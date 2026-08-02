@@ -73,7 +73,7 @@ export function Navbar() {
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-[9990] bg-[#0c0e10] md:hidden ${isOpen ? 'block' : 'hidden'}`}
+        className={`fixed inset-0 z-9990 bg-#0c0e10 md:hidden ${isOpen ? 'block' : 'hidden'}`}
         id="mobile-menu"
         aria-hidden={!isOpen}
       >
