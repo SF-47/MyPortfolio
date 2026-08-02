@@ -43,7 +43,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 z-[70] w-full border-b border-outline-variant bg-surface/95 backdrop-blur-md">
+      <header className="fixed top-0 z-[10000] w-full border-b border-outline-variant bg-[#0c0e10]">
         <div className="mx-auto flex h-16 max-w-container items-center justify-between px-5 md:h-20 md:px-8">
           <a className="font-display text-xl font-semibold uppercase tracking-tight text-on-surface transition hover:text-primary md:text-3xl" href="#home" onClick={closeMenu}>
             {profile.name}
@@ -73,18 +73,17 @@ export function Navbar() {
         </div>
       </header>
       <div
-        className={`fixed inset-x-0 bottom-0 top-16 z-[60] bg-[#0c0e10] shadow-2xl transition md:hidden ${
-          isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        className={`fixed inset-0 z-[9990] bg-[#0c0e10] md:hidden ${isOpen ? 'block' : 'hidden'}`}
         id="mobile-menu"
+        aria-hidden={!isOpen}
       >
-        <nav className="flex h-full flex-col border-t border-outline-variant bg-[#0c0e10] px-5 py-8" aria-label="Mobile navigation">
+        <nav className="flex min-h-dvh flex-col gap-3 bg-[#0c0e10] px-5 pb-8 pt-24" aria-label="Mobile navigation">
           {navItems.map((item) => (
             <a
-              className={`nav-link border-b border-outline-variant px-4 py-5 transition-colors ${
+              className={`nav-link border border-outline-variant px-4 py-5 transition-colors ${
                 activeHref === item.href
-                  ? 'bg-surface-container text-primary'
-                  : 'bg-[#151719] text-on-surface hover:bg-surface-container'
+                  ? 'bg-[#25272a] text-primary'
+                  : 'bg-[#151719] text-on-surface hover:bg-[#25272a]'
               }`}
               href={item.href}
               key={item.href}
