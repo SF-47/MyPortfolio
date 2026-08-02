@@ -35,7 +35,7 @@ export const profile = {
 
 export const socialLinks: LinkItem[] = [
   { label: 'GitHub', href: 'https://github.com/SF-47', external: true },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sami-farhat-46692641a', external: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/samifarhat-dev', external: true },
 ]
 
 export const projects: Project[] = [
