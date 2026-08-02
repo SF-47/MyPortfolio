@@ -143,7 +143,6 @@ export const skillGroups: SkillGroup[] = [
     items: [
       'ASP.NET Core Web API',
       'Entity Framework Core',
-      'Express.js',
       'REST APIs',
       'JWT Authentication',
       'Role-Based Authorization',
