@@ -61,7 +61,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 1px solid #c0c1ff;
+  outline: 2px solid #c0c1ff;
   outline-offset: 4px;
 }
 
@@ -132,15 +132,15 @@ textarea:focus-visible {
 }
 
 @utility text-body {
-  font-size: 17px;
-  line-height: 29px;
+  font-size: 18px;
+  line-height: 31px;
   font-weight: 400;
 }
 
 @utility label-caps {
   font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 13.5px;
+  line-height: 20px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -157,16 +157,16 @@ textarea:focus-visible {
 
 @utility meta-num {
   font-family: 'Space Mono', monospace;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 14.5px;
+  line-height: 22px;
   font-weight: 400;
   letter-spacing: 0;
 }
 
 @utility skill-item {
   font-family: 'Space Mono', monospace;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 15px;
+  line-height: 24px;
   font-weight: 400;
   letter-spacing: 0.04em;
 }
@@ -182,11 +182,11 @@ textarea:focus-visible {
 
 @utility editorial-button {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
   border: 1px solid #908f9d;
-  padding: 12px 28px;
+  padding: 14px 28px;
   font-family: 'Space Mono', monospace;
   font-size: 13px;
   line-height: 18px;
@@ -194,6 +194,12 @@ textarea:focus-visible {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: background-color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+}
+
+@utility editorial-button-large {
+  min-height: 52px;
+  padding-inline: 32px;
+  font-size: 14px;
 }
 
 @utility editorial-button-primary {
@@ -234,7 +240,7 @@ textarea:focus-visible {
   font-size: 120px;
   line-height: 1;
   font-weight: 700;
-  color: rgb(226 226 229 / 10%);
+  color: rgb(226 226 229 / 7%);
 }
 
 .editorial-button:hover {
@@ -243,6 +249,30 @@ textarea:focus-visible {
 
 .editorial-button-primary:hover {
   background: #373a9b;
+}
+
+@utility contact-link {
+  display: grid;
+  grid-template-columns: minmax(88px, 0.35fr) minmax(0, 1fr);
+  gap: 16px;
+  border-bottom: 1px solid #464652;
+  padding-block: 12px;
+  color: #e2e2e5;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 22px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.contact-link span:last-child {
+  overflow-wrap: anywhere;
+  color: #c7c5d4;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  border-color: #c0c1ff;
+  color: #c0c1ff;
 }
 
 @utility editorial-menu-button {
@@ -296,7 +326,7 @@ textarea:focus-visible {
   }
 
   .hero-watermark {
-    font-size: 140px;
+    font-size: 128px;
   }
 }
 
@@ -315,8 +345,8 @@ textarea:focus-visible {
   }
 
   .text-body {
-    font-size: 16px;
-    line-height: 27px;
+    font-size: 17px;
+    line-height: 29px;
   }
 
   .section-title {
@@ -334,6 +364,11 @@ textarea:focus-visible {
   .editorial-subtitle {
     font-size: 28px;
     line-height: 36px;
+  }
+
+  .contact-link {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }
 

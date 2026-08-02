@@ -20,17 +20,17 @@ export const navItems: NavItem[] = [
 
 export const profile = {
   name: 'Sami Farhat',
-  title: 'Junior Full-Stack & Mobile Developer',
+  title: 'Full-Stack & Mobile Developer',
   location: 'Beirut, Lebanon',
-  email: 'samihfarhat2005@gmail.com',
+  email: 'sami.farhat.dev@gmail.com',
   availability:
-    'Open to junior developer roles, internships, remote opportunities, and freelance projects.',
+    'Open to full-stack, mobile, remote, and freelance developer opportunities.',
   summary:
-    'Junior Full-Stack & Mobile Developer focused on building practical web and mobile applications using React, React Native, ASP.NET Core, TypeScript, PostgreSQL, Supabase, and Firebase.',
+    'Full-Stack & Mobile Developer focused on building practical web and mobile applications using React, React Native, ASP.NET Core, TypeScript, PostgreSQL, Supabase, and Firebase.',
   growth:
     'Currently strengthening TypeScript and advanced React skills through practical projects.',
   educationSummary:
-    'He has completed the degree requirements for a Bachelor of Science in Computer Science at the Islamic University of Lebanon and is currently waiting for the official graduation certificate.',
+    'Bachelor of Science in Computer Science at the Islamic University of Lebanon, October 2023 - August 2026.',
 }
 
 export const socialLinks: LinkItem[] = [
@@ -42,38 +42,38 @@ export const projects: Project[] = [
   {
     id: '01',
     title: 'Findly',
-    kicker: 'AI-Powered Lost & Found System for University Campuses',
+    kicker: 'Lost-and-found platform for university campuses',
     description:
-      'A full-stack university lost-and-found platform with a React admin dashboard, React Native mobile application, ASP.NET Core Web API, PostgreSQL database, AI-assisted item matching, notifications, image storage, and real-time chat.',
+      'Full-stack lost-and-found platform consisting of an ASP.NET Core API, React admin dashboard, and Expo React Native mobile app. The system includes 64 REST endpoints, 11 admin pages, 17 mobile screens, 9 PostgreSQL entities, and role-based access for 3 user types.',
     image: stitchAsset('findly-real-composite.webp'),
     imageAlt:
       'Findly admin dashboard and React Native mobile application screens',
     repository: 'https://github.com/SF-47/findly',
     actions: [
-      { label: 'View Repository', href: 'https://github.com/SF-47/findly', external: true },
+      { label: 'View GitHub', href: 'https://github.com/SF-47/findly', external: true },
       {
         label: 'Watch Demo',
-        href: 'https://drive.google.com/file/d/1v0SOa4yqmMoDwy0Iu_RnM6rnAb1L9V1M/view?usp=drive_link',
+        href: 'https://drive.google.com/file/d/1v0SOa4yqmMoDwy0Iu_RnM6rnAb1L9V1M/view?usp=sharing',
         external: true,
       },
     ],
     technologies: [
       'ASP.NET Core',
-      'Entity Framework Core',
       'React',
       'TypeScript',
-      'React Native',
+      'Expo React Native',
       'PostgreSQL',
       'Supabase',
-      'n8n / Gemini AI',
+      'JWT Authentication',
+      'BCrypt password hashing',
+      'n8n integration',
     ],
     features: [
-      'Role-based accounts',
-      'Student verification',
-      'Lost and found reports',
-      'AI-assisted matching',
-      'Admin match review',
-      'Real-time chat and notifications',
+      '3 integrated applications: ASP.NET Core API, React admin dashboard, and Expo React Native mobile app',
+      '64 REST API endpoints across 13 controllers',
+      '9 PostgreSQL entities and 3 user roles: Owner, UniversityAdmin, and Student',
+      '11 admin pages and 17 mobile screens',
+      'Matching candidates filtered by university, category, report type, open status, student, date window, and candidate limit',
     ],
     meta: [
       { label: 'Status', value: 'Repository public / not publicly deployed' },
@@ -86,16 +86,16 @@ export const projects: Project[] = [
     title: 'Shawarma Story QR Menu',
     kicker: 'Customer QR menu and admin management dashboard',
     description:
-      'A live bilingual restaurant QR menu built for a real client, combining a customer-facing ordering experience with a protected Firebase Authentication admin dashboard for managing menu items, categories, prices, availability, and Firestore menu data.',
+      'Bilingual QR restaurant menu built with React, Vite, Tailwind CSS, and Firebase. The application includes a public customer interface, protected admin panel, Arabic RTL support, persistent cart, WhatsApp checkout, 7 menu-management operations, and 23 reusable React components.',
     image: stitchAsset('shawarma-real-composite.webp'),
     imageAlt:
       'Shawarma Story bilingual QR menu, cart ordering flow, and Firebase admin panel',
     repository: 'https://github.com/SF-47/restaurant-qr-menu',
     liveUrl: 'https://shawarmastory.com',
     actions: [
-      { label: 'Visit Website', href: 'https://shawarmastory.com', external: true },
+      { label: 'Live Website', href: 'https://shawarmastory.com', external: true },
       {
-        label: 'View Repository',
+        label: 'View GitHub',
         href: 'https://github.com/SF-47/restaurant-qr-menu',
         external: true,
       },
@@ -108,14 +108,15 @@ export const projects: Project[] = [
       'Firebase Firestore',
       'Firebase Authentication',
       'Firebase Hosting',
+      'LocalStorage cart persistence',
     ],
     features: [
-      'Bilingual English and Arabic support',
-      'RTL layout',
-      'Customer category filtering and cart controls',
-      'WhatsApp checkout',
-      'Firebase Authentication admin login',
-      'Add, edit, delete, price, availability, and category management',
+      '2 interfaces in one React/Vite application: public customer menu and protected admin panel',
+      '2 routes and 23 reusable React component files',
+      'English and Arabic with Arabic RTL support',
+      '7 admin menu-management operations',
+      'Firestore collections: menuItems and admins',
+      'WhatsApp checkout and admin metrics for total, available, unavailable, and categories',
     ],
     meta: [
       { label: 'Status', value: 'Live client website' },
@@ -127,87 +128,75 @@ export const projects: Project[] = [
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Languages',
-    items: ['JavaScript', 'TypeScript', 'C#', 'Java', 'Python', 'C++'],
-  },
-  {
     title: 'Frontend',
-    items: ['React', 'HTML5', 'CSS3', 'Tailwind CSS', 'React Router'],
-  },
-  {
-    title: 'Mobile',
-    items: ['React Native', 'Expo', 'NativeWind'],
+    items: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
   },
   {
     title: 'Backend',
-    items: [
-      'ASP.NET Core Web API',
-      'Entity Framework Core',
-      'REST APIs',
-      'JWT Authentication',
-      'Role-Based Authorization',
-      'BCrypt',
-    ],
+    items: ['ASP.NET Core', 'C#', 'REST APIs', 'JWT Authentication'],
   },
   {
-    title: 'Databases and Cloud',
+    title: 'Mobile',
+    items: ['React Native', 'Expo', 'NativeWind', 'Flutter'],
+  },
+  {
+    title: 'Databases & Cloud',
     items: [
       'PostgreSQL',
       'Supabase',
-      'Supabase Storage',
-      'Supabase Realtime',
       'Firebase Firestore',
       'Firebase Authentication',
       'Firebase Hosting',
       'SQL Server',
-      'SSMS',
+      'Cloudflare',
     ],
   },
   {
-    title: 'AI and Automation',
-    items: ['n8n', 'Gemini AI integration'],
+    title: 'Tools & Workflow',
+    items: ['Git', 'GitHub', 'Postman', 'Jira', 'VS Code'],
   },
   {
-    title: 'Tools',
-    items: ['Git', 'GitHub', 'Postman', 'Jira', 'VS Code', 'Stitch'],
+    title: 'Programming Languages',
+    items: ['JavaScript', 'TypeScript', 'C#', 'Java', 'Python', 'C++'],
   },
   {
-    title: 'Spoken Languages',
-    items: ['Arabic — Native', 'English — Upper-Intermediate'],
+    title: 'Automation & AI',
+    items: ['n8n'],
+  },
+  {
+    title: 'Academic Exposure',
+    items: ['Java Desktop Applications', 'C# Windows Forms'],
   },
 ]
 
 export const education: EducationItem[] = [
   {
-    year: '2026',
+    year: 'October 2023 - August 2026',
     degree: 'Bachelor of Science in Computer Science',
     institution: 'Islamic University of Lebanon',
-    status: 'Degree requirements completed — official graduation certificate pending',
   },
 ]
 
 export const experience: ExperienceItem[] = [
   {
-    year: '2025',
+    year: 'January 2026 - July 2026',
+    role: 'Freelance Frontend Developer',
+    organization: 'Shawarma Story',
+    details: [
+      'Built and deployed a mobile-first bilingual restaurant QR menu.',
+      'Implemented a protected Firebase-backed admin panel for menu management.',
+      'Added English and Arabic support with RTL layout, cart persistence, and WhatsApp checkout.',
+    ],
+  },
+  {
+    year: 'November 2025 - December 2025',
     role: 'Frontend Developer Intern',
     organization: 'TechTalks Community',
     location: 'Remote',
     details: [
-      'Completed the official TechTalks Internship Program',
-      'Worked with React, Git, GitHub, databases, REST APIs, Jira, and structured development workflows',
-      'Official Internship Completion Certificate issued in December 2025',
-    ],
-  },
-  {
-    year: '2024',
-    role: 'Freelance Frontend Developer',
-    organization: 'Shawarma Story',
-    details: [
-      'Built and deployed a mobile-first bilingual restaurant QR menu',
-      'Implemented Firebase-backed menu and protected admin functionality',
-      'Added English and Arabic support with RTL layout',
-      'Added cart controls, customer notes, and WhatsApp ordering',
-      'Deployed using Firebase Hosting and a custom domain',
+      'Completed the official TechTalks Internship Program.',
+      'Worked with React, Git, GitHub, databases, REST APIs, Jira, and structured development workflows.',
+      'Received the official internship completion certificate in December 2025.',
     ],
   },
 ]

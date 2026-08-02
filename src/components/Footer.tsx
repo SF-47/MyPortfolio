@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex flex-wrap gap-6">
           {socialLinks.map((link) =>
             link.href ? (
-              <a className="meta-num text-on-surface-variant underline underline-offset-4 transition hover:text-primary" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+              <a className="meta-num text-on-surface-variant underline underline-offset-4 transition hover:text-primary" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
                 {link.label}
               </a>
             ) : (

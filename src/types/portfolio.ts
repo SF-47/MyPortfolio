@@ -44,5 +44,5 @@ export type EducationItem = {
   year: string
   degree: string
   institution: string
-  status: string
+  status?: string
 }

@@ -36,7 +36,7 @@ export function Experience() {
               <span className="meta-num mb-4 block text-primary">{item.year}</span>
               <h3 className="mb-3 font-display text-3xl font-semibold">{item.degree}</h3>
               <p className="mb-4 text-body text-on-surface-variant">{item.institution}</p>
-              <p className="text-body text-on-surface-variant">{item.status}</p>
+              {item.status ? <p className="text-body text-on-surface-variant">{item.status}</p> : null}
             </article>
           ))}
         </div>

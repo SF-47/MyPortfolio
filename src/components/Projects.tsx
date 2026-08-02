@@ -6,7 +6,14 @@ function ProjectActions({ project }: { project: Project }) {
     <div className="mt-8 flex flex-wrap gap-4">
       {project.actions.map((action) =>
         action.href ? (
-          <a className="editorial-button text-center" href={action.href} key={action.label} target={action.external ? '_blank' : undefined} rel={action.external ? 'noreferrer' : undefined}>
+          <a
+            className="editorial-button editorial-button-large text-center"
+            href={action.href}
+            key={action.label}
+            target={action.external ? '_blank' : undefined}
+            rel={action.external ? 'noopener noreferrer' : undefined}
+            aria-label={`${action.label} for ${project.title}`}
+          >
             {action.label}
           </a>
         ) : (
@@ -34,7 +41,7 @@ export function Projects() {
           <div className="order-2 md:order-1 md:col-span-4">
             <span className="meta-num mb-4 block text-primary">[{findly.id}] CASE STUDY</span>
             <h3 className="section-title mb-4">{findly.title}</h3>
-            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface-variant">{findly.kicker}</p>
+            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{findly.kicker}</p>
             <p className="text-body text-on-surface-variant">{findly.description}</p>
             <ProjectActions project={findly} />
             <dl className="mt-8 grid grid-cols-1 gap-5 border-t border-outline-variant pt-6">
@@ -48,7 +55,7 @@ export function Projects() {
           </div>
           <div className="order-1 md:order-2 md:col-span-8">
             <div className="aspect-[16/9] overflow-hidden bg-surface-variant">
-              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={findly.image} target="_blank" rel="noreferrer" aria-label="Open larger Findly project image preview">
+              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={findly.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Findly project image preview">
                 <img className="h-full w-full object-cover object-center transition duration-700" src={findly.image} alt={findly.imageAlt} width="960" height="540" loading="lazy" />
               </a>
             </div>
@@ -64,7 +71,7 @@ export function Projects() {
         <div className="grid items-end gap-12 md:grid-cols-12">
           <div className="md:col-span-7">
             <div className="aspect-[4/3] overflow-hidden bg-surface-variant">
-              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={shawarma.image} target="_blank" rel="noreferrer" aria-label="Open larger Shawarma Story project image preview">
+              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={shawarma.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Shawarma Story project image preview">
                 <img className="h-full w-full object-cover object-center transition duration-700" src={shawarma.image} alt={shawarma.imageAlt} width="900" height="675" loading="lazy" />
               </a>
             </div>
@@ -72,7 +79,7 @@ export function Projects() {
           <div className="md:col-span-5 md:pb-12">
             <span className="meta-num mb-4 block text-primary">[{shawarma.id}] WEB PLATFORM</span>
             <h3 className="section-title mb-4">{shawarma.title}</h3>
-            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface-variant">{shawarma.kicker}</p>
+            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{shawarma.kicker}</p>
             <p className="text-body text-on-surface-variant">{shawarma.description}</p>
             <ProjectActions project={shawarma} />
             <dl className="mt-8 flex flex-col border-l-2 border-primary pl-6">

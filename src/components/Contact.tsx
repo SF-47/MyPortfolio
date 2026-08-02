@@ -2,6 +2,18 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { profile, socialLinks } from '../data/portfolioData'
 
+const contactLinks = [
+  { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  { label: 'GitHub', value: 'github.com/SF-47', href: 'https://github.com/SF-47', external: true },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/sami-farhat-46692641a',
+    href: socialLinks.find((link) => link.label === 'LinkedIn')?.href,
+    external: true,
+  },
+  { label: 'Portfolio', value: 'This website', href: '/' },
+]
+
 type FormValues = {
   name: string
   email: string
@@ -63,11 +75,30 @@ export function Contact() {
           <span className="meta-num mb-4 block text-primary">[05] CONNECT</span>
           <h2 className="section-title mb-6">Start a Conversation.</h2>
           <p className="mb-8 max-w-xl text-body text-on-surface-variant">
-            Open to junior developer roles, internships, remote opportunities, and selected freelance projects.
+            Open to full-stack, mobile, remote, and selected freelance opportunities.
           </p>
           <div className="space-y-6">
             <ContactRow icon="mail" label="Email" value={profile.email} href={`mailto:${profile.email}`} />
             <ContactRow icon="location_on" label="Location" value={profile.location} />
+            <div className="border-t border-outline-variant pt-6">
+              <p className="label-caps mb-4 text-primary">Direct Links</p>
+              <div className="grid gap-3">
+                {contactLinks.map((link) =>
+                  link.href ? (
+                    <a
+                      className="contact-link"
+                      href={link.href}
+                      key={link.label}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                    >
+                      <span>{link.label}</span>
+                      <span>{link.value}</span>
+                    </a>
+                  ) : null,
+                )}
+              </div>
+            </div>
             <div className="flex items-center gap-4">
               <span className="flex h-12 w-12 items-center justify-center border border-outline transition-colors">
                 <span className="material-symbols-outlined">link</span>
@@ -77,7 +108,7 @@ export function Contact() {
                 <div className="flex flex-wrap gap-4">
                   {socialLinks.map((link) =>
                     link.href ? (
-                      <a className="label-caps text-on-surface hover:text-primary" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+                      <a className="label-caps text-on-surface hover:text-primary" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
                         {link.label}
                       </a>
                     ) : (
@@ -143,7 +174,7 @@ export function Contact() {
           </button>
           <p className="mt-4 text-sm leading-6 text-on-surface-variant" role="status">
             {status === 'mailto'
-              ? 'A prepared email draft was requested. If your email app did not open, email Sami directly using the address shown here.'
+              ? 'A prepared email draft was requested. If your email app did not open, use the direct email link on this page.'
               : 'No backend email service is configured, so this form uses a mailto fallback.'}
           </p>
           {status === 'error' ? (

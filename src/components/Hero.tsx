@@ -15,17 +15,28 @@ export function Hero() {
           <a className="editorial-button editorial-button-primary" href="#work">
             View Projects
           </a>
-          <a className="editorial-button" href="#contact">
-            Contact Me
-          </a>
           <a className="editorial-button" href="/cv.pdf" download>
             Download CV
           </a>
+          {socialLinks.map((link) =>
+            link.href ? (
+              <a
+                className="editorial-button"
+                href={link.href}
+                key={link.label}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+                aria-label={`Open Sami Farhat's ${link.label} profile`}
+              >
+                {link.label}
+              </a>
+            ) : null,
+          )}
         </div>
         <div className="mt-10 flex flex-wrap gap-6">
           {socialLinks.map((link) =>
             link.href ? (
-              <a className="editorial-link" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+              <a className="editorial-link" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
                 {link.label}
               </a>
             ) : (
