@@ -237,14 +237,20 @@ textarea:focus-visible {
 @utility hero-watermark {
   user-select: none;
   font-family: 'Playfair Display', serif;
-  font-size: 120px;
+  font-size: 112px;
   line-height: 1;
   font-weight: 700;
-  color: rgb(226 226 229 / 7%);
+  color: rgb(226 226 229 / 5%);
 }
 
 .editorial-button:hover {
+  border-color: #c0c1ff;
   background: #333537;
+  color: #ffffff;
+}
+
+.editorial-button:active {
+  transform: translateY(1px);
 }
 
 .editorial-button-primary:hover {
@@ -326,7 +332,7 @@ textarea:focus-visible {
   }
 
   .hero-watermark {
-    font-size: 128px;
+    font-size: 118px;
   }
 }
 

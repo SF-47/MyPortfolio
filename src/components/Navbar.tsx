@@ -44,11 +44,11 @@ export function Navbar() {
   return (
     <>
       <header className="fixed top-0 z-[10000] w-full border-b border-outline-variant bg-[#0c0e10]">
-        <div className="mx-auto flex h-16 max-w-container items-center justify-between px-5 md:h-20 md:px-8">
+        <div className="mx-auto flex h-16 max-w-container items-center justify-between gap-6 px-5 md:h-20 md:px-8">
           <a className="font-display text-xl font-semibold uppercase tracking-tight text-on-surface transition hover:text-primary md:text-3xl" href="#home" onClick={closeMenu}>
             {profile.name}
           </a>
-          <nav className="hidden gap-9 md:flex" aria-label="Primary navigation">
+          <nav className="hidden flex-wrap justify-end gap-x-7 gap-y-3 md:flex" aria-label="Primary navigation">
             {navItems.map((item) => (
               <NavLink
                 href={item.href}
@@ -58,9 +58,6 @@ export function Navbar() {
               />
             ))}
           </nav>
-          <div className="hidden max-w-[260px] text-right label-caps text-primary lg:block">
-            {profile.availability}
-          </div>
           <button
             className="editorial-menu-button md:hidden"
             type="button"
@@ -73,7 +70,7 @@ export function Navbar() {
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-9990 bg-#0c0e10 md:hidden ${isOpen ? 'block' : 'hidden'}`}
+        className={`fixed inset-0 z-[9990] bg-[#0c0e10] md:hidden ${isOpen ? 'block' : 'hidden'}`}
         id="mobile-menu"
         aria-hidden={!isOpen}
       >

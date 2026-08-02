@@ -64,16 +64,16 @@ export const projects: Project[] = [
       'Expo React Native',
       'PostgreSQL',
       'Supabase',
-      'JWT Authentication',
+      'JWT Bearer authentication',
       'BCrypt password hashing',
-      'n8n integration',
+      'Role-based authorization',
     ],
     features: [
-      '3 integrated applications: ASP.NET Core API, React admin dashboard, and Expo React Native mobile app',
-      '64 REST API endpoints across 13 controllers',
-      '9 PostgreSQL entities and 3 user roles: Owner, UniversityAdmin, and Student',
-      '11 admin pages and 17 mobile screens',
-      'Matching candidates filtered by university, category, report type, open status, student, date window, and candidate limit',
+      'Built 3 integrated applications: ASP.NET Core API, React admin dashboard, and Expo React Native app.',
+      'Implemented 64 REST endpoints across 13 controllers with JWT Bearer authentication, BCrypt, and role-based authorization.',
+      'Designed 9 PostgreSQL entities with 13 EF Core migrations, constraints, unique indexes, and duplicate-match prevention.',
+      'Developed 11 admin pages and 17 mobile screens for verification, reporting, matching, notifications, chat, and profiles.',
+      'Integrated secured n8n matching endpoints with university, category, item type, status, student, +/-7-day, and 20-candidate filtering.',
     ],
     meta: [
       { label: 'Status', value: 'Repository public / not publicly deployed' },
@@ -111,12 +111,11 @@ export const projects: Project[] = [
       'LocalStorage cart persistence',
     ],
     features: [
-      '2 interfaces in one React/Vite application: public customer menu and protected admin panel',
-      '2 routes and 23 reusable React component files',
-      'English and Arabic with Arabic RTL support',
-      '7 admin menu-management operations',
-      'Firestore collections: menuItems and admins',
-      'WhatsApp checkout and admin metrics for total, available, unavailable, and categories',
+      'Built 2 interfaces in one React/Vite application: public menu and protected admin panel.',
+      'Supported 2 languages with Arabic RTL layout and localized menu content.',
+      'Implemented persistent cart, quantity controls, totals, notes, and itemized WhatsApp checkout.',
+      'Developed 7 admin menu-management operations for items, categories, prices, and availability.',
+      'Integrated Firestore, Firebase Authentication, and Firebase Hosting with protected write rules.',
     ],
     meta: [
       { label: 'Status', value: 'Live client website' },
@@ -133,11 +132,11 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Backend',
-    items: ['ASP.NET Core', 'C#', 'REST APIs', 'JWT Authentication'],
+    items: ['ASP.NET Core', 'C#', 'REST APIs', 'JWT Authentication', 'Role-Based Access Control'],
   },
   {
     title: 'Mobile',
-    items: ['React Native', 'Expo', 'NativeWind', 'Flutter'],
+    items: ['React Native', 'Expo', 'NativeWind'],
   },
   {
     title: 'Databases & Cloud',
@@ -148,7 +147,6 @@ export const skillGroups: SkillGroup[] = [
       'Firebase Authentication',
       'Firebase Hosting',
       'SQL Server',
-      'Cloudflare',
     ],
   },
   {
@@ -161,11 +159,11 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Automation & AI',
-    items: ['n8n'],
+    items: ['n8n', 'AI-assisted workflows'],
   },
   {
     title: 'Academic Exposure',
-    items: ['Java Desktop Applications', 'C# Windows Forms'],
+    items: ['Flutter', 'Java Desktop Applications', 'C# Windows Forms'],
   },
 ]
 
@@ -183,9 +181,9 @@ export const experience: ExperienceItem[] = [
     role: 'Freelance Frontend Developer',
     organization: 'Shawarma Story',
     details: [
-      'Built and deployed a mobile-first bilingual restaurant QR menu.',
-      'Implemented a protected Firebase-backed admin panel for menu management.',
-      'Added English and Arabic support with RTL layout, cart persistence, and WhatsApp checkout.',
+      'Built and deployed a bilingual QR restaurant menu using React, Tailwind CSS, and Firebase.',
+      'Developed a protected admin panel for managing menu items, categories, prices, and availability.',
+      'Implemented cart persistence, quantity controls, notes, and WhatsApp checkout.',
     ],
   },
   {
@@ -194,9 +192,8 @@ export const experience: ExperienceItem[] = [
     organization: 'TechTalks Community',
     location: 'Remote',
     details: [
-      'Completed the official TechTalks Internship Program.',
-      'Worked with React, Git, GitHub, databases, REST APIs, Jira, and structured development workflows.',
-      'Received the official internship completion certificate in December 2025.',
+      'Completed React-based development tasks using Git, GitHub, REST APIs, databases, and Jira.',
+      'Applied the internship training to later academic, freelance, and full-stack projects.',
     ],
   },
 ]

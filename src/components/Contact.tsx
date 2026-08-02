@@ -169,10 +169,10 @@ export function Contact() {
             {errors.message ? <p className="form-error" id="message-error">{errors.message}</p> : null}
           </div>
 
-          <button className="w-full bg-primary-container py-4 label-caps uppercase tracking-[0.2em] text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-75" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Preparing Email' : 'Send Inquiry'}
+          <button className="w-full bg-primary-container py-4 label-caps uppercase tracking-[0.16em] text-white transition hover:brightness-110 active:scale-[0.99] disabled:cursor-wait disabled:opacity-75" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Preparing Email' : 'Open Email Draft'}
           </button>
-          <p className="mt-4 text-sm leading-6 text-on-surface-variant" role="status">
+          <p className="mt-4 text-sm leading-6 text-on-surface-variant" role="status" aria-live="polite">
             {status === 'mailto'
               ? 'A prepared email draft was requested. If your email app did not open, use the direct email link on this page.'
               : 'No backend email service is configured, so this form uses a mailto fallback.'}
