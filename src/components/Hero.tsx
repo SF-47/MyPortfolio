@@ -18,9 +18,9 @@ export function Hero() {
           <a className="editorial-button" href="#contact">
             Contact Me
           </a>
-          <button className="editorial-button cursor-not-allowed opacity-75" type="button" disabled title="Final CV PDF will be added later">
-            CV Coming Soon
-          </button>
+          <a className="editorial-button" href="/cv.pdf" download>
+            Download CV
+          </a>
         </div>
         <div className="mt-10 flex flex-wrap gap-6">
           {socialLinks.map((link) =>
