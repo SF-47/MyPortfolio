@@ -72,16 +72,18 @@ export function Navbar() {
       </div>
 
       <div
-        className={`fixed inset-0 top-16 z-40 bg-surface/98 transition md:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-16 z-40 bg-[#0c0e10] shadow-2xl transition md:hidden ${
           isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
         id="mobile-menu"
       >
-        <nav className="flex h-full flex-col border-t border-outline-variant px-5 py-8" aria-label="Mobile navigation">
+        <nav className="flex h-full flex-col border-t border-outline-variant bg-[#0c0e10] px-5 py-8" aria-label="Mobile navigation">
           {navItems.map((item) => (
             <a
-              className={`nav-link border-b border-outline-variant py-5 ${
-                activeHref === item.href ? 'text-primary' : 'text-on-surface'
+              className={`nav-link border-b border-outline-variant px-1 py-5 transition-colors ${
+                activeHref === item.href
+                  ? 'bg-surface-container-low text-primary'
+                  : 'text-on-surface hover:bg-surface-container-low'
               }`}
               href={item.href}
               key={item.href}
