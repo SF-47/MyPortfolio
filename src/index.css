@@ -182,17 +182,20 @@ textarea:focus-visible {
 
 @utility editorial-button {
   display: inline-flex;
+  width: fit-content;
+  min-width: 142px;
   min-height: 48px;
   align-items: center;
   justify-content: center;
   border: 1px solid #908f9d;
-  padding: 14px 28px;
+  padding: 14px 24px;
   font-family: 'Space Mono', monospace;
   font-size: 13px;
   line-height: 18px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: background-color 160ms ease, border-color 160ms ease, opacity 160ms ease;
 }
 
@@ -237,10 +240,10 @@ textarea:focus-visible {
 @utility hero-watermark {
   user-select: none;
   font-family: 'Playfair Display', serif;
-  font-size: 112px;
+  font-size: 88px;
   line-height: 1;
   font-weight: 700;
-  color: rgb(226 226 229 / 5%);
+  color: rgb(226 226 229 / 4%);
 }
 
 .editorial-button:hover {
@@ -332,7 +335,7 @@ textarea:focus-visible {
   }
 
   .hero-watermark {
-    font-size: 118px;
+    font-size: 108px;
   }
 }
 
@@ -344,6 +347,7 @@ textarea:focus-visible {
 
   .editorial-button {
     width: 100%;
+    min-width: 0;
   }
 
   .editorial-title {

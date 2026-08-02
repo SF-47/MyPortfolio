@@ -33,29 +33,16 @@ export function Hero() {
             ) : null,
           )}
         </div>
-        <div className="mt-10 flex flex-wrap gap-6">
-          {socialLinks.map((link) =>
-            link.href ? (
-              <a className="editorial-link" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
-                {link.label}
-              </a>
-            ) : (
-              <span className="editorial-link text-on-surface-variant" key={link.label} aria-label={`${link.label} URL pending`}>
-                {link.label}
-              </span>
-            ),
-          )}
-        </div>
       </div>
       <div className="grid-blueprint relative hidden min-h-[600px] items-center justify-center overflow-hidden border-l border-outline-variant md:flex">
-        <div className="relative z-10 flex flex-col items-end p-12 text-right">
+        <div className="relative z-10 flex w-full flex-col items-end p-12 pb-28 text-right">
           <span className="hero-watermark">ENGINEER</span>
           <span className="hero-watermark">CODE</span>
           <span className="hero-watermark">BUILD</span>
-          <div className="absolute bottom-12 right-12 flex items-center gap-4 text-primary">
-            <span className="label-caps">BEIRUT / REMOTE</span>
-            <span className="h-px w-12 bg-primary" />
-          </div>
+        </div>
+        <div className="absolute bottom-12 right-12 z-20 flex items-center gap-4 text-primary">
+          <span className="label-caps">BEIRUT / REMOTE</span>
+          <span className="h-px w-12 bg-primary" />
         </div>
       </div>
     </section>
