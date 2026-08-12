@@ -20,15 +20,16 @@ export const navItems: NavItem[] = [
 
 export const profile = {
   name: 'Sami Farhat',
-  title: 'Full-Stack & Mobile Developer',
+  title: 'Junior Software Engineer',
+  specialization: 'Full-Stack & Mobile Development',
   location: 'Beirut, Lebanon',
   email: 'sami.farhat.dev@gmail.com',
   availability:
-    'Open to full-stack, mobile, remote, and freelance developer opportunities.',
+    'Open to Junior Software Engineer, backend, full-stack, frontend, and mobile development opportunities.',
   summary:
-    'Full-Stack & Mobile Developer focused on building practical web and mobile applications using React, React Native, ASP.NET Core, TypeScript, PostgreSQL, Supabase, and Firebase.',
+    'Computer Science graduate and Junior Software Engineer with hands-on experience building full-stack and mobile applications, backend APIs, database-driven systems, authentication, automation, and deployments using React, React Native, TypeScript, ASP.NET Core, PostgreSQL, Supabase, and Firebase.',
   growth:
-    'Currently strengthening TypeScript and advanced React skills through practical projects.',
+    'Building practical software across REST APIs, role-based access, admin dashboards, mobile applications, automation workflows, and deployment.',
   educationSummary:
     'Bachelor of Science in Computer Science at the Islamic University of Lebanon, October 2023 - August 2026.',
 }
@@ -67,13 +68,15 @@ export const projects: Project[] = [
       'JWT Bearer authentication',
       'BCrypt password hashing',
       'Role-based authorization',
+      'n8n',
+      'Gemini AI',
     ],
     features: [
       'Built 3 integrated applications: ASP.NET Core API, React admin dashboard, and Expo React Native app.',
       'Implemented 64 REST endpoints across 13 controllers with JWT Bearer authentication, BCrypt, and role-based authorization.',
       'Designed 9 PostgreSQL entities with 13 EF Core migrations, constraints, unique indexes, and duplicate-match prevention.',
       'Developed 11 admin pages and 17 mobile screens for verification, reporting, matching, notifications, chat, and profiles.',
-      'Integrated secured n8n matching endpoints with university, category, item type, status, student, +/-7-day, and 20-candidate filtering.',
+      'Integrated secured n8n and Gemini AI matching workflows with university, category, item type, status, student, +/-7-day, and 20-candidate filtering.',
     ],
     meta: [
       { label: 'Status', value: 'Repository public / not publicly deployed' },
@@ -115,7 +118,7 @@ export const projects: Project[] = [
       'Supported 2 languages with Arabic RTL layout and localized menu content.',
       'Implemented persistent cart, quantity controls, totals, notes, and itemized WhatsApp checkout.',
       'Developed 7 admin menu-management operations for items, categories, prices, and availability.',
-      'Integrated Firestore, Firebase Authentication, and Firebase Hosting with protected write rules.',
+      'Integrated Firestore, Firebase Authentication, and Firebase Hosting with protected write rules and custom-domain deployment.',
     ],
     meta: [
       { label: 'Status', value: 'Live client website' },

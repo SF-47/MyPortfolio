@@ -75,7 +75,7 @@ export function Contact() {
           <span className="meta-num mb-4 block text-primary">[05] CONNECT</span>
           <h2 className="section-title mb-6">Start a Conversation.</h2>
           <p className="mb-8 max-w-xl text-body text-on-surface-variant">
-            Open to full-stack, mobile, remote, and selected freelance opportunities.
+            {profile.availability}
           </p>
           <div className="space-y-6">
             <ContactRow icon="mail" label="Email" value={profile.email} href={`mailto:${profile.email}`} />

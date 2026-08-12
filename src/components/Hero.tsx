@@ -6,7 +6,8 @@ export function Hero() {
       <div className="py-16 md:py-20 md:pr-10">
         <p className="meta-num mb-6 text-primary">[00] INTRODUCTION</p>
         <h1 className="editorial-title mb-8">{profile.name}.</h1>
-        <p className="editorial-subtitle mb-10 text-on-surface-variant">{profile.title}.</p>
+        <p className="editorial-subtitle mb-3 text-on-surface-variant">{profile.title}.</p>
+        <p className="label-caps mb-10 text-primary">{profile.specialization}</p>
         <div className="max-w-[62ch] space-y-5 text-body text-on-surface-variant">
           <p>{profile.summary}</p>
           <p>{profile.growth}</p>
