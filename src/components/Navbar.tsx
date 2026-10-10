@@ -43,23 +43,28 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 z-[10000] w-full border-b border-outline-variant bg-[#0c0e10]">
-        <div className="mx-auto flex h-16 max-w-container items-center justify-between gap-6 px-5 md:h-20 md:px-8">
-          <a className="font-display text-xl font-semibold uppercase tracking-tight text-on-surface transition hover:text-primary md:text-3xl" href="#home" onClick={closeMenu}>
+      <header className="fixed top-0 z-40 w-full border-b border-rule bg-paper/85 backdrop-blur-md">
+        <div className="page flex h-16 items-center justify-between gap-6 md:h-[72px]">
+          <a className="whitespace-nowrap font-display text-[26px] leading-none tracking-tight" href="#home" onClick={closeMenu}>
             {profile.name}
+            <span className="text-accent">.</span>
           </a>
-          <nav className="hidden flex-wrap justify-end gap-x-7 gap-y-3 md:flex" aria-label="Primary navigation">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
             {navItems.map((item) => (
-              <NavLink
+              <a
+                className={`mono border-b pb-0.5 transition-colors hover:text-accent ${
+                  activeHref === item.href ? 'border-accent text-accent' : 'border-transparent text-ink-soft'
+                }`}
                 href={item.href}
-                isActive={activeHref === item.href}
                 key={item.href}
-                label={item.label}
-              />
+                aria-current={activeHref === item.href ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
             ))}
           </nav>
           <button
-            className="editorial-menu-button md:hidden"
+            className="btn !min-h-10 !w-auto !px-4 md:hidden"
             type="button"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -69,44 +74,25 @@ export function Navbar() {
           </button>
         </div>
       </header>
-      <div
-        className={`fixed inset-0 z-[9990] bg-[#0c0e10] md:hidden ${isOpen ? 'block' : 'hidden'}`}
-        id="mobile-menu"
-        aria-hidden={!isOpen}
-      >
-        <nav className="flex min-h-dvh flex-col gap-3 bg-[#0c0e10] px-5 pb-8 pt-24" aria-label="Mobile navigation">
-          {navItems.map((item) => (
+      <div className={`fixed inset-0 z-30 bg-paper md:hidden ${isOpen ? 'block' : 'hidden'}`} id="mobile-menu">
+        <nav className="flex min-h-dvh flex-col justify-center gap-1 px-5 pb-8 pt-24" aria-label="Mobile navigation">
+          {navItems.map((item, index) => (
             <a
-              className={`nav-link border border-outline-variant px-4 py-5 transition-colors ${
-                activeHref === item.href
-                  ? 'bg-[#25272a] text-primary'
-                  : 'bg-[#151719] text-on-surface hover:bg-[#25272a]'
+              className={`display flex items-baseline gap-4 border-b border-rule py-3 text-[44px] ${
+                activeHref === item.href ? 'text-accent' : ''
               }`}
               href={item.href}
               key={item.href}
               aria-current={activeHref === item.href ? 'page' : undefined}
               onClick={closeMenu}
             >
+              <span className="mono text-ink-soft">0{index}</span>
               {item.label}
             </a>
           ))}
-          <p className="mt-8 max-w-sm text-body text-on-surface-variant">{profile.availability}</p>
+          <p className="mt-8 max-w-sm text-ink-soft">{profile.availability}</p>
         </nav>
       </div>
     </>
-  )
-}
-
-function NavLink({ href, isActive, label }: { href: string; isActive: boolean; label: string }) {
-  return (
-    <a
-      className={`nav-link pb-1 transition-colors hover:text-on-surface ${
-        isActive ? 'border-b-2 border-primary text-primary' : 'text-on-surface-variant'
-      }`}
-      href={href}
-      aria-current={isActive ? 'page' : undefined}
-    >
-      {label}
-    </a>
   )
 }
