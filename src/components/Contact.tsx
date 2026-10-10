@@ -5,7 +5,6 @@ import { profile, socialLinks } from '../data/portfolioData'
 const linkedInHref = socialLinks.find((link) => link.label === 'LinkedIn')?.href
 
 const contactLinks = [
-  { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
   { label: 'GitHub', value: 'github.com/SF-47', href: 'https://github.com/SF-47', external: true },
   {
     label: 'LinkedIn',
@@ -103,27 +102,6 @@ export function Contact() {
                     </a>
                   ) : null,
                 )}
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 items-center justify-center border border-outline transition-colors">
-                <span className="material-symbols-outlined" aria-hidden="true">link</span>
-              </span>
-              <div>
-                <p className="label-caps mb-1 text-on-surface-variant">Profiles</p>
-                <div className="flex flex-wrap gap-4">
-                  {socialLinks.map((link) =>
-                    link.href ? (
-                      <a className="label-caps text-on-surface hover:text-primary" href={link.href} key={link.label} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
-                        {link.label}
-                      </a>
-                    ) : (
-                      <span className="label-caps text-on-surface-variant" key={link.label}>
-                        {link.label} URL pending
-                      </span>
-                    ),
-                  )}
-                </div>
               </div>
             </div>
           </div>

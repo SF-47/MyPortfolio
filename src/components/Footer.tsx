@@ -2,8 +2,8 @@ import { profile, socialLinks } from '../data/portfolioData'
 
 export function Footer() {
   return (
-    <footer className="border-t border-outline-variant bg-surface-container-lowest px-5 py-8 md:px-8">
-      <div className="mx-auto flex max-w-container flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <footer className="border-t border-outline-variant bg-surface-container-lowest py-8">
+      <div className="section-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <p className="label-caps text-on-surface">© 2026 {profile.name} · Built in Beirut</p>
         <div className="flex flex-wrap gap-6">
           {socialLinks.map((link) =>
