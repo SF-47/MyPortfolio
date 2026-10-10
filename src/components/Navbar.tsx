@@ -84,6 +84,7 @@ export function Navbar() {
               }`}
               href={item.href}
               key={item.href}
+              aria-current={activeHref === item.href ? 'page' : undefined}
               onClick={closeMenu}
             >
               {item.label}
