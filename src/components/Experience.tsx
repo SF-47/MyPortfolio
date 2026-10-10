@@ -1,46 +1,43 @@
 import { education, experience } from '../data/portfolioData'
-import { Reveal } from './Reveal'
-import { SectionHead } from './SectionHead'
 
 export function Experience() {
   return (
-    <section className="bg-paper-deep py-20 md:py-32" id="experience">
-      <div className="page">
-        <SectionHead num="04" title="Experience" aside="Work · Education" />
-
-        <div className="border-t border-ink">
-          {experience.map((item) => (
-            <Reveal className="grid gap-4 border-b border-rule py-10 md:grid-cols-12 md:gap-8" key={`${item.year}-${item.role}`}>
-              <span className="mono text-accent md:col-span-3">{item.year}</span>
-              <div className="md:col-span-4">
-                <h3 className="display text-[34px] md:text-[44px]">{item.role}</h3>
-                <p className="mono mt-3 text-ink-soft">
-                  {item.organization}
-                  {item.location ? ` / ${item.location}` : ''}
-                </p>
-              </div>
-              <ul className="space-y-3 md:col-span-5">
-                {item.details.map((detail) => (
-                  <li className="flex gap-3 text-[17px] leading-7 text-ink-soft" key={detail}>
-                    <span className="mt-3 h-px w-4 shrink-0 bg-accent" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
+    <section className="border-t border-outline-variant bg-surface-container py-24 md:py-32" id="experience">
+      <div className="section-shell grid gap-16 md:grid-cols-2">
+        <div>
+          <h2 className="label-caps mb-12 tracking-[0.2em]">[04] Experience</h2>
+          <div className="space-y-12">
+            {experience.map((item) => (
+              <article className="group border-b border-outline-variant pb-10" key={`${item.year}-${item.role}`}>
+                <span className="meta-num mb-3 block text-primary">{item.year}</span>
+                <div>
+                  <h3 className="mb-2 font-display text-2xl font-semibold transition-colors group-hover:text-primary">{item.role}</h3>
+                  <p className="label-caps mb-4 text-on-surface-variant">
+                    {item.organization}
+                    {item.location ? ` | ${item.location}` : ''}
+                  </p>
+                  <ul className="space-y-3">
+                    {item.details.map((detail) => (
+                      <li className="flex gap-3 text-body text-on-surface-variant" key={detail}>
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-primary" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className="label-caps mb-12 tracking-[0.2em]">Education</h2>
           {education.map((item) => (
-            <Reveal className="grid gap-4 border-b border-ink py-10 md:grid-cols-12 md:gap-8" key={item.degree}>
-              <span className="mono text-accent md:col-span-3">{item.year}</span>
-              <div className="md:col-span-4">
-                <h3 className="display text-[34px] md:text-[44px]">Education</h3>
-                <p className="mono mt-3 text-ink-soft">{item.institution}</p>
-              </div>
-              <div className="md:col-span-5">
-                <p className="text-[17px] leading-7">{item.degree}</p>
-                {item.status ? <p className="mt-2 text-ink-soft">{item.status}</p> : null}
-              </div>
-            </Reveal>
+            <article className="border-l-2 border-primary pl-6" key={item.degree}>
+              <span className="meta-num mb-4 block text-primary">{item.year}</span>
+              <h3 className="mb-3 font-display text-3xl font-semibold">{item.degree}</h3>
+              <p className="mb-4 text-body text-on-surface-variant">{item.institution}</p>
+              {item.status ? <p className="text-body text-on-surface-variant">{item.status}</p> : null}
+            </article>
           ))}
         </div>
       </div>

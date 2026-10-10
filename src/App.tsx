@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <a
-        className="sr-only z-50 bg-accent px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[10001] bg-primary px-4 py-3 text-[#121416] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         href="#main"
       >
         Skip to content

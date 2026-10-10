@@ -1,30 +1,32 @@
 import { profile } from '../data/portfolioData'
-import { Reveal } from './Reveal'
-import { SectionHead } from './SectionHead'
 
 export function About() {
-  const details = [
-    { title: 'Background', text: profile.educationSummary },
-    { title: 'Development focus', text: profile.growth },
-    { title: 'Availability', text: profile.availability },
-  ]
-
   return (
-    <section className="bg-paper-deep py-20 md:py-32" id="profile">
-      <div className="page">
-        <SectionHead num="02" title="Profile" aside="Thinking · Execution" />
-        <Reveal>
-          <p className="display max-w-[22ch] text-[40px] leading-[1.02] md:text-[76px]">
-            Systematic thinking, <em className="text-accent">practical</em> execution.
+    <section className="border-y border-outline-variant bg-surface-container-low py-24 md:py-40" id="profile">
+      <div className="section-shell grid gap-12 md:grid-cols-12 md:gap-16">
+        <div className="md:col-span-4">
+          <p className="meta-num mb-4 text-primary">[02] PROFILE</p>
+          <h2 className="section-title leading-tight">Systematic Thinking. Practical Execution.</h2>
+        </div>
+        <div className="space-y-10 md:col-span-8">
+          <p className="font-display text-[28px] font-normal leading-relaxed text-on-surface md:text-[32px]">
+            {profile.summary}
           </p>
-        </Reveal>
-        <div className="mt-16 grid gap-10 border-t border-ink pt-8 md:mt-24 md:grid-cols-3 md:gap-12">
-          {details.map((item, index) => (
-            <Reveal delay={index * 100} key={item.title}>
-              <h3 className="mono mb-4 text-accent">{item.title}</h3>
-              <p className="text-[17px] leading-7 text-ink-soft">{item.text}</p>
-            </Reveal>
-          ))}
+          <div className="h-px w-full bg-outline-variant" />
+          <div className="grid gap-10 md:grid-cols-2">
+            <div>
+              <h3 className="label-caps mb-4 text-primary">Background</h3>
+              <p className="text-body text-on-surface-variant">{profile.educationSummary}</p>
+            </div>
+            <div>
+              <h3 className="label-caps mb-4 text-primary">Development Focus</h3>
+              <p className="text-body text-on-surface-variant">{profile.growth}</p>
+            </div>
+            <div>
+              <h3 className="label-caps mb-4 text-primary">Availability</h3>
+              <p className="text-body text-on-surface-variant">{profile.availability}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
