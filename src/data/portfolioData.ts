@@ -34,6 +34,8 @@ export const profile = {
     'Bachelor of Science in Computer Science at the Islamic University of Lebanon, October 2023 – August 2026.',
 }
 
+export const heroStack = ['React', 'React Native', 'TypeScript', 'ASP.NET Core', 'PostgreSQL', 'Firebase']
+
 export const socialLinks: LinkItem[] = [
   { label: 'GitHub', href: 'https://github.com/SF-47', external: true },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/samifarhat-dev', external: true },
