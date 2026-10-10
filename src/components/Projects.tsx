@@ -28,7 +28,7 @@ function ProjectActions({ project }: { project: Project }) {
 
 function ProjectMeta({ project }: { project: Project }) {
   return (
-    <dl className="mt-8 grid gap-3 border-t border-outline-variant pt-6 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
+    <dl className="mt-8 grid gap-3 border-t border-outline-variant pt-6 sm:grid-cols-3 md:grid-cols-1">
       {project.meta.map((item) => (
         <div className="border-l border-outline-variant pl-4" key={item.label}>
           <dt className="label-caps mb-1 text-primary">{item.label}</dt>
@@ -74,7 +74,7 @@ export function Projects() {
       </article>
 
       <article>
-        <div className="grid items-end gap-12 md:grid-cols-12">
+        <div className="grid items-start gap-12 md:grid-cols-12">
           <div className="md:col-span-7">
             <div className="aspect-[4/3] overflow-hidden bg-surface-variant">
               <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={shawarma.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Shawarma Story project image preview">
@@ -82,7 +82,7 @@ export function Projects() {
               </a>
             </div>
           </div>
-          <div className="md:col-span-5 md:pb-12">
+          <div className="md:col-span-5">
             <span className="meta-num mb-4 block text-primary">[{shawarma.id}] WEB PLATFORM</span>
             <h3 className="section-title mb-4">{shawarma.title}</h3>
             <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{shawarma.kicker}</p>

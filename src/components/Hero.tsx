@@ -2,8 +2,9 @@ import { profile, socialLinks } from '../data/portfolioData'
 
 export function Hero() {
   return (
-    <section className="section-shell grid items-start border-b border-outline-variant pt-16 md:min-h-screen md:grid-cols-[45%_55%] md:items-center md:pt-20" id="home">
-      <div className="py-16 md:py-20 md:pr-10">
+    <section className="border-b border-outline-variant pt-16 md:pt-20" id="home">
+      <div className="section-shell grid items-start md:min-h-[calc(100vh-5rem)] md:grid-cols-[58%_42%] md:items-stretch">
+      <div className="py-16 md:self-center md:py-20 md:pr-10">
         <p className="meta-num mb-6 text-primary">[00] INTRODUCTION</p>
         <h1 className="editorial-title mb-8">{profile.name}.</h1>
         <p className="editorial-subtitle mb-3 text-on-surface-variant">{profile.title}.</p>
@@ -12,17 +13,17 @@ export function Hero() {
           <p>{profile.summary}</p>
           <p>{profile.growth}</p>
         </div>
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-          <a className="editorial-button editorial-button-primary" href="#work">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a className="editorial-button editorial-button-primary !min-w-0 !px-5" href="#work">
             View Projects
           </a>
-          <a className="editorial-button" href="/cv.pdf" download>
+          <a className="editorial-button !min-w-0 !px-5" href="/cv.pdf" download>
             Download CV
           </a>
           {socialLinks.map((link) =>
             link.href ? (
               <a
-                className="editorial-button"
+                className="editorial-button !min-w-0 !px-5"
                 href={link.href}
                 key={link.label}
                 target={link.external ? '_blank' : undefined}
@@ -45,6 +46,7 @@ export function Hero() {
           <span className="label-caps">BEIRUT / REMOTE</span>
           <span className="h-px w-12 bg-primary" />
         </div>
+      </div>
       </div>
     </section>
   )

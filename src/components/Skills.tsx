@@ -11,7 +11,7 @@ export function Skills() {
         {skillGroups.map((group, index) => (
           <article className="border-b border-r border-outline-variant p-8 transition-colors hover:bg-surface-variant/40 md:p-10" key={group.title}>
             <span className="meta-num mb-6 block text-primary">{String(index + 1).padStart(2, '0')} / INDEX</span>
-            <h3 className="mb-7 border-b border-outline-variant pb-4 font-display text-2xl font-semibold">{group.title}</h3>
+            <h3 className="mb-7 border-b border-outline-variant pb-4 font-display text-2xl font-semibold lg:min-h-[81px]">{group.title}</h3>
             <ul className="space-y-5">
               {group.items.map((item) => (
                 <li className="flex items-start gap-3 skill-item text-on-surface-variant" key={item}>

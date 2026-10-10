@@ -340,7 +340,7 @@ textarea:focus-visible {
   }
 
   .hero-watermark {
-    font-size: 108px;
+    font-size: clamp(38px, 5vw, 96px);
   }
 }
 

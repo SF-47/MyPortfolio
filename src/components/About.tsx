@@ -22,7 +22,7 @@ export function About() {
               <h3 className="label-caps mb-4 text-primary">Development Focus</h3>
               <p className="text-body text-on-surface-variant">{profile.growth}</p>
             </div>
-            <div>
+            <div className="md:col-span-2">
               <h3 className="label-caps mb-4 text-primary">Availability</h3>
               <p className="text-body text-on-surface-variant">{profile.availability}</p>
             </div>
