@@ -64,6 +64,7 @@ export const projects: Project[] = [
       'TypeScript',
       'Expo React Native',
       'PostgreSQL',
+      'MySQL',
       'Supabase',
       'JWT Bearer authentication',
       'BCrypt password hashing',
@@ -131,7 +132,7 @@ export const projects: Project[] = [
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend',
-    items: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
+    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
   },
   {
     title: 'Backend',
@@ -145,6 +146,7 @@ export const skillGroups: SkillGroup[] = [
     title: 'Databases & Cloud',
     items: [
       'PostgreSQL',
+      'MySQL',
       'Supabase',
       'Firebase Firestore',
       'Firebase Authentication',
