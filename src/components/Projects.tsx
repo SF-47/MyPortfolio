@@ -1,27 +1,25 @@
 import { projects } from '../data/portfolioData'
 import type { Project } from '../types/portfolio'
-import { Reveal } from './Reveal'
-import { SectionHead } from './SectionHead'
 
 function ProjectActions({ project }: { project: Project }) {
   return (
-    <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
+    <div className="mt-8 flex flex-wrap gap-4">
       {project.actions.map((action) =>
         action.href ? (
           <a
-            className="arrow-link"
+            className="editorial-button editorial-button-large text-center"
             href={action.href}
             key={action.label}
             target={action.external ? '_blank' : undefined}
             rel={action.external ? 'noopener noreferrer' : undefined}
             aria-label={`${action.label} for ${project.title}`}
           >
-            {action.label} ↗
+            {action.label}
           </a>
         ) : (
-          <span className="mono text-ink-soft" key={action.label}>
+          <button className="editorial-button cursor-not-allowed text-on-surface-variant" key={action.label} type="button" disabled>
             {action.label}
-          </span>
+          </button>
         ),
       )}
     </div>
@@ -30,11 +28,11 @@ function ProjectActions({ project }: { project: Project }) {
 
 function ProjectMeta({ project }: { project: Project }) {
   return (
-    <dl className="mt-10 border-t border-rule">
+    <dl className="mt-8 grid gap-3 border-t border-outline-variant pt-6 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
       {project.meta.map((item) => (
-        <div className="grid grid-cols-[88px_1fr] gap-4 border-b border-rule py-3" key={item.label}>
-          <dt className="mono text-ink-soft">{item.label}</dt>
-          <dd className="text-[15px] leading-6">{item.value}</dd>
+        <div className="border-l border-outline-variant pl-4" key={item.label}>
+          <dt className="label-caps mb-1 text-primary">{item.label}</dt>
+          <dd className="meta-num text-on-surface">{item.value}</dd>
         </div>
       ))}
     </dl>
@@ -42,61 +40,78 @@ function ProjectMeta({ project }: { project: Project }) {
 }
 
 export function Projects() {
+  const [findly, shawarma] = projects
+
   return (
-    <section className="page py-20 md:py-32" id="work">
-      <SectionHead num="01" title="Selected work" aside="Two public projects" />
-
-      <div className="space-y-24 md:space-y-40">
-        {projects.map((project, index) => (
-          <article className="grid gap-10 md:grid-cols-12 md:gap-x-12" key={project.id}>
-            <Reveal className="md:col-span-4 md:self-start md:sticky md:top-28">
-              <span className="display block text-[96px] text-accent md:text-[140px]">{project.id}</span>
-              <h3 className="display mt-2 text-[48px] md:text-[64px]">{project.title}</h3>
-              <p className="mt-4 text-[19px] leading-7 text-ink-soft">{project.kicker}</p>
-              <ProjectActions project={project} />
-              <ProjectMeta project={project} />
-            </Reveal>
-
-            <Reveal className="md:col-span-8" delay={120}>
-              <a
-                className="project-image block overflow-hidden border border-ink bg-paper-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                href={project.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open larger ${project.title} project image preview`}
-              >
-                <img
-                  className={`w-full object-cover object-center ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}
-                  src={project.image}
-                  alt={project.imageAlt}
-                  width={index === 0 ? 960 : 900}
-                  height={index === 0 ? 540 : 675}
-                  loading="lazy"
-                />
-              </a>
-
-              <p className="lede mt-10">{project.description}</p>
-
-              <ol className="mt-10 border-t border-ink">
-                {project.features.map((feature, featureIndex) => (
-                  <li className="grid grid-cols-[40px_1fr] gap-4 border-b border-rule py-4" key={feature}>
-                    <span className="mono pt-1 text-accent">{String(featureIndex + 1).padStart(2, '0')}</span>
-                    <span className="text-[16px] leading-7 md:text-[17px]">{feature}</span>
-                  </li>
-                ))}
-              </ol>
-
-              <ul className="mt-8 flex flex-wrap gap-2" aria-label={`${project.title} technologies`}>
-                {project.technologies.map((tech) => (
-                  <li className="chip" key={tech}>
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </article>
-        ))}
+    <section className="section-shell py-24 md:py-32" id="work">
+      <div className="section-rule mb-16 md:mb-20">
+        <h2 className="label-caps tracking-[0.2em]">[01] Selected Work</h2>
+        <span className="meta-num text-on-surface-variant">FEATURED PUBLIC PROJECTS</span>
       </div>
+
+      <article className="mb-28 md:mb-40">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="order-2 md:order-1 md:col-span-5">
+            <span className="meta-num mb-4 block text-primary">[{findly.id}] CASE STUDY</span>
+            <h3 className="section-title mb-4">{findly.title}</h3>
+            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{findly.kicker}</p>
+            <p className="text-body text-on-surface-variant">{findly.description}</p>
+            <ProjectActions project={findly} />
+            <ProjectMeta project={findly} />
+          </div>
+          <div className="order-1 md:order-2 md:col-span-7">
+            <div className="aspect-[16/9] overflow-hidden bg-surface-variant">
+              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={findly.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Findly project image preview">
+                <img className="h-full w-full object-cover object-center transition duration-700" src={findly.image} alt={findly.imageAlt} width="960" height="540" loading="lazy" />
+              </a>
+            </div>
+            <div className="mt-8 grid gap-8 md:grid-cols-2">
+              <FeatureList title="Verified Technologies" items={findly.technologies} />
+              <FeatureList title="Verified Features" items={findly.features} />
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article>
+        <div className="grid items-end gap-12 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <div className="aspect-[4/3] overflow-hidden bg-surface-variant">
+              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={shawarma.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Shawarma Story project image preview">
+                <img className="h-full w-full object-cover object-center transition duration-700" src={shawarma.image} alt={shawarma.imageAlt} width="900" height="675" loading="lazy" />
+              </a>
+            </div>
+          </div>
+          <div className="md:col-span-5 md:pb-12">
+            <span className="meta-num mb-4 block text-primary">[{shawarma.id}] WEB PLATFORM</span>
+            <h3 className="section-title mb-4">{shawarma.title}</h3>
+            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{shawarma.kicker}</p>
+            <p className="text-body text-on-surface-variant">{shawarma.description}</p>
+            <ProjectActions project={shawarma} />
+            <ProjectMeta project={shawarma} />
+          </div>
+        </div>
+        <div className="mt-10 grid gap-8 md:grid-cols-2">
+          <FeatureList title="Verified Technologies" items={shawarma.technologies} />
+          <FeatureList title="Verified Features" items={shawarma.features} />
+        </div>
+      </article>
     </section>
+  )
+}
+
+function FeatureList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="border-t border-outline-variant pt-5">
+      <h4 className="label-caps mb-4 text-primary">{title}</h4>
+      <ul className="grid gap-3">
+        {items.map((item) => (
+          <li className="flex gap-3 text-[16px] leading-7 text-on-surface-variant md:text-[17px]" key={item}>
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-primary" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
