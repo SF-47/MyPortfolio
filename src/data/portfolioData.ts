@@ -31,7 +31,7 @@ export const profile = {
   growth:
     'Building practical software across REST APIs, role-based access, admin dashboards, mobile applications, automation workflows, and deployment.',
   educationSummary:
-    'Bachelor of Science in Computer Science at the Islamic University of Lebanon, October 2023 - August 2026.',
+    'Bachelor of Science in Computer Science at the Islamic University of Lebanon, October 2023 – August 2026.',
 }
 
 export const socialLinks: LinkItem[] = [
@@ -76,7 +76,7 @@ export const projects: Project[] = [
       'Implemented 64 REST endpoints across 13 controllers with JWT Bearer authentication, BCrypt, and role-based authorization.',
       'Designed 9 PostgreSQL entities with 13 EF Core migrations, constraints, unique indexes, and duplicate-match prevention.',
       'Developed 11 admin pages and 17 mobile screens for verification, reporting, matching, notifications, chat, and profiles.',
-      'Integrated secured n8n and Gemini AI matching workflows with university, category, item type, status, student, +/-7-day, and 20-candidate filtering.',
+      'Integrated secured n8n and Gemini AI matching workflows with university, category, item type, status, student, ±7-day, and 20-candidate filtering.',
     ],
     meta: [
       { label: 'Status', value: 'Repository public / not publicly deployed' },
@@ -172,7 +172,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const education: EducationItem[] = [
   {
-    year: 'October 2023 - August 2026',
+    year: 'October 2023 – August 2026',
     degree: 'Bachelor of Science in Computer Science',
     institution: 'Islamic University of Lebanon',
   },
@@ -180,7 +180,7 @@ export const education: EducationItem[] = [
 
 export const experience: ExperienceItem[] = [
   {
-    year: 'January 2026 - July 2026',
+    year: 'January 2026 – July 2026',
     role: 'Freelance Frontend Developer',
     organization: 'Shawarma Story',
     details: [
@@ -190,7 +190,7 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    year: 'November 2025 - December 2025',
+    year: 'November 2025 – December 2025',
     role: 'Frontend Developer Intern',
     organization: 'TechTalks Community',
     location: 'Remote',
