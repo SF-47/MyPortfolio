@@ -2,16 +2,17 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { profile, socialLinks } from '../data/portfolioData'
 
+const linkedInHref = socialLinks.find((link) => link.label === 'LinkedIn')?.href
+
 const contactLinks = [
   { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
   { label: 'GitHub', value: 'github.com/SF-47', href: 'https://github.com/SF-47', external: true },
   {
     label: 'LinkedIn',
-    value: 'linkedin.com/in/sami-farhat-46692641a',
-    href: socialLinks.find((link) => link.label === 'LinkedIn')?.href,
+    value: linkedInHref?.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''),
+    href: linkedInHref,
     external: true,
   },
-  { label: 'Portfolio', value: 'This website', href: '/' },
 ]
 
 type FormValues = {

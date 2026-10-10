@@ -45,7 +45,7 @@ export function Projects() {
   return (
     <section className="section-shell py-24 md:py-32" id="work">
       <div className="section-rule mb-16 md:mb-20">
-        <h2 className="label-caps tracking-[0.2em]">Selected Work</h2>
+        <h2 className="label-caps tracking-[0.2em]">[01] Selected Work</h2>
         <span className="meta-num text-on-surface-variant">FEATURED PUBLIC PROJECTS</span>
       </div>
 
