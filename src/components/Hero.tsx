@@ -37,9 +37,9 @@ export function Hero() {
       </div>
       <div className="grid-blueprint relative hidden min-h-[600px] items-center justify-center overflow-hidden border-l border-outline-variant md:flex">
         <div className="relative z-10 flex w-full flex-col items-end p-12 pb-28 text-right">
-          <span className="hero-watermark">ENGINEER</span>
-          <span className="hero-watermark">CODE</span>
-          <span className="hero-watermark">BUILD</span>
+          <span className="hero-watermark" aria-hidden="true">ENGINEER</span>
+          <span className="hero-watermark" aria-hidden="true">CODE</span>
+          <span className="hero-watermark" aria-hidden="true">BUILD</span>
         </div>
         <div className="absolute bottom-12 right-12 z-20 flex items-center gap-4 text-primary">
           <span className="label-caps">BEIRUT / REMOTE</span>

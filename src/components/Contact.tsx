@@ -48,6 +48,11 @@ export function Contact() {
     const nextErrors = validateForm(values)
     setErrors(nextErrors)
 
+    const firstInvalid = Object.keys(nextErrors)[0]
+    if (firstInvalid) {
+      document.getElementById(firstInvalid)?.focus()
+    }
+
     if (Object.keys(nextErrors).length > 0) {
       setStatus('error')
       return
@@ -102,7 +107,7 @@ export function Contact() {
             </div>
             <div className="flex items-center gap-4">
               <span className="flex h-12 w-12 items-center justify-center border border-outline transition-colors">
-                <span className="material-symbols-outlined">link</span>
+                <span className="material-symbols-outlined" aria-hidden="true">link</span>
               </span>
               <div>
                 <p className="label-caps mb-1 text-on-surface-variant">Profiles</p>
@@ -141,6 +146,8 @@ export function Contact() {
             label="Email"
             onChange={(value) => updateValue('email', value)}
             placeholder="email@example.com"
+            inputMode="email"
+            spellCheck={false}
             type="email"
             value={values.email}
           />
@@ -163,7 +170,7 @@ export function Contact() {
               id="message"
               name="message"
               onChange={(event) => updateValue('message', event.target.value)}
-              placeholder="Describe your project or opportunity..."
+              placeholder="Describe your project or opportunity…"
               rows={5}
               value={values.message}
             />
@@ -193,7 +200,9 @@ function Field({
   id,
   label,
   onChange,
+  inputMode,
   placeholder,
+  spellCheck,
   type = 'text',
   value,
 }: {
@@ -202,7 +211,9 @@ function Field({
   id: keyof FormValues
   label: string
   onChange: (value: string) => void
+  inputMode?: 'email'
   placeholder: string
+  spellCheck?: boolean
   type?: string
   value: string
 }) {
@@ -217,9 +228,11 @@ function Field({
         autoComplete={autoComplete}
         className="editorial-field"
         id={id}
+        inputMode={inputMode}
         name={id}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
+        spellCheck={spellCheck}
         type={type}
         value={value}
       />
@@ -238,7 +251,7 @@ function ContactRow({ icon, label, value, href }: { icon: string; label: string;
   return (
     <div className="flex items-center gap-4">
       <span className="flex h-12 w-12 items-center justify-center border border-outline transition-colors">
-        <span className="material-symbols-outlined">{icon}</span>
+        <span className="material-symbols-outlined" aria-hidden="true">{icon}</span>
       </span>
       <div>
         <p className="label-caps mb-1 text-on-surface-variant">{label}</p>

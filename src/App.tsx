@@ -10,8 +10,14 @@ import { Skills } from './components/Skills'
 function App() {
   return (
     <>
+      <a
+        className="sr-only z-[10001] bg-primary px-4 py-3 text-[#121416] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        href="#main"
+      >
+        Skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
         <Projects />
         <About />
