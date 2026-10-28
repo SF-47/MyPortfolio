@@ -58,7 +58,7 @@ export function FindlyOverview() {
                   ['Clients', buildDetails.clients],
                 ] as const
               ).map(([title, items]) => (
-                <section aria-label={title} key={title}>
+                <div key={title}>
                   <h3 className="mono-label">{title}</h3>
                   <ul className="mt-3.5 border-t border-rule">
                     {items.map((item) => (
@@ -68,7 +68,7 @@ export function FindlyOverview() {
                       </li>
                     ))}
                   </ul>
-                </section>
+                </div>
               ))}
             </div>
             <p className="mt-6 max-w-[560px] text-[15px] text-fg-muted">

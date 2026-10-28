@@ -16,7 +16,7 @@ export function ContactSection() {
             Start a conversation.
           </h2>
           <a
-            className="mt-7 block w-max max-w-full break-words border-b border-signal pb-2 font-serif text-[27px] font-light leading-[1.1] tracking-[-0.025em] md:mt-9 md:text-[42px] xl:text-[52px]"
+            className="mt-7 block min-h-11 w-max max-w-full break-words border-b border-signal pb-2 font-serif text-[27px] font-light leading-[1.1] tracking-[-0.025em] md:mt-9 md:text-[42px] xl:text-[52px]"
             href={`mailto:${profile.email}`}
           >
             {profile.email}

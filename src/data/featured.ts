@@ -10,6 +10,8 @@ export type FeaturedProject = {
   caption: string
   // Natural pixel width of the screenshot, used for the expanded view.
   imageWidth: number
+  // 800px-wide copy of the screenshot, served to phones and narrow columns.
+  smallImage: string
   // Crop to the part of the image that has content: aspect ratio, and the image's size and
   // offset inside the crop (percentages of the crop).
   crop: { aspect: string; width: number; left: number; top: number }
@@ -27,6 +29,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     caption: 'Admin dashboard · match report · mobile app',
     imageWidth: 1600,
+    smallImage: '/assets/stitch/findly-real-composite-800.webp',
     crop: { aspect: '1508 / 784', width: 106.1, left: -2.9, top: -11.2 },
   },
   {
@@ -40,6 +43,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     caption: 'Bilingual menu · cart · admin panel',
     imageWidth: 1200,
+    smallImage: '/assets/stitch/shawarma-real-composite-800.webp',
     crop: { aspect: '1151 / 610', width: 104.3, left: -2.2, top: -23.8 },
   },
 ]

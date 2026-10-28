@@ -23,7 +23,7 @@ export function SiteFooter({ seam }: { seam: boolean }) {
               ) : null,
             )}
             <li>
-              <a className={textLinkClass} href="#top">
+              <a className={`${textLinkClass} min-w-11 justify-center`} href="#top">
                 Top ↑
               </a>
             </li>

@@ -10,13 +10,17 @@ type ZoomableImageProps = {
   label: string
   // Blend the image's black margins into a dark surface behind it.
   blend?: boolean
+  // Smaller copy for the inline image (the expanded view always uses `src`), with the
+  // `sizes` hint describing how wide the inline image is at each viewport.
+  small?: { src: string; width: number; sizes: string }
 }
 
 // A screenshot shown cropped, which opens full size in a modal dialog on click, tap or
 // Enter. The dialog scrolls and can be pinch-zoomed, closes on Escape or its button, and
-// returns focus to the image. The image is lazy loaded and has its dimensions reserved, so
-// it does not shift the layout.
-export function ZoomableImage({ src, alt, fullWidth, crop, label, blend = false }: ZoomableImageProps) {
+// returns focus to the image. Both images are lazy loaded (the expanded one only downloads
+// once the dialog is opened) and the inline one has its dimensions reserved, so it does not
+// shift the layout.
+export function ZoomableImage({ src, alt, fullWidth, crop, label, blend = false, small }: ZoomableImageProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
 
@@ -37,7 +41,9 @@ export function ZoomableImage({ src, alt, fullWidth, crop, label, blend = false 
             className={`absolute block h-auto max-w-none ${blend ? 'mix-blend-lighten' : ''}`}
             decoding="async"
             loading="lazy"
+            sizes={small?.sizes}
             src={src}
+            srcSet={small ? `${small.src} ${small.width}w, ${src} ${fullWidth}w` : undefined}
             style={{ width: `${crop.width}%`, left: `${crop.left}%`, top: `${crop.top}%` }}
             width={fullWidth}
           />
@@ -65,7 +71,7 @@ export function ZoomableImage({ src, alt, fullWidth, crop, label, blend = false 
           </button>
         </div>
         <div className="h-[calc(100dvh-60px)] overflow-auto" tabIndex={0}>
-          <img alt={alt} className="block h-auto max-w-none" src={src} style={{ width: fullWidth }} />
+          <img alt={alt} className="block h-auto max-w-none" decoding="async" loading="lazy" src={src} style={{ width: fullWidth }} />
         </div>
       </dialog>
     </>
