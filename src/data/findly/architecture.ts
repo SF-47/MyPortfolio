@@ -18,7 +18,9 @@ export type ArchitectureNode = {
   kind: 'Client' | 'Backend' | 'Data' | 'Automation' | 'AI'
   title: string
   meta: string
-  // Narrow layout wraps the meta text onto lines.
+  // Meta text split over lines where one line would crowd the node (both layouts).
+  metaLines?: string[]
+  // Narrow layout only: wrap the meta text onto lines.
   metaTall?: string[]
   sub?: string
   layers: LayerId[]
@@ -50,6 +52,7 @@ export const nodes: Record<NodeId, ArchitectureNode> = {
     kind: 'Client',
     title: 'Expo React Native',
     meta: '17 mobile screens',
+    metaTall: ['17 screens'],
     layers: ['all', 'auth'],
     detail: {
       rows: [
@@ -95,7 +98,7 @@ export const nodes: Record<NodeId, ArchitectureNode> = {
     kind: 'Data',
     title: 'PostgreSQL',
     meta: '9 entities · 13 migrations',
-    metaTall: ['9 entities', '13 migrations'],
+    metaLines: ['9 entities', '13 migrations'],
     layers: ['all', 'data'],
     detail: {
       rows: [
@@ -133,6 +136,13 @@ export const nodes: Record<NodeId, ArchitectureNode> = {
       note: 'Per the project README. The Gemini step is part of the n8n workflow, which is not in the repository.',
     },
   },
+}
+
+// In the hero diagram n8n and Gemini AI are drawn as a single node.
+export const mergedAutomationNode = {
+  title: 'n8n → Gemini AI',
+  meta: 'compares candidates',
+  metaTall: ['compares', 'candidates'],
 }
 
 export const edges: Record<EdgeId, ArchitectureEdge> = {
@@ -236,6 +246,8 @@ type Box = { x: number; y: number; w: number; h: number }
 type LayoutSpec = {
   width: number
   height: number
+  // Height when n8n and Gemini AI are drawn as one node (the hero diagram).
+  heightMerged: number
   nodes: Record<NodeId, Box>
   // Orthogonal route from the `from` node to the `to` node.
   edges: Record<EdgeId, { points: Point[]; label?: Point }>
@@ -246,6 +258,7 @@ export const layouts: Record<DiagramLayout, LayoutSpec> = {
   wide: {
     width: 720,
     height: 630,
+    heightMerged: 480,
     nodes: {
       expo: { x: 0, y: 0, w: 220, h: 100 },
       admin: { x: 500, y: 0, w: 220, h: 100 },
@@ -265,6 +278,7 @@ export const layouts: Record<DiagramLayout, LayoutSpec> = {
   tall: {
     width: 350,
     height: 564,
+    heightMerged: 412,
     nodes: {
       expo: { x: 0, y: 0, w: 167, h: 100 },
       admin: { x: 183, y: 0, w: 167, h: 100 },

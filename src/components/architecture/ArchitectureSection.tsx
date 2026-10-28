@@ -97,7 +97,7 @@ export function ArchitectureSection() {
         />
       </div>
 
-      <div className="mt-20 border-t border-rule pt-10">
+      <div className="mt-20 scroll-mt-6 border-t border-rule pt-10" id="trace">
         <h3 className="text-h3">Trace a new report</h3>
         <p className="mt-3 max-w-[640px] text-fg-muted">
           What happens, in order, when a student reports a lost or found item. Each step names where it is established: the Findly backend code, or only the project README (the n8n workflow

@@ -1,11 +1,12 @@
 import { Link } from 'react-router'
+import { Hero } from '../components/hero/Hero'
 import { SeamRuler } from '../components/layout/SeamRuler'
 import { Surface, type SurfaceTone } from '../components/layout/Surface'
 import { routes, usePageMeta } from '../app/meta'
-import { profile, projects } from '../data/portfolioData'
+import { projects } from '../data/portfolioData'
 
-// Temporary Milestone 2 page. It exists to exercise the surfaces, seam rulers and anchor
-// navigation; the final hero and sections replace it in later milestones.
+// The hero is final (Milestone 4). The sections below it are temporary placeholders that
+// exercise the surfaces, seam rulers and anchor navigation until they are built.
 const sections: ReadonlyArray<{ id: string; tone: SurfaceTone; label: string; title: string }> = [
   { id: 'work', tone: 'paper', label: '01 — Selected work', title: 'Selected work.' },
   { id: 'profile', tone: 'tint', label: '02 — Profile', title: 'Systematic thinking, practical execution.' },
@@ -19,15 +20,7 @@ export function HomePage() {
 
   return (
     <>
-      <Surface as="section" className="section-y">
-        <div className="wrap">
-          <p className="mono-label text-fg-muted">Milestone 2 · temporary content</p>
-          <h1 className="mt-6 text-display">{profile.name}</h1>
-          <p className="mt-6 max-w-xl font-serif text-[length:var(--text-lede)] text-fg-muted">
-            {profile.title} — {profile.specialization}
-          </p>
-        </div>
-      </Surface>
+      <Hero />
       {sections.map((section, index) => {
         const previous = sections[index - 1]
         const enteringCanvas = section.tone === 'canvas' && previous && previous.tone !== 'canvas'

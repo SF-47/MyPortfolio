@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     hydrateFallbackElement: <PageLoading />,
     children: [
-      { index: true, element: <HomePage />, handle: { footerSeam: true } satisfies RouteHandle },
+      { index: true, element: <HomePage />, handle: { footerSeam: true, integratedHeader: true } satisfies RouteHandle },
       {
         path: childPath(routes.findly.path),
         lazy: async () => ({

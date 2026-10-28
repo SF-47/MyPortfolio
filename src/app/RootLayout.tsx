@@ -8,6 +8,7 @@ export function RootLayout() {
   const { pathname, hash } = useLocation()
   const matches = useMatches()
   const footerSeam = matches.some((match) => (match.handle as RouteHandle | undefined)?.footerSeam)
+  const integratedHeader = matches.some((match) => (match.handle as RouteHandle | undefined)?.integratedHeader)
   const mainRef = useRef<HTMLElement>(null)
   const announceRef = useRef<HTMLParagraphElement>(null)
   const previousPathname = useRef(pathname)
@@ -31,7 +32,7 @@ export function RootLayout() {
       >
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader integrated={integratedHeader} />
       <main className="flex-1 outline-none" id="main" ref={mainRef} tabIndex={-1}>
         <Outlet />
       </main>

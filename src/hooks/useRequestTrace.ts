@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const STEP_MS = 2600
+const STEP_MS = 3000
 
 // State for stepping through a sequence of stages. Autoplay advances one stage at a time
 // and stops after the last one; it never loops. When autoplay is not allowed (reduced
