@@ -202,3 +202,25 @@ export const experience: ExperienceItem[] = [
     ],
   },
 ]
+
+export const stats = [
+  { value: 64, label: 'REST endpoints', note: 'Findly API' },
+  { value: 17, label: 'Mobile screens', note: 'Expo React Native' },
+  { value: 11, label: 'Admin pages', note: 'React dashboard' },
+  { value: 9, label: 'Database entities', note: 'PostgreSQL' },
+]
+
+export const marqueeItems = [
+  'React',
+  'TypeScript',
+  'ASP.NET Core',
+  'React Native',
+  'PostgreSQL',
+  'Firebase',
+  'Supabase',
+  'Tailwind CSS',
+  'Expo',
+  'n8n',
+  'C#',
+  'REST APIs',
+]

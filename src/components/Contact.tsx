@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { useRef } from 'react'
 import { profile, socialLinks } from '../data/portfolioData'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { Magnetic } from './ui/Magnetic'
+import { SectionHead } from './ui/SectionHead'
 
 const linkedInHref = socialLinks.find((link) => link.label === 'LinkedIn')?.href
 
@@ -73,48 +77,53 @@ export function Contact() {
 
   const isSubmitting = status === 'submitting'
 
+  const root = useRef<HTMLElement>(null)
+  useScrollReveal(root)
+
   return (
-    <section className="section-shell bg-surface py-20 md:py-32" id="contact">
-      <div className="grid gap-14 md:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] md:items-start md:gap-16 lg:gap-20">
-        <div className="min-w-0">
-          <span className="meta-num mb-4 block text-primary">[05] CONNECT</span>
-          <h2 className="section-title mb-6">Start a Conversation.</h2>
-          <p className="mb-8 max-w-xl text-body text-on-surface-variant">
-            {profile.availability}
-          </p>
-          <div className="space-y-6">
+    <section className="shell py-28 md:py-40" id="contact" ref={root}>
+      <SectionHead
+        index="05"
+        label="Connect"
+        title={
+          <>
+            Let&rsquo;s build something <span className="serif text-grad">worth shipping.</span>
+          </>
+        }
+      />
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+        <div className="min-w-0" data-reveal>
+          <p className="mb-10 max-w-xl text-lg leading-8 text-mute">{profile.availability}</p>
+          <div className="grid gap-4">
             <ContactRow icon="mail" label="Email" value={profile.email} href={`mailto:${profile.email}`} />
-            <ContactRow icon="location_on" label="Location" value={profile.location} />
-            <div className="border-t border-outline-variant pt-6">
-              <p className="label-caps mb-4 text-primary">Direct Links</p>
-              <div className="grid gap-3">
-                {contactLinks.map((link) =>
-                  link.href ? (
-                    <a
-                      className="contact-link"
-                      href={link.href}
-                      key={link.label}
-                      target={link.external ? '_blank' : undefined}
-                      rel={link.external ? 'noopener noreferrer' : undefined}
-                    >
-                      <span>{link.label}</span>
-                      <span>{link.value}</span>
-                    </a>
-                  ) : null,
-                )}
-              </div>
-            </div>
+            <ContactRow icon="pin" label="Location" value={profile.location} />
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {contactLinks.map((link) =>
+              link.href ? (
+                <Magnetic key={link.label}>
+                  <a
+                    className="btn"
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {link.label} <span aria-hidden="true">↗</span>
+                  </a>
+                </Magnetic>
+              ) : null,
+            )}
           </div>
         </div>
 
-        <form className="min-w-0 border border-outline-variant bg-surface-container-lowest p-6 md:p-10" onSubmit={handleSubmit} noValidate>
+        <form className="glass min-w-0 p-6 md:p-10" data-spot data-reveal data-delay="0.1" onSubmit={handleSubmit} noValidate>
           <Field
             autoComplete="name"
             error={errors.name}
             id="name"
             label="Name"
             onChange={(value) => updateValue('name', value)}
-            placeholder="Your Full Name"
+            placeholder="Your full name"
             value={values.name}
           />
           <Field
@@ -139,12 +148,12 @@ export function Contact() {
             value={values.subject}
           />
           <div className="mb-8">
-            <label className="label-caps mb-2 block text-on-surface-variant" htmlFor="message">Message</label>
+            <label className="mono mb-2 block text-mute" htmlFor="message">Message</label>
             <textarea
               aria-describedby={errors.message ? 'message-error' : undefined}
               aria-invalid={Boolean(errors.message)}
               autoComplete="off"
-              className="editorial-field min-h-32 resize-y"
+              className="field min-h-36 resize-y"
               id="message"
               name="message"
               onChange={(event) => updateValue('message', event.target.value)}
@@ -155,10 +164,10 @@ export function Contact() {
             {errors.message ? <p className="form-error" id="message-error">{errors.message}</p> : null}
           </div>
 
-          <button className="w-full bg-primary-container py-4 label-caps uppercase tracking-[0.16em] text-white transition hover:brightness-110 active:scale-[0.99] disabled:cursor-wait disabled:opacity-75" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Preparing Email' : 'Open Email Draft'}
+          <button className="btn btn-primary w-full" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Preparing email…' : 'Open email draft'}
           </button>
-          <p className="mt-4 text-sm leading-6 text-on-surface-variant" role="status" aria-live="polite">
+          <p className="mt-4 text-sm leading-6 text-mute" role="status" aria-live="polite">
             {status === 'mailto'
               ? 'A prepared email draft was requested. If your email app did not open, use the direct email link on this page.'
               : 'No backend email service is configured, so this form uses a mailto fallback.'}
@@ -199,12 +208,12 @@ function Field({
 
   return (
     <div className="mb-8">
-      <label className="label-caps mb-2 block text-on-surface-variant" htmlFor={id}>{label}</label>
+      <label className="mono mb-2 block text-mute" htmlFor={id}>{label}</label>
       <input
         aria-describedby={error ? errorId : undefined}
         aria-invalid={Boolean(error)}
         autoComplete={autoComplete}
-        className="editorial-field"
+        className="field"
         id={id}
         inputMode={inputMode}
         name={id}
@@ -219,20 +228,32 @@ function Field({
   )
 }
 
-function ContactRow({ icon, label, value, href }: { icon: string; label: string; value: string; href?: string }) {
+function ContactRow({ icon, label, value, href }: { icon: 'mail' | 'pin'; label: string; value: string; href?: string }) {
   const content = href ? (
-    <a className="label-caps text-on-surface hover:text-primary" href={href}>{value}</a>
+    <a className="break-all text-lg transition-colors hover:text-cyan" href={href}>{value}</a>
   ) : (
-    <span className="label-caps text-on-surface">{value}</span>
+    <span className="text-lg">{value}</span>
   )
 
   return (
-    <div className="flex items-center gap-4">
-      <span className="flex h-12 w-12 items-center justify-center border border-outline transition-colors">
-        <span className="material-symbols-outlined" aria-hidden="true">{icon}</span>
+    <div className="glass flex items-center gap-5 !rounded-2xl p-4" data-spot>
+      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-cyan">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          {icon === 'mail' ? (
+            <>
+              <rect x="3" y="5" width="18" height="14" rx="3" />
+              <path d="m4 7 8 6 8-6" />
+            </>
+          ) : (
+            <>
+              <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z" />
+              <circle cx="12" cy="9.5" r="2.5" />
+            </>
+          )}
+        </svg>
       </span>
-      <div>
-        <p className="label-caps mb-1 text-on-surface-variant">{label}</p>
+      <div className="min-w-0">
+        <p className="mono mb-1 text-mute">{label}</p>
         {content}
       </div>
     </div>
