@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react'
-import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router'
-import { routes } from './meta'
-
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `label-caps underline-offset-8 hover:underline ${isActive ? 'underline text-on-surface' : 'text-on-surface-variant'}`
+import { Outlet, ScrollRestoration, useLocation, useMatches } from 'react-router'
+import { SiteFooter } from '../components/layout/SiteFooter'
+import { SiteHeader } from '../components/layout/SiteHeader'
+import type { RouteHandle } from './routeHandle'
 
 export function RootLayout() {
   const { pathname, hash } = useLocation()
+  const matches = useMatches()
+  const footerSeam = matches.some((match) => (match.handle as RouteHandle | undefined)?.footerSeam)
   const mainRef = useRef<HTMLElement>(null)
   const announceRef = useRef<HTMLParagraphElement>(null)
   const previousPathname = useRef(pathname)
@@ -23,42 +24,20 @@ export function RootLayout() {
   }, [pathname, hash])
 
   return (
-    <>
+    <div className="flex min-h-dvh flex-col bg-surface text-fg" data-surface="paper" id="top">
       <a
-        className="sr-only z-[10001] bg-primary px-4 py-3 text-[#121416] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="mono-label absolute left-[-9999px] top-2 z-50 bg-signal px-4 py-3 font-medium text-canvas focus:left-3 focus:outline-canvas"
         href="#main"
       >
         Skip to content
       </a>
-      <header className="border-b border-outline-variant">
-        <div className="mx-auto flex max-w-container items-center justify-between gap-6 px-6 py-4">
-          <Link className="font-display text-xl" to={routes.home.path}>
-            Sami Farhat
-          </Link>
-          <nav aria-label="Primary">
-            <ul className="flex gap-6">
-              <li>
-                <NavLink className={navLinkClass} end to={routes.home.path}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className={navLinkClass} to={routes.findly.path}>
-                  Findly
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-      <main className="mx-auto max-w-container px-6 py-16 outline-none" id="main" ref={mainRef} tabIndex={-1}>
+      <SiteHeader />
+      <main className="flex-1 outline-none" id="main" ref={mainRef} tabIndex={-1}>
         <Outlet />
       </main>
-      <footer className="border-t border-outline-variant">
-        <p className="label-caps mx-auto max-w-container px-6 py-8 text-on-surface-variant">© 2026 Sami Farhat · Built in Beirut</p>
-      </footer>
+      <SiteFooter seam={footerSeam} />
       <p aria-live="polite" className="sr-only" ref={announceRef} role="status" />
       <ScrollRestoration />
-    </>
+    </div>
   )
 }

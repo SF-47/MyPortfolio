@@ -4,25 +4,26 @@ import { projects } from '../data/portfolioData'
 
 const findly = projects.find((project) => project.id === '01')
 
-// Temporary Milestone 1 scaffold. The full case study is built in a later milestone.
+// Temporary scaffold. The full case study is built in a later milestone.
 export function FindlyCaseStudy() {
   usePageMeta('findly')
 
   return (
-    <>
-      <p className="mb-6">
-        <Link className="label-caps underline underline-offset-4" to={routes.home.path}>
-          ← Home
+    <div className="wrap section-y">
+      <p className="mono-label text-fg-muted">
+        <Link className="underline underline-offset-4" to={routes.home.path}>
+          Home
         </Link>
+        {' / '}
+        Work / 01 Findly · scaffold
       </p>
-      <p className="meta-num mb-4 text-primary">Case study 01 · scaffold</p>
-      <h1 className="font-display text-5xl">{findly?.title}</h1>
-      <p className="mt-4 max-w-xl text-on-surface-variant">{findly?.kicker}</p>
-      <ul className="mt-8 flex flex-wrap gap-6">
+      <h1 className="mt-6 text-display">{findly?.title}</h1>
+      <p className="mt-6 max-w-xl font-serif text-[length:var(--text-lede)] text-fg-muted">{findly?.kicker}</p>
+      <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2">
         {findly?.actions.map((action) =>
           action.href ? (
             <li key={action.label}>
-              <a className="underline underline-offset-4" href={action.href} rel="noopener noreferrer" target="_blank">
+              <a className="inline-flex min-h-11 items-center underline underline-offset-4" href={action.href} rel="noopener noreferrer" target="_blank">
                 {action.label}
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
@@ -30,6 +31,6 @@ export function FindlyCaseStudy() {
           ) : null,
         )}
       </ul>
-    </>
+    </div>
   )
 }
