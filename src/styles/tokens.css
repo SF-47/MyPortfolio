@@ -100,3 +100,16 @@
     --gutter: 64px;
   }
 }
+
+/* An element flagged data-surface-xl="canvas" turns to canvas colours from xl up only (the
+   home page navigation, which sits over the hero's canvas column at that width). */
+@media (width >= theme(--breakpoint-xl)) {
+  [data-surface-xl='canvas'] {
+    --surface-bg: var(--color-canvas);
+    --surface-fg: var(--color-canvas-ink);
+    --surface-muted: var(--color-canvas-muted);
+    --surface-rule: rgb(125 146 153 / 0.45);
+    --surface-tick: rgb(125 146 153 / 0.6);
+    --surface-focus: var(--color-signal);
+  }
+}
