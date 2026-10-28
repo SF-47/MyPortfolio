@@ -4,6 +4,7 @@ import { ArchitectureDiagram } from '../architecture/ArchitectureDiagram'
 import { SeamRuler } from '../layout/SeamRuler'
 import { Surface } from '../layout/Surface'
 import { ButtonLink } from '../ui/ButtonLink'
+import { textLinkClass } from '../ui/textLinkClass'
 import { chipClass } from '../ui/chipStyles'
 import { profile, socialLinks } from '../../data/portfolioData'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
@@ -11,7 +12,6 @@ import { heroCanvasPadding, heroColumns } from './heroLayout'
 import { MatchFieldPreview } from './MatchFieldPreview'
 import { SelectedSystems } from './SelectedSystems'
 
-const textLink = 'mono-label inline-flex min-h-11 items-center underline underline-offset-[5px]'
 
 // The home page hero: editorial paper column, dark engineering canvas, and the ruler seam
 // between them. From xl up the two sit side by side and the shared header overlays the top
@@ -45,7 +45,7 @@ export function Hero() {
         <p className="mt-3 flex flex-wrap gap-x-7">
           {socialLinks.map((link) =>
             link.href ? (
-              <a className={textLink} href={link.href} key={link.label} rel="noopener noreferrer" target="_blank">
+              <a className={textLinkClass} href={link.href} key={link.label} rel="noopener noreferrer" target="_blank">
                 {link.label} →<span className="sr-only"> (opens in a new tab)</span>
               </a>
             ) : null,
@@ -70,7 +70,7 @@ export function Hero() {
           <ArchitectureDiagram interactive={false} layout={wide ? 'wide' : 'tall'} merged />
         </div>
         <p className="mt-6">
-          <Link className={`${textLink} font-medium`} to={routes.findly.path}>
+          <Link className={`${textLinkClass} font-medium`} to={routes.findly.path}>
             Read the case study →
           </Link>
         </p>

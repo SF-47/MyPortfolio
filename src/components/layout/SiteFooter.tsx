@@ -1,8 +1,7 @@
 import { profile, socialLinks } from '../../data/portfolioData'
 import { SeamRuler } from './SeamRuler'
+import { textLinkClass } from '../ui/textLinkClass'
 import { Surface } from './Surface'
-
-const linkClass = 'mono-label inline-flex min-h-11 items-center underline underline-offset-[5px]'
 
 // `seam` draws the ruler above the footer when the page's last section is dark canvas.
 export function SiteFooter({ seam }: { seam: boolean }) {
@@ -16,7 +15,7 @@ export function SiteFooter({ seam }: { seam: boolean }) {
             {socialLinks.map((link) =>
               link.href ? (
                 <li key={link.label}>
-                  <a className={linkClass} href={link.href} rel="noopener noreferrer" target="_blank">
+                  <a className={textLinkClass} href={link.href} rel="noopener noreferrer" target="_blank">
                     {link.label}
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
@@ -24,7 +23,7 @@ export function SiteFooter({ seam }: { seam: boolean }) {
               ) : null,
             )}
             <li>
-              <a className={linkClass} href="#top">
+              <a className={textLinkClass} href="#top">
                 Top ↑
               </a>
             </li>

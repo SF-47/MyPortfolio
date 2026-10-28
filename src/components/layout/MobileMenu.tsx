@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { profile, socialLinks } from '../../data/portfolioData'
+import { useActiveSection } from '../../app/activeSection'
 import { currentNavKey, primaryNav } from '../../app/navigation'
 
-type MobileMenuProps = { pathname: string; hash: string }
+type MobileMenuProps = { pathname: string }
 
 // Full-screen menu for widths below the lg breakpoint, built on a modal <dialog>: the
 // browser traps focus, makes the page behind inert, closes on Escape and returns focus to
 // the button that opened it.
-export function MobileMenu({ pathname, hash }: MobileMenuProps) {
+export function MobileMenu({ pathname }: MobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const [open, setOpen] = useState(false)
-  const current = currentNavKey(pathname, hash)
+  const { active } = useActiveSection()
+  const current = currentNavKey(pathname, active)
 
   // If the viewport grows past the menu breakpoint while the menu is open, close it so the
   // inline navigation takes over and the page is not left inert behind a hidden dialog.

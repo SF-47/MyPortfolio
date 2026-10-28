@@ -12,10 +12,10 @@ export const primaryNav: ReadonlyArray<{ key: NavKey; label: string; to: string 
 
 const keyForHash = (hash: string) => primaryNav.find((item) => item.to.endsWith(hash))?.key
 
-// Which item is current: anything under /work is "Work"; on the home page, the item whose
-// section the URL hash points at; otherwise none.
-export function currentNavKey(pathname: string, hash: string): NavKey | undefined {
+// Which item is current. Anything under /work is "Work". On the home page it is the section
+// in view (from the scroll-spy, as an element id), or none while the hero is showing.
+export function currentNavKey(pathname: string, activeSection: string | null): NavKey | undefined {
   if (pathname.startsWith('/work')) return 'work'
-  if (pathname === '/' && hash) return keyForHash(hash)
+  if (pathname === '/' && activeSection) return keyForHash(`#${activeSection}`)
   return undefined
 }

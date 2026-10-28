@@ -1,64 +1,31 @@
-import { Link } from 'react-router'
+import { AboutSection } from '../components/home/AboutSection'
+import { ContactSection } from '../components/home/ContactSection'
+import { ExperienceSection } from '../components/home/ExperienceSection'
+import { FeaturedProjects } from '../components/home/FeaturedProjects'
+import { SkillsSection } from '../components/home/SkillsSection'
 import { Hero } from '../components/hero/Hero'
 import { SeamRuler } from '../components/layout/SeamRuler'
-import { Surface, type SurfaceTone } from '../components/layout/Surface'
-import { routes, usePageMeta } from '../app/meta'
-import { projects } from '../data/portfolioData'
+import { usePageMeta } from '../app/meta'
+import { useScrollSpy } from '../hooks/useScrollSpy'
 
-// The hero is final (Milestone 4). The sections below it are temporary placeholders that
-// exercise the surfaces, seam rulers and anchor navigation until they are built.
-const sections: ReadonlyArray<{ id: string; tone: SurfaceTone; label: string; title: string }> = [
-  { id: 'work', tone: 'paper', label: '01 — Selected work', title: 'Selected work.' },
-  { id: 'profile', tone: 'tint', label: '02 — Profile', title: 'Systematic thinking, practical execution.' },
-  { id: 'capabilities', tone: 'canvas', label: '03 — Skills', title: 'The toolbox.' },
-  { id: 'experience', tone: 'paper', label: '04 — Experience', title: 'Experience & education.' },
-  { id: 'contact', tone: 'canvas', label: '05 — Connect', title: 'Start a conversation.' },
-]
+// Element ids of the sections the navigation points at, in page order.
+const sectionIds = ['work', 'profile', 'capabilities', 'experience', 'contact'] as const
 
 export function HomePage() {
   usePageMeta('home')
+  useScrollSpy(sectionIds)
 
   return (
     <>
       <Hero />
-      {sections.map((section, index) => {
-        const previous = sections[index - 1]
-        const enteringCanvas = section.tone === 'canvas' && previous && previous.tone !== 'canvas'
-        const leavingCanvas = section.tone !== 'canvas' && previous?.tone === 'canvas'
-        return (
-          <div className="contents" key={section.id}>
-            {enteringCanvas ? <SeamRuler edge="bottom" tone={previous.tone === 'tint' ? 'tint' : 'paper'} /> : null}
-            {leavingCanvas ? <SeamRuler edge="top" /> : null}
-            <Surface as="section" className="section-y" id={section.id} tone={section.tone}>
-              <div className="wrap">
-                <p className="mono-label text-fg-muted">{section.label}</p>
-                <h2 className="mt-4 text-h2">{section.title}</h2>
-                {section.id === 'work' ? (
-                  <ul className="mt-10 space-y-3">
-                    {projects.map((project) => (
-                      <li key={project.id}>
-                        {project.id === '01' ? (
-                          <Link className="underline underline-offset-4" to={routes.findly.path}>
-                            {project.title}
-                          </Link>
-                        ) : (
-                          <a className="underline underline-offset-4" href={project.liveUrl ?? project.repository} rel="noopener noreferrer" target="_blank">
-                            {project.title}
-                            <span className="sr-only"> (opens in a new tab)</span>
-                          </a>
-                        )}
-                        <span className="text-fg-muted"> — {project.kicker}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="mt-10 text-fg-muted">Placeholder. Built in a later milestone.</p>
-                )}
-              </div>
-            </Surface>
-          </div>
-        )
-      })}
+      <FeaturedProjects />
+      <AboutSection />
+      <SeamRuler edge="bottom" tone="tint" />
+      <SkillsSection />
+      <SeamRuler edge="top" />
+      <ExperienceSection />
+      <SeamRuler edge="bottom" />
+      <ContactSection />
     </>
   )
 }
