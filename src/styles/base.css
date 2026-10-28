@@ -55,6 +55,20 @@
   line-height: 1.5;
 }
 
+/* Eyebrow: a mono label led by a small square, as in the boards. */
+@utility eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  &::before {
+    content: '';
+    flex: none;
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+  }
+}
+
 /* Vertical rhythm between page sections: 64px on phones, 96px from md up. */
 @utility section-y {
   padding-block: 64px;

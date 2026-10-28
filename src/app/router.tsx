@@ -21,7 +21,10 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage />, handle: { footerSeam: true } satisfies RouteHandle },
       {
         path: childPath(routes.findly.path),
-        lazy: async () => ({ Component: (await import('../routes/FindlyCaseStudy')).FindlyCaseStudy }),
+        lazy: async () => ({
+          Component: (await import('../routes/FindlyCaseStudy')).FindlyCaseStudy,
+          handle: { footerSeam: true } satisfies RouteHandle,
+        }),
       },
       { path: '*', element: <NotFound /> },
     ],
