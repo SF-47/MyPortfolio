@@ -2,21 +2,11 @@ import type {
   EducationItem,
   ExperienceItem,
   LinkItem,
-  NavItem,
   Project,
   SkillGroup,
 } from '../types/portfolio'
 
 const stitchAsset = (fileName: string) => `/assets/stitch/${fileName}`
-
-export const navItems: NavItem[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Work', href: '#work' },
-  { label: 'Profile', href: '#profile' },
-  { label: 'Skills', href: '#capabilities' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
-]
 
 export const profile = {
   name: 'Sami Farhat',
@@ -132,11 +122,11 @@ export const projects: Project[] = [
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend',
-    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
+    items: ['React', 'Next.js', 'Tailwind CSS', 'HTML5', 'CSS3'],
   },
   {
     title: 'Backend',
-    items: ['ASP.NET Core', 'C#', 'REST APIs', 'JWT Authentication', 'Role-Based Access Control'],
+    items: ['ASP.NET Core', 'REST APIs', 'JWT Authentication', 'Role-Based Access Control'],
   },
   {
     title: 'Mobile',

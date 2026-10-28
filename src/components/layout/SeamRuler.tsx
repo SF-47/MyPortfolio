@@ -3,8 +3,8 @@ import type { SurfaceTone } from './Surface'
 type SeamRulerProps = {
   // The side of the ruler that touches the dark canvas; ticks grow inward from it.
   edge: 'top' | 'bottom' | 'left' | 'right'
-  // Paper tone the ruler sits on (the ruler's own background).
-  tone?: Exclude<SurfaceTone, 'canvas'>
+  // Surface the ruler sits on (sets its background and tick colour).
+  tone?: SurfaceTone
   className?: string
 }
 

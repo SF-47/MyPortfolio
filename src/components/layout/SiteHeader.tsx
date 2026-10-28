@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router'
+import { useActiveSection } from '../../app/activeSection'
 import { currentNavKey, primaryNav } from '../../app/navigation'
 import { profile } from '../../data/portfolioData'
 import { heroCanvasPadding, heroColumns } from '../hero/heroLayout'
@@ -13,8 +14,9 @@ type SiteHeaderProps = {
 }
 
 export function SiteHeader({ integrated = false }: SiteHeaderProps) {
-  const { pathname, hash } = useLocation()
-  const current = currentNavKey(pathname, hash)
+  const { pathname } = useLocation()
+  const { active } = useActiveSection()
+  const current = currentNavKey(pathname, active)
   // Applied only when integrated. Spelled out in full so Tailwind can see each class.
   const onHero = {
     header: `relative z-10 xl:-mb-[72px] xl:grid xl:grid-rows-[72px] xl:border-b-0 xl:bg-transparent ${heroColumns}`,
@@ -58,7 +60,7 @@ export function SiteHeader({ integrated = false }: SiteHeaderProps) {
         >
           CV ↓
         </a>
-        <MobileMenu hash={hash} pathname={pathname} />
+        <MobileMenu pathname={pathname} />
       </div>
     </Surface>
   )

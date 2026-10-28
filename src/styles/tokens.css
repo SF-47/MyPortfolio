@@ -24,6 +24,9 @@
   --color-canvas-line: #7d9299;
   --color-canvas-stroke: #5b747c;
 
+  /* The black of the project screenshots, so their margins disappear into the plate. */
+  --color-plate: #0c0c0e;
+
   /* The one accent. Used on the canvas only; on paper it is too light to carry meaning. */
   --color-signal: #ffc400;
 
