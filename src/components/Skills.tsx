@@ -1,21 +1,49 @@
+import { useLayoutEffect, useRef } from 'react'
 import { skillGroups } from '../data/portfolioData'
+import { gsap, prefersReducedMotion } from '../lib/motion'
+import { SectionHead } from './ui/SectionHead'
 
 export function Skills() {
+  const root = useRef<HTMLElement>(null)
+
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return
+    const ctx = gsap.context(() => {
+      gsap.from('.skill-card', {
+        y: 70,
+        rotateX: -12,
+        autoAlpha: 0,
+        stagger: 0.08,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.skill-grid', start: 'top 85%', once: true },
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="section-shell py-24 md:py-32" id="capabilities">
-      <div className="section-rule mb-12">
-        <h2 className="label-caps tracking-[0.2em]">[03] Skills</h2>
-        <span className="meta-num text-on-surface-variant">VERIFIED TECHNICAL INDEX</span>
-      </div>
-      <div className="grid border-l border-t border-outline-variant md:grid-cols-2 lg:grid-cols-4">
+    <section className="shell py-28 md:py-40" id="capabilities" ref={root}>
+      <SectionHead
+        index="03"
+        label="Skills"
+        title={
+          <>
+            The <span className="serif text-grad">toolbox</span>.
+          </>
+        }
+      />
+      <div className="skill-grid grid gap-4 [perspective:1200px] md:grid-cols-2 lg:grid-cols-4">
         {skillGroups.map((group, index) => (
-          <article className="border-b border-r border-outline-variant p-8 transition-colors hover:bg-surface-variant/40 md:p-10" key={group.title}>
-            <span className="meta-num mb-6 block text-primary">{String(index + 1).padStart(2, '0')} / INDEX</span>
-            <h3 className="mb-7 border-b border-outline-variant pb-4 font-display text-2xl font-semibold lg:min-h-[81px]">{group.title}</h3>
-            <ul className="space-y-5">
+          <article className="skill-card glass p-7" data-spot key={group.title}>
+            <div className="mb-6 flex items-baseline justify-between">
+              <span className="mono text-violet">{String(index + 1).padStart(2, '0')}</span>
+              <span className="mono text-mute">{group.items.length} items</span>
+            </div>
+            <h3 className="mb-5 font-display text-2xl font-semibold tracking-[-0.03em]">{group.title}</h3>
+            <ul className="flex flex-wrap gap-2">
               {group.items.map((item) => (
-                <li className="flex items-start gap-3 skill-item text-on-surface-variant" key={item}>
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-primary" />
+                <li className="chip" key={item}>
                   {item}
                 </li>
               ))}

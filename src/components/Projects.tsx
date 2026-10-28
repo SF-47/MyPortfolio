@@ -1,117 +1,174 @@
+import { useLayoutEffect, useRef } from 'react'
 import { projects } from '../data/portfolioData'
+import { gsap, prefersReducedMotion } from '../lib/motion'
 import type { Project } from '../types/portfolio'
+import { Magnetic } from './ui/Magnetic'
+import { SectionHead } from './ui/SectionHead'
 
-function ProjectActions({ project }: { project: Project }) {
-  return (
-    <div className="mt-8 flex flex-wrap gap-4">
-      {project.actions.map((action) =>
-        action.href ? (
-          <a
-            className="editorial-button editorial-button-large text-center"
-            href={action.href}
-            key={action.label}
-            target={action.external ? '_blank' : undefined}
-            rel={action.external ? 'noopener noreferrer' : undefined}
-            aria-label={`${action.label} for ${project.title}`}
-          >
-            {action.label}
-          </a>
-        ) : (
-          <button className="editorial-button cursor-not-allowed text-on-surface-variant" key={action.label} type="button" disabled>
-            {action.label}
-          </button>
-        ),
-      )}
-    </div>
-  )
-}
+function ProjectCard({ project, reverse }: { project: Project; reverse: boolean }) {
+  const media = useRef<HTMLDivElement>(null)
 
-function ProjectMeta({ project }: { project: Project }) {
+  const handleTilt = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion() || event.pointerType !== 'mouse' || !media.current) return
+    const rect = event.currentTarget.getBoundingClientRect()
+    const px = (event.clientX - rect.left) / rect.width - 0.5
+    const py = (event.clientY - rect.top) / rect.height - 0.5
+    gsap.to(media.current, { rotationY: px * 10, rotationX: -py * 10, duration: 0.6, ease: 'power3.out' })
+  }
+  const resetTilt = () => {
+    if (media.current) gsap.to(media.current, { rotationY: 0, rotationX: 0, duration: 0.9, ease: 'elastic.out(1,0.6)' })
+  }
+
   return (
-    <dl className="mt-8 grid gap-3 border-t border-outline-variant pt-6 sm:grid-cols-3 md:grid-cols-1">
-      {project.meta.map((item) => (
-        <div className="border-l border-outline-variant pl-4" key={item.label}>
-          <dt className="label-caps mb-1 text-primary">{item.label}</dt>
-          <dd className="meta-num text-on-surface">{item.value}</dd>
+    <article className="project-card relative" aria-labelledby={`project-${project.id}`}>
+      <span
+        className="pointer-events-none absolute -top-10 select-none font-display text-[clamp(8rem,22vw,18rem)] font-bold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.1)] md:-top-24"
+        style={reverse ? { right: 0 } : { left: 0 }}
+        aria-hidden="true"
+      >
+        {project.id}
+      </span>
+
+      <div className={`relative grid items-center gap-10 lg:grid-cols-12 lg:gap-14 ${reverse ? '' : ''}`}>
+        <div className={`lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
+          <div className="[perspective:1400px]" onPointerMove={handleTilt} onPointerLeave={resetTilt}>
+            <div className="glass overflow-hidden !rounded-[32px] p-2 will-change-transform md:p-3" ref={media} data-cursor>
+              <div className="project-img-wrap overflow-hidden rounded-[24px] bg-ink-2">
+                <a
+                  className="block"
+                  href={project.liveUrl ?? project.repository}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title}`}
+                >
+                  <img
+                    className="project-img aspect-[16/10] w-full scale-[1.18] object-cover"
+                    src={project.image}
+                    alt={project.imageAlt}
+                    width="960"
+                    height="600"
+                    loading="lazy"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      ))}
-    </dl>
+
+        <div className={`lg:col-span-5 ${reverse ? 'lg:order-1' : ''}`}>
+          <p className="mono mb-4 text-cyan">{project.meta[0]?.value}</p>
+          <h3
+            className="font-display text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.04em]"
+            id={`project-${project.id}`}
+          >
+            {project.title}
+          </h3>
+          <p className="serif mt-4 text-[1.6rem] leading-8 text-white/80">{project.kicker}</p>
+          <p className="mt-5 leading-8 text-mute">{project.description}</p>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            {project.actions.map((action) =>
+              action.href ? (
+                <Magnetic key={action.label}>
+                  <a
+                    className={`btn ${action === project.actions[0] ? 'btn-primary' : ''}`}
+                    href={action.href}
+                    target={action.external ? '_blank' : undefined}
+                    rel={action.external ? 'noopener noreferrer' : undefined}
+                    aria-label={`${action.label} for ${project.title}`}
+                  >
+                    {action.label} <span aria-hidden="true">↗</span>
+                  </a>
+                </Magnetic>
+              ) : null,
+            )}
+          </div>
+
+          <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            {project.meta.map((item) => (
+              <div className="bg-ink/70 p-4 backdrop-blur" key={item.label}>
+                <dt className="mono mb-1.5 text-mute">{item.label}</dt>
+                <dd className="text-sm leading-6">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      <div className="relative mt-10 grid gap-6 lg:grid-cols-12">
+        <div className="glass self-start p-7 lg:col-span-5" data-spot>
+          <h4 className="mono mb-5 text-cyan">Stack</h4>
+          <ul className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <li className="chip" key={tech}>
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="glass p-7 lg:col-span-7" data-spot>
+          <h4 className="mono mb-5 text-cyan">What I built</h4>
+          <ol className="grid gap-4">
+            {project.features.map((feature, index) => (
+              <li className="flex gap-4 text-[15px] leading-7 text-mute" key={feature}>
+                <span className="mono mt-1 text-violet">{String(index + 1).padStart(2, '0')}</span>
+                {feature}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </article>
   )
 }
 
 export function Projects() {
-  const [findly, shawarma] = projects
+  const root = useRef<HTMLElement>(null)
+
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>('.project-card').forEach((card) => {
+        gsap.from(card.querySelector('.project-img-wrap'), {
+          clipPath: 'inset(14% 10% 14% 10% round 40px)',
+          ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 25%', scrub: true },
+        })
+        gsap.to(card.querySelector('.project-img'), {
+          scale: 1,
+          yPercent: -4,
+          ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top 90%', end: 'bottom 20%', scrub: true },
+        })
+        gsap.from(card.querySelectorAll('.glass[data-spot]'), {
+          y: 60,
+          autoAlpha: 0,
+          stagger: 0.15,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: card.querySelector('.glass[data-spot]'), start: 'top 90%', once: true },
+        })
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section className="section-shell py-24 md:py-32" id="work">
-      <div className="section-rule mb-16 md:mb-20">
-        <h2 className="label-caps tracking-[0.2em]">[01] Selected Work</h2>
-        <span className="meta-num text-on-surface-variant">FEATURED PUBLIC PROJECTS</span>
-      </div>
-
-      <article className="mb-28 md:mb-40">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="order-2 md:order-1 md:col-span-5">
-            <span className="meta-num mb-4 block text-primary">[{findly.id}] CASE STUDY</span>
-            <h3 className="section-title mb-4">{findly.title}</h3>
-            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{findly.kicker}</p>
-            <p className="text-body text-on-surface-variant">{findly.description}</p>
-            <ProjectActions project={findly} />
-            <ProjectMeta project={findly} />
-          </div>
-          <div className="order-1 md:order-2 md:col-span-7">
-            <div className="aspect-[16/9] overflow-hidden bg-surface-variant">
-              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={findly.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Findly project image preview">
-                <img className="h-full w-full object-cover object-center transition duration-700" src={findly.image} alt={findly.imageAlt} width="960" height="540" loading="lazy" />
-              </a>
-            </div>
-            <div className="mt-8 grid gap-8 md:grid-cols-2">
-              <FeatureList title="Verified Technologies" items={findly.technologies} />
-              <FeatureList title="Verified Features" items={findly.features} />
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article>
-        <div className="grid items-start gap-12 md:grid-cols-12">
-          <div className="md:col-span-7">
-            <div className="aspect-[4/3] overflow-hidden bg-surface-variant">
-              <a className="block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" href={shawarma.image} target="_blank" rel="noopener noreferrer" aria-label="Open larger Shawarma Story project image preview">
-                <img className="h-full w-full object-cover object-center transition duration-700" src={shawarma.image} alt={shawarma.imageAlt} width="900" height="675" loading="lazy" />
-              </a>
-            </div>
-          </div>
-          <div className="md:col-span-5">
-            <span className="meta-num mb-4 block text-primary">[{shawarma.id}] WEB PLATFORM</span>
-            <h3 className="section-title mb-4">{shawarma.title}</h3>
-            <p className="mb-6 font-display text-[24px] leading-9 text-on-surface">{shawarma.kicker}</p>
-            <p className="text-body text-on-surface-variant">{shawarma.description}</p>
-            <ProjectActions project={shawarma} />
-            <ProjectMeta project={shawarma} />
-          </div>
-        </div>
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
-          <FeatureList title="Verified Technologies" items={shawarma.technologies} />
-          <FeatureList title="Verified Features" items={shawarma.features} />
-        </div>
-      </article>
-    </section>
-  )
-}
-
-function FeatureList({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="border-t border-outline-variant pt-5">
-      <h4 className="label-caps mb-4 text-primary">{title}</h4>
-      <ul className="grid gap-3">
-        {items.map((item) => (
-          <li className="flex gap-3 text-[16px] leading-7 text-on-surface-variant md:text-[17px]" key={item}>
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-primary" />
-            {item}
-          </li>
+    <section className="shell pb-28 pt-32 md:pb-40 md:pt-44" id="work" ref={root}>
+      <SectionHead
+        index="01"
+        label="Selected work"
+        title={
+          <>
+            Things I&rsquo;ve <span className="serif text-grad">built</span> &amp; shipped.
+          </>
+        }
+      />
+      <div className="grid gap-32 md:gap-48">
+        {projects.map((project, index) => (
+          <ProjectCard key={project.id} project={project} reverse={index % 2 === 1} />
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   )
 }

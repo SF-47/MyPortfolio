@@ -1,112 +1,166 @@
-import { useEffect, useState } from 'react'
-import { navItems, profile } from '../data/portfolioData'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { navItems } from '../data/portfolioData'
+import { scrollToTarget } from '../lib/scroll'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeHref, setActiveHref] = useState('#home')
+  const [pill, setPill] = useState({ left: 0, width: 0 })
+  const [compact, setCompact] = useState(false)
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
 
   useEffect(() => {
-    const sectionIds = navItems.map((item) => item.href.slice(1))
-    const handleScroll = () => {
-      const current = sectionIds.findLast((id) => {
-        const section = document.getElementById(id)
-        return section ? section.getBoundingClientRect().top <= 140 : false
-      })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveHref(`#${entry.target.id}`)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    )
+    navItems.forEach((item) => {
+      const section = document.querySelector(item.href)
+      if (section) observer.observe(section)
+    })
 
-      if (current) {
-        setActiveHref(`#${current}`)
-      }
+    const onScroll = () => setCompact(window.scrollY > 80)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', onScroll)
     }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : ''
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-      }
+  useLayoutEffect(() => {
+    const measure = () => {
+      const link = linkRefs.current[activeHref]
+      if (link) setPill({ left: link.offsetLeft, width: link.offsetWidth })
     }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [activeHref])
 
-    window.addEventListener('keydown', handleKeyDown)
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keydown', onKey)
     }
   }, [isOpen])
 
-  const closeMenu = () => setIsOpen(false)
+  const go = (href: string) => (event: React.MouseEvent) => {
+    event.preventDefault()
+    setIsOpen(false)
+    scrollToTarget(href)
+  }
 
   return (
     <>
-      <header className="fixed top-0 z-[10000] w-full border-b border-outline-variant bg-[#0c0e10]">
-        <div className="mx-auto flex h-16 max-w-container items-center justify-between gap-6 px-5 md:h-20 md:px-8">
-          <a className="font-display text-xl font-semibold uppercase tracking-tight text-on-surface transition hover:text-primary md:text-3xl" href="#home" onClick={closeMenu}>
-            {profile.name}
-          </a>
-          <nav className="hidden flex-wrap justify-end gap-x-7 gap-y-3 md:flex" aria-label="Primary navigation">
-            {navItems.map((item) => (
-              <NavLink
-                href={item.href}
-                isActive={activeHref === item.href}
-                key={item.href}
-                label={item.label}
-              />
-            ))}
-          </nav>
-          <button
-            className="editorial-menu-button md:hidden"
-            type="button"
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setIsOpen((value) => !value)}
+      <header className="fixed inset-x-0 top-0 z-[10000] flex justify-center px-4 pt-4 md:pt-5">
+        <div
+          className={`glass !bg-[rgb(10_11_20/0.72)] flex items-center gap-2 !rounded-full py-2 pl-3 pr-2 transition-all duration-500 md:gap-4 ${
+            compact ? 'w-auto' : 'w-full max-w-[1000px]'
+          } ${compact ? 'max-md:w-full' : ''} justify-between`}
+        >
+          <a
+            className="flex items-center gap-2.5 pr-2 font-display text-[17px] font-semibold tracking-tight"
+            href="#home"
+            onClick={go('#home')}
+            aria-label="Sami Farhat — back to top"
           >
-            {isOpen ? 'Close' : 'Menu'}
-          </button>
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-violet to-cyan text-[13px] font-bold text-ink">
+              SF
+            </span>
+            <span className={compact ? 'hidden' : 'hidden sm:inline'}>Sami Farhat</span>
+          </a>
+
+          <nav className="relative hidden md:block" aria-label="Primary navigation">
+            <span
+              className="absolute inset-y-0 rounded-full bg-white/10 transition-all duration-500 ease-[cubic-bezier(.7,0,.2,1)]"
+              style={{ left: pill.left, width: pill.width }}
+              aria-hidden="true"
+            />
+            <ul className="relative flex">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    ref={(node) => {
+                      linkRefs.current[item.href] = node
+                    }}
+                    className={`block rounded-full px-4 py-2 text-sm transition-colors ${
+                      activeHref === item.href ? 'text-white' : 'text-mute hover:text-white'
+                    }`}
+                    href={item.href}
+                    aria-current={activeHref === item.href ? 'page' : undefined}
+                    onClick={go(item.href)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <a className="btn btn-primary !min-h-10 !px-5 text-sm" href="/cv.pdf" download>
+              CV
+            </a>
+            <button
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 md:hidden"
+              type="button"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              onClick={() => setIsOpen((value) => !value)}
+            >
+              <span className="relative block h-3 w-5">
+                <span
+                  className={`absolute left-0 h-px w-5 bg-white transition-all duration-300 ${
+                    isOpen ? 'top-1.5 rotate-45' : 'top-0'
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 h-px w-5 bg-white transition-all duration-300 ${
+                    isOpen ? 'top-1.5 -rotate-45' : 'top-3'
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </header>
+
       <div
-        className={`fixed inset-0 z-[9990] bg-[#0c0e10] md:hidden ${isOpen ? 'block' : 'hidden'}`}
         id="mobile-menu"
-        aria-hidden={!isOpen}
+        className={`fixed inset-0 z-[9999] flex flex-col justify-center bg-ink/90 px-8 backdrop-blur-2xl transition-all duration-500 md:hidden ${
+          isOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        }`}
       >
-        <nav className="flex min-h-dvh flex-col gap-3 bg-[#0c0e10] px-5 pb-8 pt-24" aria-label="Mobile navigation">
-          {navItems.map((item) => (
-            <a
-              className={`nav-link border border-outline-variant px-4 py-5 transition-colors ${
-                activeHref === item.href
-                  ? 'bg-[#25272a] text-primary'
-                  : 'bg-[#151719] text-on-surface hover:bg-[#25272a]'
-              }`}
-              href={item.href}
+        <ul className="grid gap-2">
+          {navItems.map((item, index) => (
+            <li
               key={item.href}
-              aria-current={activeHref === item.href ? 'page' : undefined}
-              onClick={closeMenu}
+              className={`transition-all duration-700 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+              style={{ transitionDelay: isOpen ? `${120 + index * 60}ms` : '0ms' }}
             >
-              {item.label}
-            </a>
+              <a
+                className="block font-display text-5xl font-semibold tracking-[-0.03em]"
+                href={item.href}
+                onClick={go(item.href)}
+              >
+                {item.label}
+              </a>
+            </li>
           ))}
-          <p className="mt-8 max-w-sm text-body text-on-surface-variant">{profile.availability}</p>
-        </nav>
+        </ul>
       </div>
     </>
-  )
-}
-
-function NavLink({ href, isActive, label }: { href: string; isActive: boolean; label: string }) {
-  return (
-    <a
-      className={`nav-link pb-1 transition-colors hover:text-on-surface ${
-        isActive ? 'border-b-2 border-primary text-primary' : 'text-on-surface-variant'
-      }`}
-      href={href}
-      aria-current={isActive ? 'page' : undefined}
-    >
-      {label}
-    </a>
   )
 }
