@@ -4,6 +4,9 @@
 // refresh, answer unknown URLs with a genuine 404 status, and link-preview crawlers (which
 // do not run JavaScript) see correct metadata. The React app boots from the same bundle.
 //
+// Also writes robots.txt and sitemap.xml from the same data, so the site's address lives in
+// one place (siteUrl in src/app/pageMeta.json).
+//
 // Route data comes from src/app/pageMeta.json, which the router also reads.
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -57,4 +60,13 @@ for (const [key, route] of Object.entries(meta.routes)) {
   await writeFile(file, render(route))
   written.push(path.relative(root, file))
 }
+const indexable = Object.values(meta.routes).filter((route) => route.noindex !== true)
+await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${meta.siteUrl}/sitemap.xml\n`)
+await writeFile(
+  path.join(dist, 'sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable
+    .map((route) => `  <url><loc>${escapeText(meta.siteUrl + (route.path === '/' ? '/' : route.path))}</loc></url>`)
+    .join('\n')}\n</urlset>\n`,
+)
+written.push('robots.txt', 'sitemap.xml')
 console.log(`prerender-routes: wrote ${written.join(', ')}`)

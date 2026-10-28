@@ -45,7 +45,8 @@ export function ExperienceSection() {
           </div>
           <div className="relative h-[58px] border-b border-rule">
             <div className="mono-label absolute left-0 top-3 flex h-[34px] w-full items-center overflow-hidden whitespace-nowrap bg-fg px-3 font-medium text-surface md:px-3">
-              <span className="truncate">
+              <span className="md:hidden">{degree.degree.replace('Bachelor of Science in', 'B.Sc.')}</span>
+              <span className="hidden truncate md:inline">
                 {degree.degree} · {degree.institution}
               </span>
             </div>

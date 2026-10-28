@@ -29,7 +29,7 @@ export function FindlyStack() {
           </h2>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {findlyStack.map((group) => (
-              <section aria-label={group.title} className="border-t border-rule pt-3.5" key={group.title}>
+              <div className="border-t border-rule pt-3.5" key={group.title}>
                 <h3 className="mono-label">{group.title}</h3>
                 <ul className="mt-2">
                   {group.items.map((item) => (
@@ -38,7 +38,7 @@ export function FindlyStack() {
                     </li>
                   ))}
                 </ul>
-              </section>
+              </div>
             ))}
           </div>
         </div>

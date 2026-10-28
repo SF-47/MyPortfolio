@@ -59,7 +59,7 @@ export function FeaturedProjects() {
               </div>
               <div className={`bg-plate px-4 pb-3.5 pt-5 text-fg md:px-[26px] md:pb-[18px] md:pt-7 ${flip ? 'xl:order-first' : ''}`} data-surface="canvas">
                 <SeamRuler className="mb-3.5 bg-transparent opacity-55" edge="top" tone="canvas" />
-                <ZoomableImage alt={project.imageAlt} crop={featured.crop} fullWidth={featured.imageWidth} label={project.imageAlt} src={project.image} />
+                <ZoomableImage alt={project.imageAlt} crop={featured.crop} fullWidth={featured.imageWidth} label={project.imageAlt} small={{ src: featured.smallImage, width: 800, sizes: '(min-width: 1280px) 740px, 106vw' }} src={project.image} />
                 <p className="mono-label mt-3.5 text-fg-muted">{featured.caption}</p>
               </div>
             </article>

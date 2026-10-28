@@ -1,0 +1,37 @@
+/*
+ * Self-hosted, latin-only variable fonts (see public/fonts/README.md). font-display: swap shows
+ * text immediately in the fallback face and swaps when a font arrives.
+ *
+ * They are deliberately not preloaded: on a slow connection the preloads compete with the
+ * JavaScript bundle and delay the first paint (measured with Lighthouse under throttling:
+ * 84 without preloads, 73 with them). Without preloads the fonts start downloading as soon as
+ * the first render needs them.
+ */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url('/fonts/newsreader-latin-300-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url('/fonts/newsreader-italic-latin-300-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/schibsted-grotesk-latin-400-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Martian Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/martian-mono-latin-400-500.woff2') format('woff2');
+}

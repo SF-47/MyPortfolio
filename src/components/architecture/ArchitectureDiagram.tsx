@@ -161,6 +161,8 @@ export function ArchitectureDiagram({
             : [mergedAutomationNode.meta]
           : ((tall ? node.metaTall : undefined) ?? node.metaLines ?? [node.meta])
         const metaY = lines.length > 1 ? 74 : tall ? (node.sub ? h - 40 : 76) : h - (node.sub ? 40 : 22)
+        // The spaces between the <text> elements keep the node's visible text readable as words
+        // (assistive technology and label-in-name checks join them), and are not drawn.
         const content = (
           <>
             <rect
@@ -172,13 +174,13 @@ export function ArchitectureDiagram({
             {interactive ? <rect className="fill-none stroke-signal opacity-0 group-focus-visible:opacity-100" height={h + 12} strokeWidth={2} width={w + 12} x={-6} y={-6} /> : null}
             <text className={`font-mono text-[12.5px] uppercase tracking-[0.05em] ${hot ? 'fill-signal' : 'fill-canvas-muted'}`} x={14} y={26}>
               {mergedNode ? 'Automation' : node.kind}
-            </text>
+            </text>{' '}
             <text className={`fill-canvas-ink font-sans font-medium tracking-[-0.01em] ${id === 'api' ? (tall ? 'text-[21px]' : 'text-[24px]') : tall ? 'text-[16px]' : 'text-[20px]'}`} x={14} y={tall && id === 'api' ? 50 : 54}>
               {title}
-            </text>
+            </text>{' '}
             {lines.map((line, index) => (
               <text className="fill-canvas-muted font-mono text-[12.5px]" key={line} x={14} y={metaY + index * 16}>
-                {line}
+                {line}{' '}
               </text>
             ))}
             {node.sub ? (
@@ -197,7 +199,7 @@ export function ArchitectureDiagram({
         }
         return (
           <g
-            aria-label={`${title}, ${node.meta}`}
+            aria-label={`${mergedNode ? 'Automation' : node.kind} ${title}, ${[...lines, node.sub].filter(Boolean).join(' ')}`}
             aria-pressed={selected}
             className="group cursor-pointer outline-none"
             key={id}

@@ -27,7 +27,7 @@ export function FindlyCaseStudy() {
         <div className="wrap">
           {findly && featured ? (
             <figure className="mx-auto max-w-[1200px]">
-              <ZoomableImage alt={findly.imageAlt} blend crop={featured.crop} fullWidth={featured.imageWidth} label={findly.imageAlt} src={findly.image} />
+              <ZoomableImage alt={findly.imageAlt} blend crop={featured.crop} fullWidth={featured.imageWidth} label={findly.imageAlt} small={{ src: featured.smallImage, width: 800, sizes: '(min-width: 1280px) 1280px, 106vw' }} src={findly.image} />
               <figcaption className="mono-label mt-4 text-fg-muted">Fig. 1 — Findly admin dashboard, match comparison report and Expo mobile app</figcaption>
             </figure>
           ) : null}

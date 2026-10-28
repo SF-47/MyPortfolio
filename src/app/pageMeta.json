@@ -1,7 +1,7 @@
 {
-  "siteUrl": "https://my-portfolio-gules-iota-10.vercel.app",
+  "siteUrl": "https://sami-farhat.vercel.app",
   "siteName": "Sami Farhat",
-  "defaultImage": "/assets/stitch/editorial-desktop-final.png",
+  "defaultImage": "/og-image.png",
   "routes": {
     "home": {
       "path": "/",
