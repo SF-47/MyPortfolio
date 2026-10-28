@@ -1,0 +1,23 @@
+{
+  "siteUrl": "https://my-portfolio-gules-iota-10.vercel.app",
+  "siteName": "Sami Farhat",
+  "defaultImage": "/assets/stitch/editorial-desktop-final.png",
+  "routes": {
+    "home": {
+      "path": "/",
+      "title": "Sami Farhat | Junior Software Engineer",
+      "description": "Portfolio of Sami Farhat, a Junior Software Engineer specializing in full-stack and mobile development with React, React Native, TypeScript, and ASP.NET Core."
+    },
+    "findly": {
+      "path": "/work/findly",
+      "title": "Findly case study | Sami Farhat",
+      "description": "Case study of Findly, a lost-and-found platform for university campuses: an ASP.NET Core API, a React admin dashboard and an Expo React Native mobile app."
+    },
+    "notFound": {
+      "path": "*",
+      "title": "Page not found | Sami Farhat",
+      "description": "This page does not exist.",
+      "noindex": true
+    }
+  }
+}
