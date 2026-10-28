@@ -7,18 +7,20 @@ export function ErrorPage() {
   const status = isRouteErrorResponse(error) ? error.status : null
 
   return (
-    <main className="mx-auto max-w-container px-6 py-16" id="main">
-      <p className="meta-num mb-4 text-primary">{status ?? 'Error'}</p>
-      <h1 className="font-display text-5xl">Something went wrong</h1>
-      <p className="mt-4 max-w-xl text-on-surface-variant">This page could not be loaded. Try again, or return to the home page.</p>
-      <p className="mt-8 flex gap-6">
-        <button className="underline underline-offset-4" onClick={() => window.location.reload()} type="button">
-          Reload
-        </button>
-        <Link className="underline underline-offset-4" to={routes.home.path}>
-          Go to the home page
-        </Link>
-      </p>
+    <main className="min-h-dvh bg-surface text-fg" data-surface="paper" id="main">
+      <div className="wrap section-y">
+        <p className="mono-label text-fg-muted">{status ?? 'Error'}</p>
+        <h1 className="mt-6 text-display">Something went wrong</h1>
+        <p className="mt-6 max-w-xl font-serif text-[length:var(--text-lede)] text-fg-muted">This page could not be loaded. Try again, or return to the home page.</p>
+        <p className="mt-10 flex gap-8">
+          <button className="inline-flex min-h-11 items-center underline underline-offset-4" onClick={() => window.location.reload()} type="button">
+            Reload
+          </button>
+          <Link className="inline-flex min-h-11 items-center underline underline-offset-4" to={routes.home.path}>
+            Go to the home page
+          </Link>
+        </p>
+      </div>
     </main>
   )
 }

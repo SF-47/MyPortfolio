@@ -1,0 +1,102 @@
+/*
+ * Design tokens for the System Map "Hybrid" direction: warm editorial paper plus a dark
+ * engineering canvas, with one signal colour. Reference: design-boards/system-map-phase2.
+ */
+@theme {
+  /* Typography */
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Schibsted Grotesk', system-ui, sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, monospace;
+  --text-mono: 11px;
+  --text-lede: 19px;
+
+  /* Paper surfaces */
+  --color-paper: #e9e6dc;
+  --color-paper-tint: #dfdbce;
+  --color-ink: #14130f;
+  --color-ink-muted: #4f4c41;
+
+  /* Canvas surface */
+  --color-canvas: #0c1517;
+  --color-canvas-raised: #111c1f;
+  --color-canvas-ink: #e6ebe9;
+  --color-canvas-muted: #9aa9ae;
+  --color-canvas-line: #7d9299;
+  --color-canvas-stroke: #5b747c;
+
+  /* The one accent. Used on the canvas only; on paper it is too light to carry meaning. */
+  --color-signal: #ffc400;
+
+  /*
+   * Breakpoints (replace Tailwind's defaults):
+   *   below md  phone        md  tablet (760px)
+   *   lg        inline navigation replaces the menu (900px)
+   *   xl        desktop, split hero (1280px)
+   */
+  --breakpoint-*: initial;
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 900px;
+  --breakpoint-xl: 1280px;
+
+}
+
+/*
+ * Surface-aware tokens. A Surface (see components/layout/Surface.tsx) sets these variables,
+ * so one set of utilities (bg-surface, text-fg, text-fg-muted, border-rule, outline-focus)
+ * is correct on both paper and canvas. `inline` keeps them resolving at runtime.
+ */
+@theme inline {
+  --color-surface: var(--surface-bg);
+  --color-fg: var(--surface-fg);
+  --color-fg-muted: var(--surface-muted);
+  --color-rule: var(--surface-rule);
+  --color-focus: var(--surface-focus);
+}
+
+:root,
+[data-surface='paper'] {
+  --surface-bg: var(--color-paper);
+  --surface-fg: var(--color-ink);
+  --surface-muted: var(--color-ink-muted);
+  --surface-rule: rgb(20 19 15 / 0.32);
+  --surface-tick: rgb(20 19 15 / 0.5);
+  --surface-focus: var(--color-ink);
+}
+
+[data-surface='tint'] {
+  --surface-bg: var(--color-paper-tint);
+  --surface-fg: var(--color-ink);
+  --surface-muted: var(--color-ink-muted);
+  --surface-rule: rgb(20 19 15 / 0.32);
+  --surface-tick: rgb(20 19 15 / 0.5);
+  --surface-focus: var(--color-ink);
+}
+
+[data-surface='canvas'] {
+  --surface-bg: var(--color-canvas);
+  --surface-fg: var(--color-canvas-ink);
+  --surface-muted: var(--color-canvas-muted);
+  --surface-rule: rgb(125 146 153 / 0.45);
+  --surface-tick: rgb(125 146 153 / 0.6);
+  --surface-focus: var(--color-signal);
+}
+
+/* Page gutter: 20 / 28 / 40 / 64px, matching the boards. */
+:root {
+  --gutter: 20px;
+}
+@media (width >= theme(--breakpoint-md)) {
+  :root {
+    --gutter: 28px;
+  }
+}
+@media (width >= theme(--breakpoint-lg)) {
+  :root {
+    --gutter: 40px;
+  }
+}
+@media (width >= theme(--breakpoint-xl)) {
+  :root {
+    --gutter: 64px;
+  }
+}

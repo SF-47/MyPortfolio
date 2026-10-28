@@ -5,6 +5,7 @@ import { NotFound } from '../routes/NotFound'
 import { PageLoading } from '../routes/PageLoading'
 import { RootLayout } from './RootLayout'
 import { routes } from './meta'
+import type { RouteHandle } from './routeHandle'
 
 // Route paths come from pageMeta.json, the same file scripts/prerender-routes.mjs
 // reads, so the router and the generated per-route HTML files cannot drift apart.
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     hydrateFallbackElement: <PageLoading />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <HomePage />, handle: { footerSeam: true } satisfies RouteHandle },
       {
         path: childPath(routes.findly.path),
         lazy: async () => ({ Component: (await import('../routes/FindlyCaseStudy')).FindlyCaseStudy }),

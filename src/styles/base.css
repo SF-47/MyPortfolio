@@ -1,0 +1,149 @@
+@layer base {
+  html {
+    background: var(--color-paper);
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 24px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  /* Lock page scroll behind a modal dialog (the mobile menu). */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    margin: 0;
+    background: var(--surface-bg);
+    color: var(--surface-fg);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* One focus indicator everywhere; its colour follows the surface (ink on paper, signal on canvas). */
+  :focus-visible {
+    outline: 2px solid var(--surface-focus);
+    outline-offset: 3px;
+  }
+
+  @media (width < theme(--breakpoint-md)) {
+    body {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Page width and gutter. Surfaces are full-bleed; their content sits inside .wrap. */
+@utility wrap {
+  margin-inline: auto;
+  max-width: 1440px;
+  padding-inline: var(--gutter);
+}
+
+/* Small uppercase mono label used for eyebrows, captions and controls. */
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* Vertical rhythm between page sections: 64px on phones, 96px from md up. */
+@utility section-y {
+  padding-block: 64px;
+  @media (width >= theme(--breakpoint-md)) {
+    padding-block: 96px;
+  }
+}
+
+/*
+ * Serif headings, responsive like the boards: display 46 / 56 / 64px (phone / md / xl),
+ * h2 42 / 60px, h3 26 / 30px.
+ */
+@utility text-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-size: 46px;
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: 56px;
+  }
+  @media (width >= theme(--breakpoint-xl)) {
+    font-size: 64px;
+  }
+}
+@utility text-h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  font-size: 42px;
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: 60px;
+  }
+}
+@utility text-h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  font-size: 26px;
+  @media (width >= theme(--breakpoint-md)) {
+    font-size: 30px;
+  }
+}
+
+/*
+ * Seam rulers: tick marks along the edge where paper meets canvas. The `edge` is the side
+ * of the ruler that touches the dark surface; ticks grow inward from it. Major tick every
+ * 100px, minor every 20px.
+ */
+@layer components {
+  .seam {
+    flex: none;
+    background-color: var(--surface-bg);
+    background-repeat: no-repeat;
+  }
+  .seam-top,
+  .seam-bottom {
+    height: 28px;
+    width: 100%;
+    background-image:
+      repeating-linear-gradient(90deg, var(--surface-tick) 0 1px, transparent 1px 100px),
+      repeating-linear-gradient(90deg, var(--surface-tick) 0 1px, transparent 1px 20px);
+    background-size:
+      100% 28px,
+      100% 16px;
+  }
+  .seam-top {
+    background-position: 0 0;
+  }
+  .seam-bottom {
+    background-position: 0 100%;
+  }
+  .seam-left,
+  .seam-right {
+    width: 28px;
+    align-self: stretch;
+    background-image:
+      repeating-linear-gradient(0deg, var(--surface-tick) 0 1px, transparent 1px 100px),
+      repeating-linear-gradient(0deg, var(--surface-tick) 0 1px, transparent 1px 20px);
+    background-size:
+      28px 100%,
+      16px 100%;
+  }
+  .seam-left {
+    background-position: 0 0;
+  }
+  .seam-right {
+    background-position: 100% 0;
+  }
+}
