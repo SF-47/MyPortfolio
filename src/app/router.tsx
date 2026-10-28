@@ -23,7 +23,6 @@ export const router = createBrowserRouter([
         path: childPath(routes.findly.path),
         lazy: async () => ({
           Component: (await import('../routes/FindlyCaseStudy')).FindlyCaseStudy,
-          handle: { footerSeam: true } satisfies RouteHandle,
         }),
       },
       { path: '*', element: <NotFound /> },

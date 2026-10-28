@@ -8,13 +8,15 @@ type ZoomableImageProps = {
   // Crop shown inline: removes the screenshot's empty margins.
   crop: { aspect: string; width: number; left: number; top: number }
   label: string
+  // Blend the image's black margins into a dark surface behind it.
+  blend?: boolean
 }
 
 // A screenshot shown cropped, which opens full size in a modal dialog on click, tap or
 // Enter. The dialog scrolls and can be pinch-zoomed, closes on Escape or its button, and
 // returns focus to the image. The image is lazy loaded and has its dimensions reserved, so
 // it does not shift the layout.
-export function ZoomableImage({ src, alt, fullWidth, crop, label }: ZoomableImageProps) {
+export function ZoomableImage({ src, alt, fullWidth, crop, label, blend = false }: ZoomableImageProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
 
@@ -32,7 +34,7 @@ export function ZoomableImage({ src, alt, fullWidth, crop, label }: ZoomableImag
         <span className="relative block overflow-hidden" style={{ aspectRatio: crop.aspect }}>
           <img
             alt={alt}
-            className="absolute block h-auto max-w-none"
+            className={`absolute block h-auto max-w-none ${blend ? 'mix-blend-lighten' : ''}`}
             decoding="async"
             loading="lazy"
             src={src}

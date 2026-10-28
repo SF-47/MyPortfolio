@@ -44,7 +44,9 @@ export function ArchitectureSection() {
   return (
     <div>
       <p className="mono-label eyebrow text-signal">03 — Architecture</p>
-      <h2 className="text-h2 mt-5">How a request moves.</h2>
+      <h2 className="text-h2 mt-5" id="architecture-heading">
+        How a request moves.
+      </h2>
 
       <div className="mt-8 flex flex-wrap items-center gap-2 md:mt-10">
         <div aria-label="Architecture layer" className="flex flex-wrap gap-2" role="group">
@@ -97,7 +99,7 @@ export function ArchitectureSection() {
         />
       </div>
 
-      <div className="mt-20 scroll-mt-6 border-t border-rule pt-10" id="trace">
+      <div className="mt-20 border-t border-rule pt-10" id="trace">
         <h3 className="text-h3">Trace a new report</h3>
         <p className="mt-3 max-w-[640px] text-fg-muted">
           What happens, in order, when a student reports a lost or found item. Each step names where it is established: the Findly backend code, or only the project README (the n8n workflow
