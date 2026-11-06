@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sami-farhat.vercel.app/sitemap.xml

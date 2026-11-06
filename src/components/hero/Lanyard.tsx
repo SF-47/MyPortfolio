@@ -18,7 +18,8 @@ const MAX_STRETCH = 170; // px, the strap can never get longer than this
 const STRETCH_K = 170; // spring stiffness: ~0.5 s bounce
 const STRETCH_DAMPING = 7;
 const STRETCH_DAMPING_REDUCED = 26; // ≈ 2·√k, critically damped
-const PATTERN = 44; // px, height of one chevron tile on the strap (index.css)
+/** Below this much motion the badge counts as settled and the loop sleeps. */
+const REST = 0.0008;
 
 /** Rubber band: follows 1:1 at first, then resists, never past MAX_STRETCH. */
 const rubber = (raw: number) => (raw <= 0 ? 0 : MAX_STRETCH * (1 - Math.exp(-raw / MAX_STRETCH)));
@@ -30,15 +31,19 @@ export function Lanyard() {
   const swingRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const strapRef = useRef<HTMLDivElement>(null);
+  const lowerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
     const swing = swingRef.current;
     const card = cardRef.current;
     const strap = strapRef.current;
-    if (!root || !swing || !card || !strap) return;
+    const lower = lowerRef.current;
+    if (!root || !swing || !card || !strap || !lower) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // The idle breeze keeps the loop running forever, so only use it where it's cheap.
+    const breezy = () => !reduced.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     let theta = reduced.matches ? 0 : 0.32; // start mid-swing so it settles in on load
     let omega = 0;
     let dragging = false;
@@ -67,28 +72,35 @@ export function Lanyard() {
     };
     const clamp = (v: number) => Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, v));
 
-    // Resting strap height, measured once and on resize (not per frame: no forced layout).
-    let applied = 0;
+    // Resting strap height, measured once and on resize (never per frame).
     let base = strap.offsetHeight;
     const measure = () => {
-      base = strap.offsetHeight - applied;
+      base = strap.offsetHeight;
     };
 
+    // Transforms only: no layout work per frame, so it stays smooth on phones.
     const apply = () => {
-      swing.style.transform = `rotate(${theta}rad)`;
-      // Longer strap; the printed pattern stretches with it, like real elastic.
-      applied = stretch;
-      strap.style.setProperty("--stretch", `${stretch.toFixed(2)}px`);
-      strap.style.backgroundSize = `100% ${((PATTERN * (base + stretch)) / base).toFixed(2)}px`;
+      swing.style.transform = `rotate(${theta.toFixed(4)}rad)`;
+      // Stretch the strap from its top (the printed pattern stretches with it, like elastic)
+      // and move the clip + badge down by the same amount.
+      strap.style.transform = `scaleY(${((base + stretch) / base).toFixed(4)})`;
+      lower.style.transform = `translate3d(0, ${stretch.toFixed(2)}px, 0)`;
       // A little turn of the badge while it moves, for depth.
-      card.style.transform = `perspective(900px) rotateY(${Math.max(-25, Math.min(25, omega * 9))}deg)`;
+      card.style.transform = `perspective(900px) rotateY(${Math.max(-25, Math.min(25, omega * 9)).toFixed(2)}deg)`;
+    };
+
+    const wake = () => {
+      if (!frame && visible) {
+        last = performance.now();
+        frame = requestAnimationFrame(step);
+      }
     };
 
     const step = (now: number) => {
       const dt = Math.min(0.033, (now - last) / 1000);
       last = now;
       if (!dragging) {
-        const breeze = reduced.matches ? 0 : 0.035 * Math.sin(now / 1400);
+        const breeze = breezy() ? 0.035 * Math.sin(now / 1400) : 0;
         const damping = reduced.matches ? DAMPING_REDUCED : DAMPING;
         // A longer strap swings more slowly (pendulum: ω² ∝ 1/L).
         const stiffness = STIFFNESS / (1 + stretch / 250);
@@ -105,7 +117,13 @@ export function Lanyard() {
         }
       }
       apply();
-      frame = visible ? requestAnimationFrame(step) : 0;
+      const settled =
+        !dragging && !breezy() && Math.abs(omega) < REST && Math.abs(theta) < REST && Math.abs(stretchV) < 0.05 && Math.abs(stretch) < 0.05;
+      if (settled) {
+        theta = omega = stretch = stretchV = 0;
+        apply();
+      }
+      frame = visible && !settled ? requestAnimationFrame(step) : 0;
     };
 
     const onDown = (e: PointerEvent) => {
@@ -118,6 +136,7 @@ export function Lanyard() {
       omega = 0;
       stretchV = 0;
       card.dataset.dragging = "true";
+      wake();
     };
     const onMove = (e: PointerEvent) => {
       if (!dragging) return;
@@ -146,14 +165,12 @@ export function Lanyard() {
       else if (e.key === "ArrowDown") stretchV += 900;
       else return;
       e.preventDefault();
+      wake();
     };
 
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (visible && !frame) {
-        last = performance.now();
-        frame = requestAnimationFrame(step);
-      }
+      wake();
     });
     io.observe(root);
     window.addEventListener("resize", measure);
@@ -182,8 +199,9 @@ export function Lanyard() {
     <div ref={rootRef} className="lanyard relative mx-auto h-full w-full select-none">
       <div ref={swingRef} className="absolute top-0 left-1/2 flex origin-top -translate-x-1/2 flex-col items-center will-change-transform">
         {/* strap: runs up past the top of the viewport */}
-        <div ref={strapRef} className="lanyard-strap -mt-24 h-[calc(var(--strap)+6rem+var(--stretch,0px))] w-9 shadow-[inset_-2px_0_0_rgb(0_0_0/0.08),inset_2px_0_0_rgb(255_255_255/0.5)]" />
+        <div ref={strapRef} className="lanyard-strap -mt-24 h-[calc(var(--strap)+6rem)] w-9 origin-top shadow-[inset_-2px_0_0_rgb(0_0_0/0.08),inset_2px_0_0_rgb(255_255_255/0.5)] will-change-transform" />
 
+        <div ref={lowerRef} className="flex flex-col items-center will-change-transform">
         {/* clip */}
         <div aria-hidden="true" className="flex flex-col items-center">
           <div className="h-3 w-7 rounded-b-md bg-gradient-to-b from-zinc-400 to-zinc-600" />
@@ -204,7 +222,7 @@ export function Lanyard() {
           <div className="mx-auto mb-[8%] h-2 w-12 rounded-full bg-black/60 shadow-[inset_0_1px_2px_rgb(0_0_0/0.8)]" />
 
           <div className="flex h-[calc(100%-1.5rem)] flex-col">
-            <img src="/brand/sf-logo.png" width={385} height={145} alt="" draggable={false} className="mx-auto mt-[6%] w-[92%]" />
+            <img src="/brand/sf-logo.webp" width={385} height={145} alt="" draggable={false} className="mx-auto mt-[6%] w-[92%]" />
 
             <div className="mt-auto">
               <div className="mb-3 h-px bg-gradient-to-r from-[#2ad1d6]/60 via-white/10 to-transparent" />
@@ -219,6 +237,7 @@ export function Lanyard() {
 
           {/* sheen */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.07] via-transparent to-transparent" />
+        </div>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ export function MobileMenu({ active }: { active: string }) {
         style={{ "--d": "650ms" } as CSSProperties}
       >
         <a href="#home" aria-label="Sami Farhat, home" onClick={() => setOpen(false)} className="grid h-9 w-16 place-items-center rounded-full bg-[#0b131e]">
-          <img src="/brand/sf-logo.png" alt="" width={385} height={145} className="w-[74%]" />
+          <img src="/brand/sf-logo.webp" alt="" width={385} height={145} className="w-[74%]" />
         </a>
         <button
           ref={button}

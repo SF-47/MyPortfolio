@@ -2,10 +2,48 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Sami Farhat · Junior Software Engineer</title>
+    <meta name="description" content="Sami Farhat, junior software engineer in Beirut building full-stack web and mobile apps with React, React Native, ASP.NET Core and PostgreSQL. Open to work." />
+    <meta name="author" content="Sami Farhat" />
+    <link rel="canonical" href="https://sami-farhat.vercel.app/" />
     <meta name="theme-color" content="#0a0a0a" />
-    <meta name="description" content="Sami Farhat, junior software engineer building full-stack web and mobile apps with React, React Native, ASP.NET Core and PostgreSQL." />
-    <title>Sami Farhat · Software Engineer</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Link previews (LinkedIn, WhatsApp, Slack, X…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sami Farhat" />
+    <meta property="og:url" content="https://sami-farhat.vercel.app/" />
+    <meta property="og:title" content="Sami Farhat · Junior Software Engineer" />
+    <meta property="og:description" content="Full-stack & mobile apps built end to end: Findly, Flexible Portfolio and the live Shawarma Story QR menu. Open to work." />
+    <meta property="og:image" content="https://sami-farhat.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sami Farhat, junior software engineer, open to work, next to screenshots of the Findly dashboard and the Shawarma Story menu." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sami Farhat · Junior Software Engineer" />
+    <meta name="twitter:description" content="Full-stack & mobile apps built end to end. Open to work." />
+    <meta name="twitter:image" content="https://sami-farhat.vercel.app/og-image.png" />
+
+    <!-- The hero's fonts are needed for the first paint: start them early -->
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin-400-600.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sami Farhat",
+        "jobTitle": "Junior Software Engineer",
+        "url": "https://sami-farhat.vercel.app/",
+        "email": "mailto:sami.farhat.dev@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Beirut", "addressCountry": "LB" },
+        "sameAs": ["https://github.com/SF-47", "https://www.linkedin.com/in/samifarhat-dev"]
+      }
+    </script>
     <script>
       // Apply the saved theme before first paint (default: dark).
       try {
@@ -15,6 +53,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="max-width:560px;margin:15vh auto;padding:0 20px;font-family:system-ui,sans-serif;color:#e2e8f0">
+        Sami Farhat, junior software engineer. This portfolio needs JavaScript.
+        <a href="/cv.pdf" style="color:#7dd3fc">CV (PDF)</a> ·
+        <a href="https://github.com/SF-47" style="color:#7dd3fc">GitHub</a> ·
+        <a href="mailto:sami.farhat.dev@gmail.com" style="color:#7dd3fc">Email</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

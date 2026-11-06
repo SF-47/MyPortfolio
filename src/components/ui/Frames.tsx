@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
-export type Shot = { src: string; srcSmall?: string; alt: string; width: number; height: number };
+export type Shot = { src: string; srcSmall?: string; /** pixel width of srcSmall (default 800) */ smallWidth?: number; alt: string; width: number; height: number };
 
 function Img({ shot, sizes, eager }: { shot: Shot; sizes: string; eager?: boolean }) {
   return (
     <img
       src={shot.src}
-      srcSet={shot.srcSmall ? `${shot.srcSmall} 800w, ${shot.src} ${shot.width}w` : undefined}
+      srcSet={shot.srcSmall ? `${shot.srcSmall} ${shot.smallWidth ?? 800}w, ${shot.src} ${shot.width}w` : undefined}
       sizes={shot.srcSmall ? sizes : undefined}
       width={shot.width}
       height={shot.height}
@@ -41,7 +41,7 @@ export function PhoneFrame({ shot, className = "", eager }: { shot: Shot; classN
   return (
     <div className={`rounded-[1.6rem] border border-white/15 bg-[#0c0d10] p-[5px] shadow-float ${className}`}>
       <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.3rem] bg-black">
-        <Img shot={shot} sizes="260px" eager={eager} />
+        <Img shot={shot} sizes="(min-width: 1024px) 230px, 28vw" eager={eager} />
       </div>
     </div>
   );

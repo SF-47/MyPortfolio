@@ -17,13 +17,19 @@ export function LampSwitch({ className = "" }: { className?: string }) {
     trackEvent("Lamp pulled", { to: theme === "dark" ? "light" : "dark" });
   };
   const cordRef = useRef<HTMLSpanElement>(null);
+  const knobRef = useRef<HTMLSpanElement>(null);
   const drag = useRef({ active: false, startY: 0, pulled: 0, moved: false, endedAt: 0 });
 
+  // Transforms only (GPU): the cord stretches from its top and the knob + hint move down with it.
   const setPull = (px: number, spring: boolean) => {
     const cord = cordRef.current;
-    if (!cord) return;
-    cord.style.transition = spring ? "height 0.55s cubic-bezier(0.3, 1.8, 0.5, 1)" : "none";
-    cord.style.height = `${BASE + px}px`;
+    const knob = knobRef.current;
+    if (!cord || !knob) return;
+    const t = spring ? "transform 0.55s cubic-bezier(0.3, 1.8, 0.5, 1)" : "none";
+    cord.style.transition = t;
+    knob.style.transition = t;
+    cord.style.transform = `scaleY(${(BASE + px) / BASE})`;
+    knob.style.transform = `translate3d(0, ${px}px, 0)`;
   };
 
   const tug = () => {
@@ -76,7 +82,8 @@ export function LampSwitch({ className = "" }: { className?: string }) {
         tug();
       }}
     >
-      <span ref={cordRef} aria-hidden="true" className="block w-px bg-gradient-to-b from-transparent via-fg-3/70 to-fg-3" style={{ height: BASE }} />
+      <span ref={cordRef} aria-hidden="true" className="block w-px origin-top bg-gradient-to-b from-transparent via-fg-3/70 to-fg-3 will-change-transform" style={{ height: BASE }} />
+      <span ref={knobRef} className="flex flex-col items-center will-change-transform">
 
       {/* bulb / knob */}
       <span
@@ -94,6 +101,7 @@ export function LampSwitch({ className = "" }: { className?: string }) {
       <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" className="mt-1.5 text-fg-3 motion-safe:animate-bounce">
         <path d="M3.5 5.5 7 9l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
+      </span>
     </button>
   );
 }
