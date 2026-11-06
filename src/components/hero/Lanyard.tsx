@@ -199,7 +199,9 @@ export function Lanyard() {
     <div ref={rootRef} className="lanyard relative mx-auto h-full w-full select-none">
       <div ref={swingRef} className="absolute top-0 left-1/2 flex origin-top -translate-x-1/2 flex-col items-center will-change-transform">
         {/* strap: runs up past the top of the viewport */}
-        <div ref={strapRef} className="lanyard-strap -mt-24 h-[calc(var(--strap)+6rem)] w-9 origin-top shadow-[inset_-2px_0_0_rgb(0_0_0/0.08),inset_2px_0_0_rgb(255_255_255/0.5)] will-change-transform" />
+        <div ref={strapRef} aria-hidden="true" className="lanyard-strap -mt-24 h-[calc(var(--strap)+6rem)] w-9 origin-top will-change-transform">
+          <span>{"</>  ".repeat(40)}</span>
+        </div>
 
         <div ref={lowerRef} className="flex flex-col items-center will-change-transform">
         {/* clip */}
