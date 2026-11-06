@@ -119,8 +119,8 @@ export function AboutSection() {
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
         <div className="flex flex-col gap-8">
           <p data-reveal className="text-xl leading-relaxed text-fg-2 sm:text-[22px] sm:leading-relaxed">
-            I graduated in Computer Science in 2026 and I like taking a feature all the way: the schema, the API behind it, and the
-            screen people actually touch. <span className="text-fg">Findly</span> was built that way across three apps, and{" "}
+            I graduated with a Computer Science degree in 2026, and I like taking a feature all the way: the schema, the API behind
+            it and the screen people actually touch. <span className="text-fg">Findly</span> was built that way across three apps, and{" "}
             <span className="text-fg">Shawarma Story</span> is live at a real restaurant.
           </p>
           <StackDiagram />

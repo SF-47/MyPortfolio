@@ -76,7 +76,7 @@ export function SiteFooter() {
         <span>
           © {new Date().getFullYear()} {profile.name} · {profile.location}
         </span>
-        <span>Tip: pull the lamp cord up top.</span>
+        <span>Tip: pull the lamp cord at the top of the page.</span>
       </p>
     </footer>
   );

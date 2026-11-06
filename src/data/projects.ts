@@ -97,7 +97,7 @@ export const projects: Project[] = [
       facts: [
         { label: "Type", value: "Full-stack product" },
         { label: "Role", value: "Full-stack" },
-        { label: "Screens", value: "Run locally from the repo" },
+        { label: "Screens", value: "Captured from a local run" },
       ],
     },
     desktop: [
@@ -112,7 +112,7 @@ export const projects: Project[] = [
     slug: "shawarma-story",
     title: "Shawarma Story",
     label: "Freelance client · Live",
-    kicker: "Bilingual QR menu for a real restaurant, with a cart that sends orders on WhatsApp.",
+    kicker: "Bilingual QR menu for a real restaurant, with a cart that sends orders through WhatsApp.",
     stack: ["React", "Tailwind CSS", "Firebase", "JavaScript"],
     links: [
       { label: "Live site", href: "https://shawarmastory.com", kind: "live" },
@@ -120,10 +120,10 @@ export const projects: Project[] = [
     ],
     details: {
       summary:
-        "Customers scan a QR code at the table, browse the menu in English or Arabic (right-to-left), build a cart and send an itemised order to the restaurant on WhatsApp. Staff manage items, prices and availability from a protected admin panel.",
+        "Customers scan a QR code at the table, browse the menu in English or Arabic (right-to-left), build a cart and send an itemized order to the restaurant on WhatsApp. Staff manage items, prices and availability from a protected admin panel.",
       highlights: [
         "Public menu and protected admin panel in one React + Vite app.",
-        "Saved cart with quantities, notes and an itemised WhatsApp message.",
+        "Saved cart with quantities, notes and an itemized WhatsApp message.",
         "Firestore with locked-down write rules, Firebase Auth for staff, Firebase Hosting on a custom domain.",
         "23 reusable components.",
       ],

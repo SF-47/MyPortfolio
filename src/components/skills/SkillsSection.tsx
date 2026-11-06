@@ -13,7 +13,7 @@ export function SkillsSection() {
         label="Toolbox"
         title="Skills"
         muted="& tools."
-        aside="What I build with day to day, grouped the way the projects above use them."
+        aside="Tools I use day to day, grouped the way the projects above use them."
       />
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
