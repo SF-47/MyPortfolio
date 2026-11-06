@@ -428,3 +428,12 @@ dialog.project-dialog[open]::backdrop {
       transform 0.8s var(--ease-out-expo);
   }
 }
+
+/* Sections below the fold: the browser skips their style, layout and paint until they come
+   near the viewport. Keeps theme switches and first load cheap on phones. The intrinsic size
+   is remembered after first render, so scroll position and anchor links stay stable. */
+main > section:not(#home),
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
+}
