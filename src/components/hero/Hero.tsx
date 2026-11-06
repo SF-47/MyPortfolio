@@ -1,88 +1,113 @@
-import { Link } from 'react-router'
-import { routes } from '../../app/meta'
-import { ArchitectureDiagram } from '../architecture/ArchitectureDiagram'
-import { SeamRuler } from '../layout/SeamRuler'
-import { Surface } from '../layout/Surface'
-import { ButtonLink } from '../ui/ButtonLink'
-import { textLinkClass } from '../ui/textLinkClass'
-import { chipClass } from '../ui/chipStyles'
-import { profile, socialLinks } from '../../data/portfolioData'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
-import { heroCanvasPadding, heroColumns } from './heroLayout'
-import { MatchFieldPreview } from './MatchFieldPreview'
-import { SelectedSystems } from './SelectedSystems'
+import type { CSSProperties, ReactNode } from "react";
+import { profile } from "../../data/profile";
+import { ArrowUpRight, GitHubIcon, LinkedInIcon, MailIcon, PinIcon } from "../ui/icons";
+import { TerminalLauncher } from "../terminal/TerminalLauncher";
+import { LampSwitch } from "./LampSwitch";
+import { Lanyard } from "./Lanyard";
 
-
-// The home page hero: editorial paper column, dark engineering canvas, and the ruler seam
-// between them. From xl up the two sit side by side and the shared header overlays the top
-// 72px; below that they stack. Everything here is still: no animation runs.
-export function Hero() {
-  const wide = useMediaQuery('(min-width: 760px)')
-
+function SocialLink({ href, label, children }: { href: string; label: string; children: ReactNode }) {
+  const external = href.startsWith("http");
   return (
-    <div className={`xl:grid xl:min-h-[900px] ${heroColumns}`}>
-      <Surface className="relative flex flex-col px-(--gutter) pb-9 pt-7 md:pt-9 xl:pl-(--gutter) xl:pr-[76px] xl:pt-[124px]" tone="paper">
-        <SeamRuler className="absolute inset-y-0 right-0 hidden xl:block" edge="right" />
-        <p className="mono-label eyebrow text-balance text-fg-muted">
-          {profile.title} · Full-stack & Mobile
-        </p>
-        <h1 className="text-display mt-6 xl:text-[clamp(54px,4.45vw,64px)] md:mt-7">
-          <span className="sr-only">{profile.name}: </span>
-          Full-stack systems, <em>drawn end to end.</em>
-        </h1>
-        <p className="mt-6 max-w-[470px] font-serif text-[18px] leading-[1.5] text-fg-muted md:mt-7 md:text-[length:var(--text-lede)]">
-          Computer Science graduate building APIs, admin dashboards and mobile apps with React, React Native, ASP.NET Core and PostgreSQL. The diagram is a simplified map of Findly, my largest
-          project.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <ButtonLink className="max-md:flex-1 md:min-w-[176px]" to="/#work">
-            View work <span aria-hidden="true">↓</span>
-          </ButtonLink>
-          <ButtonLink className="max-md:flex-1 md:min-w-[176px]" download href="/cv.pdf" variant="outline">
-            Download CV
-          </ButtonLink>
-        </div>
-        <p className="mt-3 flex flex-wrap gap-x-7">
-          {socialLinks.map((link) =>
-            link.href ? (
-              <a className={textLinkClass} href={link.href} key={link.label} rel="noopener noreferrer" target="_blank">
-                {link.label} →<span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            ) : null,
-          )}
-        </p>
-        <div className="mt-8 md:mt-10">
-          <SelectedSystems />
-        </div>
-        <p className="mono-label mt-auto pt-7 text-fg-muted">● Open to work — {profile.location}</p>
-      </Surface>
+    <a
+      href={href}
+      aria-label={label}
+      title={label}
+      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      className="panel grid size-12 place-items-center rounded-full text-fg-2 transition-[color,border-color,transform,box-shadow] duration-300 ease-[var(--ease-spring)] hover:-translate-y-1 hover:shadow-raised hover:border-line-strong hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      {children}
+    </a>
+  );
+}
 
-      <SeamRuler className="xl:hidden" edge="bottom" />
+export function Hero() {
+  return (
+    <section id="home" aria-labelledby="hero-title" className="relative isolate min-h-[100dvh] overflow-hidden">
+      <LampSwitch className="absolute top-0 right-5 z-20 sm:right-10" />
+      <TerminalLauncher className="rise-in absolute! top-[1.15rem] right-[4.25rem] z-20 sm:right-[5.5rem] md:top-[1.4rem]" />
 
-      <Surface className={`relative px-(--gutter) pb-12 pt-8 md:pb-14 xl:pb-[200px] xl:pt-[116px] ${heroCanvasPadding.column}`} tone="canvas">
-        <div className="flex flex-wrap items-center gap-3">
-          <p className="mono-label mr-auto text-fg-muted">Fig. 1 — Findly architecture, simplified</p>
-          <Link className={chipClass(true)} to={`${routes.findly.path}#trace`}>
-            Trace a request →
-          </Link>
+      <div className="mx-auto grid min-h-[100dvh] w-full max-w-6xl grid-rows-[auto_1fr] px-4 sm:px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:grid-rows-1 lg:gap-12">
+        {/* badge column */}
+        <div className="rise-in [--card-w:148px] [--strap:76px] h-[380px] sm:[--card-w:176px] sm:[--strap:100px] sm:h-[440px] lg:[--card-w:212px] lg:[--strap:200px] lg:h-full">
+          <Lanyard />
         </div>
-        <div className="mt-7 xl:mt-9">
-          <ArchitectureDiagram interactive={false} layout={wide ? 'wide' : 'tall'} merged />
-        </div>
-        <p className="mt-6">
-          <Link className={`${textLinkClass} font-medium`} to={routes.findly.path}>
-            Read the case study →
-          </Link>
-        </p>
-        <div className={`mt-8 flex flex-col items-start gap-2 border-t border-rule pt-3.5 md:flex-row md:items-center md:justify-between md:gap-6 xl:absolute xl:bottom-[26px] xl:mt-0 xl:pt-2.5 ${heroCanvasPadding.bandInset}`}>
-          <p className="mono-label text-signal">
-            Match field preview
-            <br />
-            Simulation · illustrative
+
+        {/* text column */}
+        <div className="flex flex-col justify-center pb-24 lg:py-32">
+          <div className="rise-in flex flex-wrap items-center gap-3" style={{ "--d": "100ms" } as CSSProperties}>
+            <a
+              href="#contact"
+              className="group/open inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-700 uppercase transition-colors hover:bg-emerald-500/15 dark:text-emerald-300"
+            >
+              <span aria-hidden="true" className="relative flex size-2">
+                <span className="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-70 motion-safe:animate-ping" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+              </span>
+              {profile.status}
+            </a>
+            <span className="font-mono text-xs tracking-wider text-accent uppercase">{profile.role}</span>
+          </div>
+          <h1 id="hero-title" style={{ "--d": "200ms" } as CSSProperties} className="rise-in mt-5 text-[2.6rem] leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl lg:text-7xl">
+            Hi, I&apos;m <span className="text-accent">Sami Farhat</span>
+          </h1>
+          <p className="rise-in mt-4 flex items-center gap-2 font-mono text-sm text-fg-3" style={{ "--d": "320ms" } as CSSProperties}>
+            <PinIcon />
+            {profile.location}
           </p>
-          <MatchFieldPreview className="w-full flex-none md:w-[460px]" />
+          <p className="rise-in mt-6 max-w-xl text-lg leading-relaxed text-fg-2" style={{ "--d": "420ms" } as CSSProperties}>{profile.intro}</p>
+
+          <div className="rise-in mt-9 flex flex-wrap items-center gap-3" style={{ "--d": "540ms" } as CSSProperties}>
+            <a
+              href="#projects"
+              className="group/cta inline-flex items-center gap-3 rounded-full bg-btn py-1.5 pr-1.5 pl-5 text-sm font-medium text-btn-fg shadow-raised transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:shadow-float active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              View projects
+              <span className="grid size-9 place-items-center rounded-full bg-btn-fg/10 transition-transform duration-500 ease-[var(--ease-spring)] group-hover/cta:translate-y-0.5 group-hover/cta:scale-105">
+                <svg aria-hidden="true" width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 2.5v7M3 6.5l3 3 3-3" />
+                </svg>
+              </span>
+            </a>
+            <a
+              href={profile.cv}
+              target="_blank"
+              rel="noreferrer"
+              className="panel group/cv inline-flex items-center gap-3 rounded-full py-1.5 pr-1.5 pl-5 text-sm font-medium text-fg transition-[transform,box-shadow,border-color] duration-500 ease-[var(--ease-out-expo)] hover:border-line-strong hover:shadow-raised active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Resume
+              <span className="grid size-9 place-items-center rounded-full bg-tint ring-1 ring-line transition-transform duration-500 ease-[var(--ease-spring)] group-hover/cv:translate-x-0.5 group-hover/cv:-translate-y-px group-hover/cv:scale-105">
+                <ArrowUpRight size={12} />
+              </span>
+              <span className="sr-only">(PDF, opens in a new tab)</span>
+            </a>
+
+            <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-line-strong sm:block" />
+
+            <div className="flex gap-2">
+              <SocialLink href={profile.github} label="GitHub">
+                <GitHubIcon size={20} />
+              </SocialLink>
+              <SocialLink href={profile.linkedin} label="LinkedIn">
+                <LinkedInIcon />
+              </SocialLink>
+              <SocialLink href={`mailto:${profile.email}`} label={`Email ${profile.email}`}>
+                <MailIcon />
+              </SocialLink>
+            </div>
+          </div>
         </div>
-      </Surface>
-    </div>
-  )
+      </div>
+
+      {/* scroll cue */}
+      <a
+        href="#projects"
+        aria-label="Scroll to projects"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:block"
+      >
+        <span className="flex h-10 w-6 justify-center rounded-full border-2 border-fg-3/60 pt-2">
+          <span className="h-2 w-1 rounded-full bg-fg-3 motion-safe:animate-bounce" />
+        </span>
+      </a>
+    </section>
+  );
 }
