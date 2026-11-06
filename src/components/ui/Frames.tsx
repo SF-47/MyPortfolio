@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 export type Shot = { src: string; srcSmall?: string; /** pixel width of srcSmall (default 800) */ smallWidth?: number; alt: string; width: number; height: number };
 
 function Img({ shot, sizes, eager }: { shot: Shot; sizes: string; eager?: boolean }) {
@@ -45,8 +43,4 @@ export function PhoneFrame({ shot, className = "", eager }: { shot: Shot; classN
       </div>
     </div>
   );
-}
-
-export function Stage({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`relative isolate overflow-hidden ${className}`}>{children}</div>;
 }

@@ -39,14 +39,24 @@ export function Hero() {
             <span aria-hidden="true" className="h-px w-5 bg-fg-3/50" />
             <StatusBadge href="#contact" />
           </p>
-          <h1 id="hero-title" style={{ "--d": "200ms" } as CSSProperties} className="rise-in mt-5 text-[2.6rem] leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl lg:text-7xl">
-            Hi, I&apos;m <span className="text-accent">Sami Farhat</span>
+          <h1 id="hero-title" style={{ "--d": "200ms" } as CSSProperties} className="rise-in mt-5 text-[2.9rem] leading-[1] font-semibold tracking-[-0.035em] text-accent sm:text-7xl lg:text-[5.25rem]">
+            {profile.name}
           </h1>
-          <p className="rise-in mt-4 flex items-center gap-2 font-mono text-sm text-fg-3" style={{ "--d": "320ms" } as CSSProperties}>
-            <PinIcon />
-            {profile.location}
+          {/* the thesis: what I build, stated plainly */}
+          <p
+            className="rise-in mt-6 max-w-[40ch] text-xl leading-snug font-medium tracking-tight text-balance text-fg sm:text-2xl lg:text-[1.75rem]"
+            style={{ "--d": "320ms" } as CSSProperties}
+          >
+            {profile.statement}
           </p>
-          <p className="rise-in mt-6 max-w-xl text-lg leading-relaxed text-fg-2" style={{ "--d": "420ms" } as CSSProperties}>{profile.intro}</p>
+          <p className="rise-in mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[13px] text-fg-3" style={{ "--d": "420ms" } as CSSProperties}>
+            <span className="inline-flex items-center gap-1.5">
+              <PinIcon size={13} />
+              {profile.location}
+            </span>
+            <span aria-hidden="true" className="hidden text-muted sm:inline">/</span>
+            <span>{profile.coreStack.join(" · ")}</span>
+          </p>
 
           <div className="rise-in mt-9 flex flex-wrap items-center gap-3" style={{ "--d": "540ms" } as CSSProperties}>
             <a

@@ -44,11 +44,10 @@ export function SkillsSection() {
                   return (
                     <li key={name}>
                       <div
-                        tabIndex={0}
                         aria-label={name}
                         role="img"
                         style={{ "--brand": t?.brand ?? "var(--accent)" } as CSSProperties}
-                        className="skill-tile has-tip group/tile relative flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl sm:gap-2.5 border border-line bg-tint p-2 shadow-soft outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        className="skill-tile has-tip group/tile relative flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl sm:gap-2.5 border border-line bg-tint p-2 shadow-soft"
                       >
                         {t && <TechLogo t={t} size={52} className="max-sm:!size-10 transition-transform duration-500 ease-[var(--ease-spring)] group-hover/tile:scale-110 group-hover/tile:-rotate-3" />}
                         <span aria-hidden="true" className="text-center text-xs leading-tight text-fg-3 transition-colors group-hover/tile:text-fg">
