@@ -7,7 +7,7 @@ export const profile = {
   intro:
     "Computer Science graduate building web and mobile apps end to end: React and React Native on the front end; ASP.NET Core, PostgreSQL and Supabase behind them.",
   /** Shown on the About card. Change or remove when it stops being true. */
-  status: "Open to work",
+  status: "Available for hire",
   /** One line under the status on the About card. */
   statusDetail: "Junior software engineering roles: full-stack, frontend or mobile.",
   languages: "Arabic (native) · English",
