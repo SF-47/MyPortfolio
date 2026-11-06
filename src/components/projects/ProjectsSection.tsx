@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useState, type CSSProperties } from "react";
 import { trackEvent } from "../../lib/analytics";
 import { projects, type Project } from "../../data/projects";
 import { SectionHeader } from "../ui/SectionHeader";
@@ -69,16 +69,6 @@ export function ProjectsSection() {
     setOpen(true);
     trackEvent("Project details", { project: p.slug });
   }, []);
-
-  // The terminal opens projects by dispatching "open-project" with a slug.
-  useEffect(() => {
-    const onRequest = (e: Event) => {
-      const p = projects.find((x) => x.slug === (e as CustomEvent<string>).detail);
-      if (p) onOpen(p);
-    };
-    window.addEventListener("open-project", onRequest);
-    return () => window.removeEventListener("open-project", onRequest);
-  }, [onOpen]);
   const onClose = useCallback(() => setOpen(false), []);
 
   return (

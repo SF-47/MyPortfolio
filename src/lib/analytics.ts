@@ -10,9 +10,7 @@ export type EventName =
   | "CV download"
   | "Contact sent"
   | "Email copied"
-  | "Lamp pulled"
-  | "Terminal opened"
-  | "Terminal command";
+  | "Lamp pulled";
 
 export function trackEvent(name: EventName, props?: Record<string, string>) {
   try {
