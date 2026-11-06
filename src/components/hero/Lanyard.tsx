@@ -224,7 +224,11 @@ export function Lanyard() {
           <div className="mx-auto mb-[8%] h-2 w-12 rounded-full bg-[var(--badge-slot)] shadow-[inset_0_1px_2px_rgb(0_0_0/0.5)]" />
 
           <div className="flex h-[calc(100%-1.5rem)] flex-col">
-            <img src="/brand/sf-logo-mark.webp" width={356} height={127} alt="" draggable={false} className="mx-auto mt-[9%] w-[86%] [filter:var(--badge-logo-filter)]" />
+            {/* the logo as a stencil, filled with the same accent as "Sami Farhat" in the hero */}
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-[9%] block aspect-[356/127] w-[86%] bg-accent [mask:url(/brand/sf-logo-mark.webp)_center/contain_no-repeat] [-webkit-mask:url(/brand/sf-logo-mark.webp)_center/contain_no-repeat]"
+            />
 
             <div className="mt-auto">
               <div className="mb-3 h-px bg-gradient-to-r from-[var(--badge-accent)] via-[var(--badge-border)] to-transparent opacity-70" />

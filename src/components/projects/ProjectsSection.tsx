@@ -78,7 +78,7 @@ export function ProjectsSection() {
         index="02"
         label="Selected work"
         title="Projects"
-        muted="I've shipped."
+        muted="I've built."
         aside="Real screens from each project. Open one for the full story."
       />
 

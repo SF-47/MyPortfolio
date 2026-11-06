@@ -1,36 +1,37 @@
-# Sami Farhat - Portfolio
+# Sami Farhat · Portfolio
 
-Personal portfolio: a single-page home and a Findly case study. React 19, TypeScript, Vite,
-Tailwind CSS 4 and React Router (data router). No other runtime dependencies.
+Personal portfolio, live at **https://sami-farhat.vercel.app**. A single page built with React 19,
+TypeScript, Vite and Tailwind CSS 4, deployed on Vercel.
 
 ## Scripts
 
-- `npm run dev` - start the dev server
-- `npm run build` - typecheck, build to `dist/`, then write the per-route HTML, `robots.txt` and `sitemap.xml`
-- `npm run lint` - run ESLint
-- `npm run preview` - preview the production build
+- `npm run dev` starts the dev server
+- `npm run build` refreshes the GitHub activity snapshot, type-checks and builds to `dist/`
+- `npm run lint` runs ESLint
+- `npm run preview` serves the production build locally
 
 ## Where things live
 
-- `src/data/portfolioData.ts` - verified profile, project, experience and skills content
-- `src/data/findly/` - Findly case study data: architecture, request trace, decisions, matching filter and the illustrative simulation sample
-- `src/styles/tokens.css` - design tokens (paper and canvas surfaces, one signal colour); `fonts.css` - self-hosted fonts
-- `src/app/pageMeta.json` - per-route title, description and `siteUrl`, the one place the site's address is set
+- `src/data/` holds the content: `profile.ts` (name, status, links), `projects.ts`, `skills.ts`,
+  `tech.ts` (logos and brand colours) and `github.json` (contribution snapshot)
+- `src/components/` holds the sections: hero (badge, lamp, nav), about, projects, skills, contact, footer
+- `src/components/background/SignalParticles.tsx` is the animated dot background
+- `src/index.css` holds the theme tokens for dark and light mode, plus animations
+- `public/` holds images, fonts, icons, the CV, `robots.txt` and `sitemap.xml`
 
-## Routing and SEO
+## Configuration
 
-The app is client-rendered, but `scripts/prerender-routes.mjs` runs after the build and writes
-`dist/index.html`, `dist/work/findly/index.html` and a real `dist/404.html`, each with that
-route's own title, description, canonical URL and Open Graph tags, plus `robots.txt` and
-`sitemap.xml`, all from `pageMeta.json`. Crawlers and link previews therefore see correct
-metadata without running JavaScript. `vercel.json` sets `trailingSlash: false` and long cache
-headers for hashed bundles and fonts.
+- `VITE_WEB3FORMS_KEY`: the Web3Forms access key for the contact form. Set it in `.env.local`
+  for local development and in Vercel → Settings → Environment Variables (Production and Preview).
+  See `.env.example`.
+- `scripts/fetch-github.mjs` runs before every build and updates `src/data/github.json`. If GitHub
+  can't be reached, the last snapshot is kept.
 
-When the production address changes (for example a custom domain), change `siteUrl` in
-`src/app/pageMeta.json` and rebuild.
+## Deploying
 
-## Fonts and images
+Vercel builds `main` to production and every other branch to a preview URL.
 
-Newsreader, Schibsted Grotesk and Martian Mono are self-hosted from `public/fonts` (see the
-README there) and not preloaded on purpose (see `src/styles/fonts.css`). Project screenshots have an 800px copy for phones.
-The social preview image is `public/og-image.png` (1200x630).
+## Credits
+
+The background is the Signal Particles effect from ThreeUI. Technology logos come from Devicon
+(MIT) and Simple Icons (CC0).

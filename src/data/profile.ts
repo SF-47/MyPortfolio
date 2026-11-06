@@ -5,7 +5,7 @@ export const profile = {
   location: "Beirut, Lebanon",
   timeZone: "Asia/Beirut",
   intro:
-    "Computer Science graduate building web and mobile apps end to end: React and React Native on the front, ASP.NET Core, PostgreSQL and Supabase behind them.",
+    "Computer Science graduate building web and mobile apps end to end: React and React Native on the front end; ASP.NET Core, PostgreSQL and Supabase behind them.",
   /** Shown on the About card. Change or remove when it stops being true. */
   status: "Open to work",
   /** One line under the status on the About card. */
