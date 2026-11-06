@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { profile } from "../../data/profile";
 import { ArrowUpRight, GitHubIcon, LinkedInIcon, MailIcon, PinIcon } from "../ui/icons";
 import { LampSwitch } from "./LampSwitch";
+import { StatusBadge } from "../ui/StatusBadge";
 import { Lanyard } from "./Lanyard";
 
 function SocialLink({ href, label, children }: { href: string; label: string; children: ReactNode }) {
@@ -33,16 +34,7 @@ export function Hero() {
         {/* text column */}
         <div className="flex flex-col justify-center pb-24 lg:py-32">
           <div className="rise-in flex flex-wrap items-center gap-3" style={{ "--d": "100ms" } as CSSProperties}>
-            <a
-              href="#contact"
-              className="group/open inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-700 uppercase transition-colors hover:bg-emerald-500/15 dark:text-emerald-300"
-            >
-              <span aria-hidden="true" className="relative flex size-2">
-                <span className="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-70 motion-safe:animate-ping" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-              </span>
-              {profile.status}
-            </a>
+            <StatusBadge href="#contact" />
             <span className="font-mono text-xs tracking-wider text-accent uppercase">{profile.role}</span>
           </div>
           <h1 id="hero-title" style={{ "--d": "200ms" } as CSSProperties} className="rise-in mt-5 text-[2.6rem] leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl lg:text-7xl">
