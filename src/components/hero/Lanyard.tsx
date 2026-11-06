@@ -217,20 +217,20 @@ export function Lanyard() {
           tabIndex={0}
           role="img"
           aria-label="Sami Farhat ID badge with the SF logo. Drag it to swing it or pull it down to stretch the strap; the arrow keys do the same."
-          className="group relative -mt-1 w-[var(--card-w)] cursor-grab touch-none rounded-2xl border border-white/10 bg-[#0b131e] p-[calc(var(--card-w)*0.08)] shadow-[0_30px_60px_-20px_rgb(0_0_0/0.65),0_0_0_1px_rgb(0_0_0/0.3)] outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-accent data-[dragging=true]:cursor-grabbing"
+          className="group relative -mt-1 w-[var(--card-w)] cursor-grab touch-none rounded-2xl border border-[var(--badge-border)] bg-[var(--badge-bg)] p-[calc(var(--card-w)*0.08)] shadow-[var(--badge-shadow)] outline-none focus-visible:ring-2 focus-visible:ring-accent data-[dragging=true]:cursor-grabbing"
           style={{ aspectRatio: "0.72" }}
         >
           {/* punched slot */}
-          <div className="mx-auto mb-[8%] h-2 w-12 rounded-full bg-black/60 shadow-[inset_0_1px_2px_rgb(0_0_0/0.8)]" />
+          <div className="mx-auto mb-[8%] h-2 w-12 rounded-full bg-[var(--badge-slot)] shadow-[inset_0_1px_2px_rgb(0_0_0/0.5)]" />
 
           <div className="flex h-[calc(100%-1.5rem)] flex-col">
-            <img src="/brand/sf-logo.webp" width={385} height={145} alt="" draggable={false} className="mx-auto mt-[6%] w-[92%]" />
+            <img src="/brand/sf-logo-mark.webp" width={356} height={127} alt="" draggable={false} className="mx-auto mt-[9%] w-[86%] [filter:var(--badge-logo-filter)]" />
 
             <div className="mt-auto">
-              <div className="mb-3 h-px bg-gradient-to-r from-[#2ad1d6]/60 via-white/10 to-transparent" />
-              <p className="text-[calc(var(--card-w)*0.085)] leading-tight font-semibold text-white">Sami Farhat</p>
-              <p className="mt-0.5 text-[calc(var(--card-w)*0.056)] text-[#2ad1d6]">Software Engineer</p>
-              <div className="mt-3 flex items-center justify-between font-mono text-[calc(var(--card-w)*0.042)] tracking-wider text-slate-400 uppercase">
+              <div className="mb-3 h-px bg-gradient-to-r from-[var(--badge-accent)] via-[var(--badge-border)] to-transparent opacity-70" />
+              <p className="text-[calc(var(--card-w)*0.085)] leading-tight font-semibold text-[var(--badge-fg)]">Sami Farhat</p>
+              <p className="mt-0.5 text-[calc(var(--card-w)*0.056)] text-[var(--badge-accent)]">Software Engineer</p>
+              <div className="mt-3 flex items-center justify-between font-mono text-[calc(var(--card-w)*0.042)] tracking-wider text-[var(--badge-muted)] uppercase">
                 <span>ID · SF-47</span>
                 <span>Beirut, LB</span>
               </div>
@@ -238,7 +238,7 @@ export function Lanyard() {
           </div>
 
           {/* sheen */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.07] via-transparent to-transparent" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--badge-sheen)] via-transparent to-transparent" />
         </div>
         </div>
       </div>
