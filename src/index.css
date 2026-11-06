@@ -615,3 +615,14 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .arch-signal { display: none; }
 }
+
+/* Project covers lean slightly toward the cursor (fine pointers, normal motion). */
+.cover-tilt {
+  transition: transform 0.6s var(--ease-out-expo);
+  transform-origin: 50% 60%;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-spotlight]:hover .cover-tilt {
+    transform: perspective(1400px) rotateX(calc((0.5 - var(--py, 0.5)) * 3deg)) rotateY(calc((var(--px, 0.5) - 0.5) * 4deg)) scale(1.012);
+  }
+}

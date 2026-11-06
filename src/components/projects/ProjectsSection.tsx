@@ -1,5 +1,6 @@
 import { useCallback, useState, type CSSProperties } from "react";
 import { trackEvent } from "../../lib/analytics";
+import { caseStudies } from "../../data/caseStudies";
 import { projects, type Project } from "../../data/projects";
 import { SectionHeader } from "../ui/SectionHeader";
 import { TechIcons } from "../ui/TechIcons";
@@ -20,10 +21,12 @@ function ProjectCard({ project, index, wide, onOpen }: { project: Project; index
       <button
         type="button"
         onClick={() => onOpen(project)}
-        aria-label={`Open details: ${project.title}`}
+        aria-label={`Open the ${project.title} case study`}
         className="block w-full cursor-zoom-in text-left outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
       >
-        <ProjectCover project={project} wide={wide} />
+        <span className="cover-tilt block">
+          <ProjectCover project={project} wide={wide} />
+        </span>
       </button>
 
       <div className={`flex flex-1 flex-col gap-5 p-6 sm:p-7 ${wide ? "lg:flex-row lg:items-end lg:justify-between lg:gap-10" : ""}`}>
@@ -34,7 +37,8 @@ function ProjectCard({ project, index, wide, onOpen }: { project: Project; index
           <h3 id={`${project.slug}-title`} className="mt-2.5 text-2xl font-semibold tracking-tight text-fg sm:text-[28px]">
             {project.title}
           </h3>
-          <p className="mt-2 leading-relaxed text-fg-3">{project.kicker}</p>
+          <p className="mt-2 leading-relaxed text-fg-2">{caseStudies[project.slug].problem}</p>
+          <p className="mt-1.5 text-sm leading-relaxed text-fg-3">{project.kicker}</p>
         </div>
 
         <div className={`relative z-[2] flex flex-col gap-5 ${wide ? "lg:items-end" : "mt-auto"}`}>
@@ -45,7 +49,7 @@ function ProjectCard({ project, index, wide, onOpen }: { project: Project; index
               onClick={() => onOpen(project)}
               className="group/btn inline-flex items-center gap-2.5 rounded-full bg-btn py-1.5 pr-1.5 pl-4 text-[13px] font-medium text-btn-fg shadow-raised transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:shadow-float active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              Details
+              Case study
               <span className="grid size-7 place-items-center rounded-full bg-btn-fg/10 transition-transform duration-500 ease-[var(--ease-spring)] group-hover/btn:translate-x-0.5 group-hover/btn:scale-105">
                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2.5 6h7M6.5 3l3 3-3 3" />
