@@ -33,10 +33,12 @@ export function Hero() {
 
         {/* text column */}
         <div className="flex flex-col justify-center pb-24 lg:py-32">
-          <div className="rise-in flex flex-wrap items-center gap-3" style={{ "--d": "100ms" } as CSSProperties}>
-            <StatusBadge href="#contact" />
+          {/* role line, with availability joined on in green */}
+          <p className="rise-in flex flex-wrap items-center gap-x-3 gap-y-2" style={{ "--d": "100ms" } as CSSProperties}>
             <span className="font-mono text-xs tracking-wider text-accent uppercase">{profile.role}</span>
-          </div>
+            <span aria-hidden="true" className="h-px w-5 bg-fg-3/50" />
+            <StatusBadge href="#contact" />
+          </p>
           <h1 id="hero-title" style={{ "--d": "200ms" } as CSSProperties} className="rise-in mt-5 text-[2.6rem] leading-[1.05] font-semibold tracking-tight text-fg sm:text-6xl lg:text-7xl">
             Hi, I&apos;m <span className="text-accent">Sami Farhat</span>
           </h1>
