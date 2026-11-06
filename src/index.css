@@ -152,18 +152,36 @@ body {
 }
 
 /* Lanyard strap: repeating chevrons printed on the band. */
-/* Lanyard strap: "code ribbon" with </> printed down it. Only the strap follows the theme;
-   the badge stays dark in both. */
+/* Lanyard strap ("code ribbon") and ID badge: both follow the theme. */
 :root,
 :root[data-theme="dark"] {
   --strap-bg: #0b131e;
   --strap-ink: #2ad1d6;
   --strap-edge: rgb(42 209 214 / 0.28);
+  --badge-bg: #0b131e;
+  --badge-border: rgb(255 255 255 / 0.1);
+  --badge-fg: #ffffff;
+  --badge-accent: #2ad1d6;
+  --badge-muted: #94a3b8;
+  --badge-slot: rgb(0 0 0 / 0.6);
+  --badge-sheen: rgb(255 255 255 / 0.07);
+  --badge-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.65), 0 0 0 1px rgb(0 0 0 / 0.3);
+  --badge-logo-filter: none;
 }
 :root[data-theme="light"] {
   --strap-bg: #f8fafc;
   --strap-ink: #0b7f84;
   --strap-edge: rgb(15 23 42 / 0.14);
+  --badge-bg: #ffffff;
+  --badge-border: rgb(15 23 42 / 0.1);
+  --badge-fg: #0b1220;
+  --badge-accent: #0b7f84;
+  --badge-muted: #64748b;
+  --badge-slot: rgb(15 23 42 / 0.16);
+  --badge-sheen: rgb(255 255 255 / 0.7);
+  --badge-shadow: 0 30px 60px -24px rgb(15 23 42 / 0.35), 0 0 0 1px rgb(15 23 42 / 0.04);
+  /* the teal logo is too pale on white: deepen it */
+  --badge-logo-filter: brightness(0.62) saturate(1.4);
 }
 .lanyard-strap {
   position: relative;
