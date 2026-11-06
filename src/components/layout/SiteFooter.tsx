@@ -20,7 +20,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-6 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <a href="#home" className="group flex items-center gap-4" aria-label="Sami Farhat, back to top">
             <span className="grid h-12 w-24 place-items-center rounded-xl border border-white/10 bg-[#0b131e] shadow-raised transition-transform duration-500 ease-[var(--ease-spring)] group-hover:-rotate-3 group-hover:scale-105">
-              <img src="/brand/sf-logo.png" alt="" width={385} height={145} className="w-[78%]" />
+              <img src="/brand/sf-logo.webp" alt="" width={385} height={145} className="w-[78%]" />
             </span>
             <span>
               <span className="block font-semibold text-fg">{profile.name}</span>

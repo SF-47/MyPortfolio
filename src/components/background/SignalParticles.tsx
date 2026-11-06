@@ -58,8 +58,13 @@ export function SignalParticles({ speed = 1, mode = "dark" }: Props) {
     let frame = 0;
 
     function resize() {
-      width = canvas!.width = canvas!.offsetWidth;
-      height = canvas!.height = canvas!.offsetHeight;
+      // Resizing a canvas reallocates it; skip no-op resizes (mobile fires many while scrolling).
+      const w = canvas!.offsetWidth;
+      const h = canvas!.offsetHeight;
+      if (w === width && h === height) return false;
+      width = canvas!.width = w;
+      height = canvas!.height = h;
+      return true;
     }
 
     function render() {
@@ -107,9 +112,17 @@ export function SignalParticles({ speed = 1, mode = "dark" }: Props) {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    // Touch devices draw every other frame (30 fps) and advance time twice as far, so the
+    // waves move at the authored speed for half the work.
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const stride = coarse ? 2 : 1;
+    let tick = 0;
+
     function draw() {
-      render();
-      time += 0.02 * (speedRef.current || 1);
+      if (tick++ % stride === 0) {
+        render();
+        time += 0.02 * stride * (speedRef.current || 1);
+      }
       frame = requestAnimationFrame(draw);
     }
 
@@ -123,8 +136,7 @@ export function SignalParticles({ speed = 1, mode = "dark" }: Props) {
     }
 
     function onResize() {
-      resize();
-      if (reducedMotion.matches) render();
+      if (resize() && reducedMotion.matches) render();
     }
 
     // Repaint immediately on theme change when the loop is not running (reduced motion).

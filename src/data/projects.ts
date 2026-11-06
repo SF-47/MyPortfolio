@@ -31,7 +31,14 @@ const desk = (name: string, alt: string, width = 1600, height = 1000): Shot => (
   width,
   height,
 });
-const phone = (name: string, alt: string): Shot => ({ src: `/projects/${name}.webp`, alt, width: 540, height: 1169 });
+const phone = (name: string, alt: string): Shot => ({
+  src: `/projects/${name}.webp`,
+  srcSmall: `/projects/${name}-270.webp`,
+  smallWidth: 270,
+  alt,
+  width: 540,
+  height: 1169,
+});
 
 export const projects: Project[] = [
   {
