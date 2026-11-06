@@ -7,8 +7,8 @@
  *                    backend → n8n webhook → Gemini.
  *  Flexible Portfolio Next.js (site + admin BFF) → ASP.NET Core (cookie auth, CSRF)
  *                    → EF Core → MySQL.
- *  Shawarma Story    React + Vite → Firestore + Firebase Auth (rules allow authenticated
- *                    writes only), Firebase Hosting, WhatsApp order hand-off.
+ *  Shawarma Story    React + Vite → Firestore + Firebase Auth (rules: public reads, writes only
+ *                    for uids in the admins collection), Firebase Hosting, WhatsApp order hand-off.
  */
 export type Layer = "client" | "api" | "data" | "services";
 export type ProjectKey = "findly" | "flexible-portfolio" | "shawarma-story";
@@ -43,7 +43,7 @@ export const nodes: ArchNode[] = [
   { id: "pg", layer: "data", name: "PostgreSQL", note: "on Supabase", logo: "PostgreSQL" },
   { id: "storage", layer: "data", name: "Supabase", note: "Storage · Realtime", logo: "Supabase" },
   { id: "mysql", layer: "data", name: "MySQL", note: "via EF Core", logo: "MySQL" },
-  { id: "firestore", layer: "data", name: "Firestore", note: "locked-down rules", logo: "Firebase" },
+  { id: "firestore", layer: "data", name: "Firestore", note: "admin-only writes", logo: "Firebase" },
 
   { id: "n8n", layer: "services", name: "n8n", note: "matching workflow", logo: "n8n" },
   { id: "gemini", layer: "services", name: "Gemini", note: "compares items", logo: "Gemini" },
@@ -90,6 +90,6 @@ export const archProjects: { key: ProjectKey | "all"; label: string; summary: st
     key: "shawarma-story",
     label: "Shawarma Story",
     summary:
-      "A React + Vite app with no custom server: the menu lives in Firestore, staff sign in with Firebase Auth, and Firestore rules allow only authenticated writes. It's served from Firebase Hosting, and each order is handed to WhatsApp as an itemized message.",
+      "A React + Vite app with no custom server: the menu lives in Firestore, staff sign in with Firebase Auth, and Firestore rules let only accounts listed as admins change the menu. It's served from Firebase Hosting, and each order is handed to WhatsApp as an itemized message.",
   },
 ];
