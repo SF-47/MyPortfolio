@@ -3,7 +3,6 @@ import { trackEvent } from "../../lib/analytics";
 import { caseStudies } from "../../data/caseStudies";
 import { projects, type Project } from "../../data/projects";
 import { SectionHeader } from "../ui/SectionHeader";
-import { TechIcons } from "../ui/TechIcons";
 import { GitHubActivity } from "./GitHubActivity";
 import { ProjectCover } from "./ProjectCover";
 import { ProjectDialog } from "./ProjectDialog";
@@ -42,7 +41,6 @@ function ProjectCard({ project, index, wide, onOpen }: { project: Project; index
         </div>
 
         <div className={`relative z-[2] flex flex-col gap-5 ${wide ? "lg:items-end" : "mt-auto"}`}>
-          <TechIcons names={project.stack} />
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"

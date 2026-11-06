@@ -9,8 +9,6 @@ export type Project = {
   kicker: string;
   /** small label above the title */
   label: string;
-  /** logos on the card (names from data/tech) */
-  stack: string[];
   links: ProjectLink[];
   /** shown only in the details dialog */
   details: {
@@ -45,7 +43,6 @@ export const projects: Project[] = [
     title: "Findly",
     label: "Graduation project · 2026",
     kicker: "AI-assisted lost & found for university campuses: API, admin dashboard and mobile app.",
-    stack: ["ASP.NET Core", "PostgreSQL", "React", "TypeScript", "React Native", "Expo", "Supabase", "n8n", "Gemini"],
     links: [
       { label: "GitHub", href: "https://github.com/SF-47/findly", kind: "repo" },
       { label: "Demo video", href: "https://drive.google.com/file/d/1v0SOa4yqmMoDwy0Iu_RnM6rnAb1L9V1M/view?usp=sharing", kind: "demo" },
@@ -75,7 +72,6 @@ export const projects: Project[] = [
     title: "Flexible Portfolio",
     label: "Full-stack product · 2026",
     kicker: "A company website whose sections, content and theme are all managed from an admin panel.",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "ASP.NET Core", "MySQL"],
     links: [{ label: "GitHub", href: "https://github.com/SF-47/flexible-portfolio", kind: "repo" }],
     details: {
       summary:
@@ -100,7 +96,6 @@ export const projects: Project[] = [
     title: "Shawarma Story",
     label: "Freelance client · Live",
     kicker: "Bilingual QR menu for a real restaurant, with a cart that sends orders through WhatsApp.",
-    stack: ["React", "Tailwind CSS", "Firebase", "JavaScript"],
     links: [
       { label: "Live site", href: "https://shawarmastory.com", kind: "live" },
       { label: "GitHub", href: "https://github.com/SF-47/restaurant-qr-menu", kind: "repo" },

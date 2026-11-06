@@ -298,22 +298,6 @@ dialog.project-dialog[open]::backdrop {
   }
 }
 
-/* Tooltip for icon-only tech badges */
-.tip {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  translate: -50% 4px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.18s ease, translate 0.25s var(--ease-out-expo);
-}
-.has-tip:hover > .tip,
-.has-tip:focus-visible > .tip {
-  opacity: 1;
-  translate: -50% 0;
-}
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
@@ -384,40 +368,6 @@ dialog.project-dialog[open]::backdrop {
 }
 [data-spotlight]:hover::after {
   opacity: 1;
-}
-
-/* Brand-coloured hover for skill tiles: --brand set per tile */
-.skill-tile {
-  transition:
-    transform 0.45s var(--ease-spring),
-    border-color 0.3s ease,
-    box-shadow 0.45s var(--ease-out-expo),
-    background-color 0.3s ease;
-}
-.skill-tile:hover,
-.skill-tile:focus-visible {
-  transform: translateY(-6px);
-  border-color: color-mix(in srgb, var(--brand) 70%, transparent);
-  background-color: color-mix(in srgb, var(--brand) 9%, var(--surface));
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--brand) 35%, transparent),
-    0 18px 40px -16px color-mix(in srgb, var(--brand) 55%, transparent);
-}
-
-/* Tooltip arrow */
-.tip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  translate: -50% -50%;
-  rotate: 45deg;
-  width: 8px;
-  height: 8px;
-  background: inherit;
-  border-right: inherit;
-  border-bottom: inherit;
-  border-radius: 1px;
 }
 
 /* Mobile menu link stagger */
