@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { StatusBadge } from "../ui/StatusBadge";
 import { profile, sections } from "../../data/profile";
 
 /** Below md: floating island with a hamburger that morphs into an X and opens a full-screen menu. */
@@ -78,10 +79,7 @@ export function MobileMenu({ active }: { active: string }) {
           </ul>
         </nav>
         <div className="menu-link space-y-3" style={{ transitionDelay: open ? "460ms" : "0ms" }}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-700 uppercase dark:text-emerald-300">
-            <span aria-hidden="true" className="size-2 rounded-full bg-emerald-500" />
-            {profile.status}
-          </span>
+          <StatusBadge />
           <a href={`mailto:${profile.email}`} className="block text-lg text-fg-2">
             {profile.email}
           </a>

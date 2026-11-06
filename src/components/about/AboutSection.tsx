@@ -3,6 +3,7 @@ import { profile } from "../../data/profile";
 import { useLocalTime } from "../../hooks/useLocalTime";
 import { SectionHeader } from "../ui/SectionHeader";
 import { ArrowUpRight } from "../ui/icons";
+import { StatusBadge } from "../ui/StatusBadge";
 import { StackDiagram } from "./StackDiagram";
 
 const record: { icon: ReactNode; label: string; title: string; sub: string; link?: { label: string; href: string } }[] = [
@@ -42,13 +43,7 @@ function StatusCard() {
         {/* soft green glow */}
         <div aria-hidden="true" className="pointer-events-none absolute -top-20 -right-16 size-64 rounded-full bg-emerald-500/20 blur-3xl" />
         <div className="relative z-[2]">
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium tracking-[0.14em] text-emerald-700 uppercase dark:text-emerald-300">
-            <span aria-hidden="true" className="relative flex size-2">
-              <span className="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-70 motion-safe:animate-ping" />
-              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-            </span>
-            {profile.status}
-          </span>
+          <StatusBadge />
           <p className="mt-5 text-2xl leading-snug font-semibold tracking-tight text-fg sm:text-[26px]">{profile.statusDetail}</p>
         </div>
 
