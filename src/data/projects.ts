@@ -9,10 +9,13 @@ export type Project = {
   kicker: string;
   /** small label above the title */
   label: string;
+  /** logos on the card (names from data/tech) */
+  stack: string[];
   links: ProjectLink[];
   /** shown only in the details dialog */
   details: {
     summary: string;
+    highlights: string[];
     fullStack: string[];
     facts: { label: string; value: string }[];
   };
@@ -43,6 +46,7 @@ export const projects: Project[] = [
     title: "Findly",
     label: "Graduation project · 2026",
     kicker: "AI-assisted lost & found for university campuses: API, admin dashboard and mobile app.",
+    stack: ["ASP.NET Core", "PostgreSQL", "React", "TypeScript", "React Native", "Expo", "Supabase", "n8n", "Gemini"],
     links: [
       { label: "GitHub", href: "https://github.com/SF-47/findly", kind: "repo" },
       { label: "Demo video", href: "https://drive.google.com/file/d/1v0SOa4yqmMoDwy0Iu_RnM6rnAb1L9V1M/view?usp=sharing", kind: "demo" },
@@ -50,6 +54,12 @@ export const projects: Project[] = [
     details: {
       summary:
         "Students report lost or found items from the mobile app. The backend narrows the candidates, an n8n workflow asks Gemini to compare them, and strong matches wait for an admin to confirm before the two students can chat privately.",
+      highlights: [
+        "64 REST endpoints across 13 controllers, with JWT, BCrypt and role-based access for owners, university admins and students.",
+        "Two-stage matching: same university and category, ±7 days, at most 20 candidates, then Gemini scoring with a 70% threshold.",
+        "9 PostgreSQL entities and 13 EF Core migrations; Supabase Storage for photos and Supabase Realtime for chat.",
+        "11 admin pages and 17 mobile screens.",
+      ],
       fullStack: ["ASP.NET Core", "EF Core", "PostgreSQL", "React", "TypeScript", "React Native", "Expo", "Supabase", "n8n", "Gemini AI"],
       facts: [
         { label: "Type", value: "Graduation project" },
@@ -72,10 +82,17 @@ export const projects: Project[] = [
     title: "Flexible Portfolio",
     label: "Full-stack product · 2026",
     kicker: "A company website whose sections, content and theme are all managed from an admin panel.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "ASP.NET Core", "MySQL"],
     links: [{ label: "GitHub", href: "https://github.com/SF-47/flexible-portfolio", kind: "repo" }],
     details: {
       summary:
         "Admins pick from 15 section types, reorder and hide them, edit their content next to a live desktop, tablet and mobile preview, and switch between theme presets. The public site is rebuilt automatically after every save.",
+      highlights: [
+        "Next.js frontend that doubles as the admin backend-for-frontend, over an ASP.NET Core API (Controller → Service → EF Core → MySQL).",
+        "15 typed section schemas validated with Zod.",
+        "Cookie-based admin auth with CSRF protection, per-IP rate limits and trusted-proxy handling.",
+        "Full endpoint reference in API.md.",
+      ],
       fullStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind 4", "Zod", "ASP.NET Core 10", "EF Core", "MySQL"],
       facts: [
         { label: "Type", value: "Full-stack product" },
@@ -96,6 +113,7 @@ export const projects: Project[] = [
     title: "Shawarma Story",
     label: "Freelance client · Live",
     kicker: "Bilingual QR menu for a real restaurant, with a cart that sends orders through WhatsApp.",
+    stack: ["React", "Tailwind CSS", "Firebase", "JavaScript"],
     links: [
       { label: "Live site", href: "https://shawarmastory.com", kind: "live" },
       { label: "GitHub", href: "https://github.com/SF-47/restaurant-qr-menu", kind: "repo" },
@@ -103,6 +121,12 @@ export const projects: Project[] = [
     details: {
       summary:
         "Customers scan a QR code at the table, browse the menu in English or Arabic (right-to-left), build a cart and send an itemized order to the restaurant on WhatsApp. Staff manage items, prices and availability from a protected admin panel.",
+      highlights: [
+        "Public menu and protected admin panel in one React + Vite app.",
+        "Saved cart with quantities, notes and an itemized WhatsApp message.",
+        "Firestore with locked-down write rules, Firebase Auth for staff, Firebase Hosting on a custom domain.",
+        "23 reusable components.",
+      ],
       fullStack: ["React", "Vite", "JavaScript", "Tailwind CSS", "Firebase Firestore", "Firebase Auth", "Firebase Hosting"],
       facts: [
         { label: "Type", value: "Freelance client" },
