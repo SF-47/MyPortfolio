@@ -1,22 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { caseStudies } from "../../data/caseStudies";
 import type { Project } from "../../data/projects";
 import { tech } from "../../data/tech";
 import { PhoneFrame } from "../ui/Frames";
 import { TechLogo } from "../ui/TechLogo";
+import { ArrowUpRight } from "../ui/icons";
 import { ProjectLinks } from "./ProjectLinks";
 
 type Props = { project: Project | null; open: boolean; onClose: () => void };
-
-function CaseLabel({ n, title, className = "" }: { n: string; title: string; className?: string }) {
-  return (
-    <h4 className={`flex items-center gap-3 font-mono text-[11px] tracking-[0.16em] uppercase ${className}`}>
-      <span className="text-accent">{n}</span>
-      <span className="text-fg-3">{title}</span>
-      <span aria-hidden="true" className="h-px flex-1 bg-line" />
-    </h4>
-  );
-}
 
 /** Rendered with key={project.slug} by the parent, so the gallery index resets per project. */
 export function ProjectDialog({ project, open, onClose }: Props) {
@@ -48,7 +38,6 @@ export function ProjectDialog({ project, open, onClose }: Props) {
   const p = project;
   const shots = p ? [...p.desktop.map((s) => ({ s, kind: "desktop" as const })), ...p.phone.map((s) => ({ s, kind: "phone" as const }))] : [];
   const current = shots[active];
-  const cs = p ? caseStudies[p.slug] : undefined;
 
   return (
     <dialog
@@ -59,7 +48,7 @@ export function ProjectDialog({ project, open, onClose }: Props) {
         if (e.target === e.currentTarget) ref.current?.close();
       }}
     >
-      {p && cs && (
+      {p && (
         <div className="max-h-[92svh] overflow-y-auto overscroll-contain [scrollbar-color:var(--line-strong)_transparent] [scrollbar-width:thin]">
           {/* header */}
           <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-bg/90 px-5 py-4 backdrop-blur-md sm:px-8">
@@ -119,55 +108,21 @@ export function ProjectDialog({ project, open, onClose }: Props) {
             </div>
           )}
 
-          {/* body: the case study */}
-          <div className="grid gap-10 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-12">
-            <div className="min-w-0">
-              <CaseLabel n="01" title="Problem" />
-              <p className="mt-3 text-[17px] leading-relaxed text-fg">{cs.context}</p>
-
-              <CaseLabel n="02" title="What I built" className="mt-10" />
-              <p className="mt-3 leading-relaxed text-fg-2">{p.details.summary}</p>
-
-              <CaseLabel n="03" title="Architecture" className="mt-10" />
-              <ol aria-label="Request flow" className="mt-4 flex flex-wrap items-center gap-y-2">
-                {cs.flow.map((step, i) => (
-                  <li key={step} className="flex items-center">
-                    {i > 0 && (
-                      <span aria-hidden="true" className="mx-1.5 flex items-center text-accent/70">
-                        <span className="h-px w-4 bg-current" />
-                        <svg width="6" height="8" viewBox="0 0 6 8" fill="currentColor"><path d="M0 0l6 4-6 4z" /></svg>
-                      </span>
-                    )}
-                    <span className="rounded-lg border border-line bg-tint px-2.5 py-1.5 font-mono text-[11.5px] text-fg-2">{step}</span>
+          {/* body */}
+          <div className="grid gap-8 px-5 py-7 sm:px-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div>
+              <p className="text-[17px] leading-relaxed text-fg-2">{p.details.summary}</p>
+              <ul className="mt-6 space-y-3">
+                {p.details.highlights.map((h) => (
+                  <li key={h} className="flex gap-3 text-sm leading-relaxed text-fg-3">
+                    <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-accent" />
+                    {h}
                   </li>
                 ))}
-              </ol>
-
-              <CaseLabel n="04" title="Key decisions" className="mt-10" />
-              {/* decisions hang off one connector line */}
-              <ol className="relative mt-5 space-y-6 border-l border-line pl-6">
-                {cs.decisions.map((d) => (
-                  <li key={d.title} className="relative">
-                    <span aria-hidden="true" className="absolute top-[0.45em] -left-[29px] size-2.5 rounded-full border-2 border-bg bg-accent" />
-                    <h5 className="font-semibold text-fg">{d.title}</h5>
-                    <p className="mt-1 text-sm leading-relaxed text-fg-3">{d.body}</p>
-                  </li>
-                ))}
-              </ol>
+              </ul>
             </div>
-
-            <aside className="min-w-0 space-y-8 lg:sticky lg:top-24 lg:self-start">
-              <div>
-                <CaseLabel n="05" title="Outcome" />
-                <p className="mt-3 text-sm leading-relaxed text-fg-2">{cs.outcome}</p>
-                {cs.next && (
-                  <p className="mt-3 text-sm leading-relaxed text-fg-3">
-                    <span className="font-mono text-[10px] tracking-[0.14em] text-muted uppercase">Next · </span>
-                    {cs.next.join(" · ")}
-                  </p>
-                )}
-              </div>
-              <dl className="grid grid-cols-3 gap-3 border-y border-line py-4">
+            <div className="space-y-6">
+              <dl className="grid grid-cols-3 gap-3 rounded-2xl border border-line bg-tint p-4">
                 {p.details.facts.map((f) => (
                   <div key={f.label}>
                     <dt className="font-mono text-[10px] tracking-wider text-muted uppercase">{f.label}</dt>
@@ -189,13 +144,13 @@ export function ProjectDialog({ project, open, onClose }: Props) {
                   })}
                 </ul>
               </div>
-              <div>
-                <CaseLabel n="06" title="Links" />
-                <div className="mt-3">
-                  <ProjectLinks project={p} />
-                </div>
-              </div>
-            </aside>
+              <ProjectLinks project={p} />
+              {p.links.some((l) => l.kind === "repo") && (
+                <p className="flex items-center gap-1.5 text-xs text-muted">
+                  <ArrowUpRight /> Source and setup steps are in the repository README.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}

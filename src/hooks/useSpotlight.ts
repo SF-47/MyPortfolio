@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-/** Feeds the pointer position into --mx/--my (px) and --px/--py (0–1) on whichever [data-spotlight] element is hovered. Fine pointers only. */
+/** Feeds the pointer position into --mx/--my on whichever [data-spotlight] element is hovered. */
 export function useSpotlight() {
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
@@ -15,9 +15,6 @@ export function useSpotlight() {
       const r = el.getBoundingClientRect();
       el.style.setProperty("--mx", `${e.clientX - r.left}px`);
       el.style.setProperty("--my", `${e.clientY - r.top}px`);
-      // normalised position (0–1), used by the project covers' tilt
-      el.style.setProperty("--px", ((e.clientX - r.left) / r.width).toFixed(3));
-      el.style.setProperty("--py", ((e.clientY - r.top) / r.height).toFixed(3));
     };
     const onMove = (e: PointerEvent) => {
       last = e;
