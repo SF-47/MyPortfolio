@@ -1,7 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { profile } from "../../data/profile";
 import { ArrowUpRight, GitHubIcon, LinkedInIcon, MailIcon, PinIcon } from "../ui/icons";
-import { TerminalLauncher } from "../terminal/TerminalLauncher";
 import { LampSwitch } from "./LampSwitch";
 import { Lanyard } from "./Lanyard";
 
@@ -24,7 +23,6 @@ export function Hero() {
   return (
     <section id="home" aria-labelledby="hero-title" className="relative isolate min-h-[100dvh] overflow-hidden">
       <LampSwitch className="absolute top-0 right-5 z-20 sm:right-10" />
-      <TerminalLauncher className="rise-in absolute! top-[1.15rem] right-[4.25rem] z-20 sm:right-[5.5rem] md:top-[1.4rem]" />
 
       <div className="mx-auto grid min-h-[100dvh] w-full max-w-6xl grid-rows-[auto_1fr] px-4 sm:px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:grid-rows-1 lg:gap-12">
         {/* badge column */}

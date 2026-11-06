@@ -394,18 +394,6 @@ dialog.project-dialog[open]::backdrop {
   to { stroke-dashoffset: 0; }
 }
 
-/* Terminal */
-@keyframes blink {
-  50% { opacity: 0; }
-}
-@keyframes term-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
-}
-.term-line {
-  animation: term-in 0.25s var(--ease-out-expo) both;
-}
-
 /* ---------- Theme switch ---------- */
 /* No per-element transitions while the theme flips (see ThemeProvider). */
 :root[data-theme-switching] *,
@@ -436,4 +424,48 @@ main > section:not(#home),
 footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 1200px;
+}
+
+/* ---------- Lamp ---------- */
+/* Keep the lamp live during the theme cross-fade so its own animation stays visible. */
+.lamp {
+  view-transition-name: lamp;
+}
+::view-transition-old(lamp) {
+  display: none;
+}
+::view-transition-new(lamp) {
+  animation: none;
+}
+
+/* Switching on: the bulb stutters to life like a real filament */
+@keyframes lamp-flicker {
+  0% { opacity: 0.35; }
+  8% { opacity: 1; }
+  14% { opacity: 0.4; }
+  22% { opacity: 1; }
+  30% { opacity: 0.6; }
+  42%, 100% { opacity: 1; }
+}
+.lamp-flicker {
+  animation: lamp-flicker 0.7s steps(1, end) both;
+}
+
+/* ...and a ring of warm light bursts outward */
+@keyframes lamp-burst {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.95; }
+  100% { transform: translate(-50%, -50%) scale(9); opacity: 0; }
+}
+.lamp-burst {
+  background: radial-gradient(circle, rgb(253 224 71 / 0.55) 0%, rgb(251 191 36 / 0.25) 35%, transparent 70%);
+  animation: lamp-burst 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Switching off: a last glow, then it fades down */
+@keyframes lamp-fade {
+  0% { transform: scale(1.18); filter: brightness(1.8); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+.lamp-fade {
+  animation: lamp-fade 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
