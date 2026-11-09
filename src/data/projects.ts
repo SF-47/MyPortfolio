@@ -49,15 +49,16 @@ export const projects: Project[] = [
     stack: ["ASP.NET Core", "PostgreSQL", "React", "TypeScript", "React Native", "Expo", "Supabase", "n8n", "Gemini"],
     links: [
       { label: "GitHub", href: "https://github.com/SF-47/findly", kind: "repo" },
+      { label: "Walkthrough", href: "/findly", kind: "demo" },
       { label: "Demo video", href: "https://drive.google.com/file/d/1v0SOa4yqmMoDwy0Iu_RnM6rnAb1L9V1M/view?usp=sharing", kind: "demo" },
     ],
     details: {
       summary:
         "Students report lost or found items from the mobile app. The backend narrows the candidates, an n8n workflow asks Gemini to compare them, and strong matches wait for an admin to confirm before the two students can chat privately.",
       highlights: [
-        "64 REST endpoints across 13 controllers, with JWT, BCrypt and role-based access for owners, university admins and students.",
+        "65 REST endpoints across 13 controllers, with JWT, BCrypt and role-based access for owners, university admins and students.",
         "Two-stage matching: same university and category, ±7 days, at most 20 candidates, then Gemini scoring with a 70% threshold.",
-        "9 PostgreSQL entities and 13 EF Core migrations; Supabase Storage for photos and Supabase Realtime for chat.",
+        "9 PostgreSQL entities and 14 EF Core migrations, with row level security on every table; Supabase Storage for photos, with ID cards behind signed links.",
         "11 admin pages and 17 mobile screens.",
       ],
       fullStack: ["ASP.NET Core", "EF Core", "PostgreSQL", "React", "TypeScript", "React Native", "Expo", "Supabase", "n8n", "Gemini AI"],

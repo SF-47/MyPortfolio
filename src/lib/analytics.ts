@@ -10,7 +10,8 @@ export type EventName =
   | "CV download"
   | "Contact sent"
   | "Email copied"
-  | "Lamp pulled";
+  | "Lamp pulled"
+  | "Findly demo";
 
 export function trackEvent(name: EventName, props?: Record<string, string>) {
   try {

@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "rewrites": [{ "source": "/findly", "destination": "/findly.html" }],
   "headers": [
     {
       "source": "/assets/(.*)\\.(js|css)",

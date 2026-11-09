@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Findly walkthrough · Sami Farhat</title>
+    <meta name="description" content="Interactive walkthrough of Findly, an AI-assisted lost and found system: a student's report, candidate filtering, Gemini scoring, admin review and private chat. Runs on sample data." />
+    <meta name="author" content="Sami Farhat" />
+    <link rel="canonical" href="https://sami-farhat.vercel.app/findly" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sami Farhat" />
+    <meta property="og:url" content="https://sami-farhat.vercel.app/findly" />
+    <meta property="og:title" content="Findly walkthrough · Sami Farhat" />
+    <meta property="og:description" content="Follow one lost item back to its owner, step by step, on sample data." />
+    <meta property="og:image" content="https://sami-farhat.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin-400-600.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // Same saved theme as the portfolio (default: dark).
+      try {
+        if (localStorage.getItem("sf-theme") === "light") document.documentElement.dataset.theme = "light";
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="max-width:560px;margin:15vh auto;padding:0 20px;font-family:system-ui,sans-serif;color:#e2e8f0">
+        This walkthrough needs JavaScript. See the
+        <a href="https://github.com/SF-47/findly" style="color:#7dd3fc">Findly source on GitHub</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/findly/main.tsx"></script>
+  </body>
+</html>
