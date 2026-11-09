@@ -117,6 +117,7 @@ export const projects: Project[] = [
     links: [
       { label: "Live site", href: "https://shawarmastory.com", kind: "live" },
       { label: "GitHub", href: "https://github.com/SF-47/restaurant-qr-menu", kind: "repo" },
+      { label: "Admin demo", href: "https://shawarmastory.com/admin-demo", kind: "demo" },
     ],
     details: {
       summary:
@@ -125,7 +126,7 @@ export const projects: Project[] = [
         "Public menu and protected admin panel in one React + Vite app.",
         "Saved cart with quantities, notes and an itemized WhatsApp message.",
         "Firestore with locked-down write rules, Firebase Auth for staff, Firebase Hosting on a custom domain.",
-        "23 reusable components.",
+        "Public admin demo on sample data, with validation that catches names typed in the wrong language and prices entered in thousands.",
       ],
       fullStack: ["React", "Vite", "JavaScript", "Tailwind CSS", "Firebase Firestore", "Firebase Auth", "Firebase Hosting"],
       facts: [
