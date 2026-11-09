@@ -3,6 +3,18 @@
 /* `dark:` follows the lamp switch (data-theme on <html>), not the OS setting. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* Tailwind v4's preflight gives buttons the default arrow cursor. Restore the pointer on every
+   enabled button (portfolio and /findly). Explicit cursor-* utilities (grab, zoom-in) still win. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
 @font-face {
   font-family: "Schibsted Grotesk";
   font-style: normal;
