@@ -13,7 +13,7 @@ TypeScript, Vite and Tailwind CSS 4, deployed on Vercel.
 ## Where things live
 
 - `src/data/` holds the content: `profile.ts` (name, status, links), `projects.ts`, `skills.ts`,
-  `tech.ts` (logos and brand colours) and `github.json` (contribution snapshot)
+  `tech.ts` (logos and brand colours)
 - `src/components/` holds the sections: hero (badge, lamp, nav), about, projects, skills, contact, footer
 - `src/components/background/SignalParticles.tsx` is the animated dot background
 - `src/index.css` holds the theme tokens for dark and light mode, plus animations
@@ -24,8 +24,6 @@ TypeScript, Vite and Tailwind CSS 4, deployed on Vercel.
 - `VITE_WEB3FORMS_KEY`: the Web3Forms access key for the contact form. Set it in `.env.local`
   for local development and in Vercel → Settings → Environment Variables (Production and Preview).
   See `.env.example`.
-- `scripts/fetch-github.mjs` runs before every build and updates `src/data/github.json`. If GitHub
-  can't be reached, the last snapshot is kept.
 
 ## Deploying
 

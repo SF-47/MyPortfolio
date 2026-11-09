@@ -3,7 +3,6 @@ import { trackEvent } from "../../lib/analytics";
 import { projects, type Project } from "../../data/projects";
 import { SectionHeader } from "../ui/SectionHeader";
 import { TechIcons } from "../ui/TechIcons";
-import { GitHubActivity } from "./GitHubActivity";
 import { ProjectCover } from "./ProjectCover";
 import { ProjectDialog } from "./ProjectDialog";
 import { ProjectLinks } from "./ProjectLinks";
@@ -87,8 +86,6 @@ export function ProjectsSection() {
           <ProjectCard key={project.slug} project={project} index={index} wide={index === 0} onOpen={onOpen} />
         ))}
       </div>
-
-      <GitHubActivity />
 
       <ProjectDialog key={selected?.slug ?? "none"} project={selected} open={open} onClose={onClose} />
     </section>
