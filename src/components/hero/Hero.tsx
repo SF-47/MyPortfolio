@@ -27,7 +27,7 @@ export function Hero() {
 
       <div className="mx-auto grid min-h-[100dvh] w-full max-w-6xl grid-rows-[auto_1fr] px-4 sm:px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:grid-rows-1 lg:gap-12">
         {/* badge column */}
-        <div className="rise-in [--card-w:148px] [--strap:76px] h-[380px] sm:[--card-w:176px] sm:[--strap:100px] sm:h-[440px] lg:[--card-w:212px] lg:[--strap:200px] lg:h-full">
+        <div className="rise-in [--card-w:148px] [--strap:28px] h-[clamp(288px,36dvh,380px)] sm:[--card-w:176px] sm:[--strap:100px] sm:h-[440px] lg:[--card-w:212px] lg:[--strap:200px] lg:h-full">
           <Lanyard />
         </div>
 

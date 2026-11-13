@@ -9,7 +9,7 @@ export function SkillsSection() {
     <section id="skills" aria-labelledby="skills-title" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6 lg:py-36">
       <SectionHeader
         id="skills-title"
-        index="03"
+        index="04"
         label="Toolbox"
         title="Skills"
         muted="& tools."

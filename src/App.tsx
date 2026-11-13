@@ -1,6 +1,7 @@
 import { AboutSection } from "./components/about/AboutSection";
 import { SignalParticles } from "./components/background/SignalParticles";
 import { ContactSection } from "./components/contact/ContactSection";
+import { ExperienceSection } from "./components/experience/ExperienceSection";
 import { Hero } from "./components/hero/Hero";
 import { SiteNav } from "./components/hero/SiteNav";
 import { SiteFooter } from "./components/layout/SiteFooter";
@@ -30,6 +31,7 @@ export function App() {
       <main className="relative z-10">
         <Hero />
         <AboutSection />
+        <ExperienceSection />
         <ProjectsSection />
         <SkillsSection />
         <ContactSection />

@@ -41,7 +41,7 @@ export function ContactSection() {
     <section id="contact" aria-labelledby="contact-title" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6 lg:py-36">
       <SectionHeader
         id="contact-title"
-        index="04"
+        index="05"
         label="Contact"
         title="Let's work"
         muted="together."

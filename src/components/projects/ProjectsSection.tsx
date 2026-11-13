@@ -74,7 +74,7 @@ export function ProjectsSection() {
     <section id="projects" aria-labelledby="projects-title" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6 lg:py-36">
       <SectionHeader
         id="projects-title"
-        index="02"
+        index="03"
         label="Selected work"
         title="Projects"
         muted="I've built."

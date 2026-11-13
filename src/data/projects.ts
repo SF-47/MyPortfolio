@@ -81,13 +81,13 @@ export const projects: Project[] = [
   {
     slug: "flexible-portfolio",
     title: "Flexible Portfolio",
-    label: "Full-stack product · 2026",
+    label: "Violet Pro internship · 2026",
     kicker: "A company website whose sections, content and theme are all managed from an admin panel.",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "ASP.NET Core", "MySQL"],
     links: [{ label: "GitHub", href: "https://github.com/SF-47/flexible-portfolio", kind: "repo" }],
     details: {
       summary:
-        "Admins pick from 15 section types, reorder and hide them, edit their content next to a live desktop, tablet and mobile preview, and switch between theme presets. The public site is rebuilt automatically after every save.",
+        "Built during my Violet Pro internship (Sep – Nov 2026). Admins pick from 15 section types, reorder and hide them, edit their content next to a live desktop, tablet and mobile preview, and switch between theme presets. The public site is rebuilt automatically after every save.",
       highlights: [
         "Next.js frontend that doubles as the admin backend-for-frontend, over an ASP.NET Core API (Controller → Service → EF Core → MySQL).",
         "15 typed section schemas validated with Zod.",
@@ -96,7 +96,7 @@ export const projects: Project[] = [
       ],
       fullStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind 4", "Zod", "ASP.NET Core 10", "EF Core", "MySQL"],
       facts: [
-        { label: "Type", value: "Full-stack product" },
+        { label: "Type", value: "Internship project" },
         { label: "Role", value: "Full-stack" },
         { label: "Screens", value: "Captured from a local run" },
       ],
