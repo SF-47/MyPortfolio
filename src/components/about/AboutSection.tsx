@@ -23,9 +23,16 @@ const record: { icon: ReactNode; label: string; title: string; sub: string; link
   {
     icon: <path d="M4 8h16v11H4zM9 8V5h6v3M4 13h16" />,
     label: "Internship",
+    title: "Violet Pro",
+    sub: "Software development intern · Sep – Nov 2026",
+    link: { label: "View certificate", href: "/violetpro-internship-certificate.pdf" },
+  },
+  {
+    icon: <path d="M4 8h16v11H4zM9 8V5h6v3M4 13h16" />,
+    label: "Internship",
     title: "TechTalks Community",
     sub: "Frontend intern · Nov – Dec 2025",
-    link: { label: "Certificate", href: "https://verify.techtalkslb.com/" },
+    link: { label: "View certificate", href: "https://verify.techtalkslb.com/" },
   },
   {
     icon: <path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z" />,
